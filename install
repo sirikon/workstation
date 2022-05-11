@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")"
+export DENO_INSTALL="$(pwd)/deno/install"
+export DENO_DIR="$(pwd)/deno/cache"
+export DENO_VERSION=$(grep deno < .tool-versions | sed 's/deno\ //')
+export DENO_BIN="${DENO_INSTALL}/bin/deno"
+export SRK_OUT="$(pwd)/out"
+
+function main {
+  log "Ensuring Deno ${DENO_VERSION}"
+  if [ ! -d "${DENO_INSTALL}" ]; then
+    curl -fsSL https://deno.land/x/install/install.sh | sh -s "v${DENO_VERSION}"
+  else
+    "$DENO_BIN" upgrade --version "${DENO_VERSION}"
+  fi
+
+  rm -rf "${SRK_OUT}"
+  "$DENO_BIN" compile \
+    -A --unstable \
+    --import-map "src/cli/import_map.json" \
+    --output "${SRK_OUT}/srk" \
+    "src/cli/main.ts"
+  chmod +x "${SRK_OUT}/srk"
+}
+
+function log {
+  printf "\e[1m\033[38;5;208m###\033[0m \e[1m%s\n\033[0m" "${1}"
+}
+
+main "${@}"

@@ -1,0 +1,14 @@
+{
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "deno.enable": true,
+  "deno.importMap": "./src/cli/import_map.json",
+  "shellcheck.enable": true,
+  "shellcheck.customArgs": ["--exclude", "SC2155"],
+  "[json]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  }
+}
