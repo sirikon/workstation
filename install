@@ -11,7 +11,7 @@ export SRK_OUT="$(pwd)/out"
 function main {
   log "Ensuring Deno ${DENO_VERSION}"
   if [ ! -d "${DENO_INSTALL}" ]; then
-    curl -fsSL https://deno.land/x/install/install.sh | sh -s "v${DENO_VERSION}"
+    curl -fsSL "https://deno.land/x/install/install.sh" | sh -s "v${DENO_VERSION}"
   else
     "$DENO_BIN" upgrade --version "${DENO_VERSION}"
   fi

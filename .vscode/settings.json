@@ -4,7 +4,7 @@
   "deno.enable": true,
   "deno.importMap": "./src/cli/import_map.json",
   "shellcheck.enable": true,
-  "shellcheck.customArgs": ["--exclude", "SC2155"],
+  "shellcheck.customArgs": ["--exclude", "SC2155,SC1090,SC2002"],
   "[json]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
