@@ -1,12 +1,12 @@
-import * as log from './core/logging.ts'
+import * as log from "./core/logging.ts";
+import { cli, run } from "denox/ui/cli/mod.ts";
 
-const commands: { [key: string]: () => (Promise<void> | void) } = {
-  install: async () => {
-    log.info("Install")
-  },
-  help: () => {
-    log.info("Help")
-  }
-}
+const srk = cli("srk");
 
-commands[Deno.args[0] || 'help']();
+srk.command("install")
+  .description("runs installation")
+  .action(() => {
+    log.info("Install!")
+  })
+
+run(srk)
