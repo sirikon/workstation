@@ -7,6 +7,7 @@ export DENO_DIR="$(pwd)/deno/cache"
 export DENO_VERSION=$(grep deno < .tool-versions | sed 's/deno\ //')
 export DENO_BIN="${DENO_INSTALL}/bin/deno"
 export SRK_OUT="$(pwd)/out"
+export SRK_BIN="${SRK_OUT}/srk"
 
 function main {
   log "Ensuring Deno ${DENO_VERSION}"
@@ -20,9 +21,12 @@ function main {
   "$DENO_BIN" compile \
     -A --unstable \
     --import-map "src/cli/import_map.json" \
-    --output "${SRK_OUT}/srk" \
+    --output "${SRK_BIN}" \
     "src/cli/main.ts"
-  chmod +x "${SRK_OUT}/srk"
+  chmod +x "${SRK_BIN}"
+
+  log "Running 'srk install'"
+  "${SRK_BIN}" install
 }
 
 function log {
