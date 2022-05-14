@@ -1,17 +1,26 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd "$(dirname "${BASH_SOURCE[0]}")"
-export DENO_INSTALL="$(pwd)/deno/install"
-export DENO_DIR="$(pwd)/deno/cache"
-export DENO_VERSION=$(grep deno < .tool-versions | sed 's/deno\ //')
-export DENO_BIN="${DENO_INSTALL}/bin/deno"
-export SRK_OUT="$(pwd)/out"
+export SRK_REPO="git@github.com:sirikon/workstation.git"
+export SRK_ROOT=~/.srk
+export SRK_OUT="${SRK_ROOT}/out"
 export SRK_EXEC="srk"
 export SRK_BIN="${SRK_OUT}/${SRK_EXEC}"
 export SRK_INSTALL="/usr/local/bin"
 
+export DENO_INSTALL="${SRK_ROOT}/deno/install"
+export DENO_DIR="${SRK_ROOT}/deno/cache"
+export DENO_VERSION=$(grep deno < .tool-versions | sed 's/deno\ //')
+export DENO_BIN="${DENO_INSTALL}/bin/deno"
+
 function main {
+  log "Ensuring repository on ${SRK_ROOT}"
+  if [ ! -d "${SRK_ROOT}" ]; then
+    git clone "${SRK_REPO}" "${SRK_ROOT}"
+  fi
+  cd "${SRK_ROOT}"
+  git pull
+
   log "Ensuring Deno ${DENO_VERSION}"
   if [ ! -d "${DENO_INSTALL}" ]; then
     curl -fsSL "https://deno.land/x/install/install.sh" | sh -s "v${DENO_VERSION}"
