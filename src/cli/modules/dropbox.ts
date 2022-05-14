@@ -1,6 +1,6 @@
 import { readFile } from "denox/fs/mod.ts";
 import { join } from "std/path/mod.ts";
-import { ensureSymlink, exists } from "std/fs/mod.ts";
+import { ensureLink, ensureSymlink, exists } from "std/fs/mod.ts";
 import * as paths from "../core/paths.ts";
 
 export type DropboxLinkOpts = {
@@ -24,12 +24,17 @@ export async function link(links: DropboxLinkOpts[]) {
     if (!await exists(dropboxPath)) {
       throw new Error(`${dropboxPath} does not exist`);
     }
-
     if (await exists(localPath)) {
       await Deno.remove(localPath, { recursive: true });
     }
-    await ensureSymlink(dropboxPath, localPath);
-    console.log(`${dropboxPath} -> ${localPath}`);
+
+    const useSoftLink = (await Deno.stat(dropboxPath)).isDirectory;
+
+    useSoftLink
+      ? await ensureSymlink(dropboxPath, localPath)
+      : await ensureLink(dropboxPath, localPath);
+
+    console.log(`[${useSoftLink ? "S" : "H"}] ${dropboxPath} -> ${localPath}`);
   }
 }
 
