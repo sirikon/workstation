@@ -67,13 +67,6 @@ export const installCommand = (srk: CommandGroupBuilder) => {
             await paths.homeDir(),
             "Library/DBeaverData/workspace6/General",
           ),
-        },
-        {
-          dropbox: "ProgramData/MacOsTerminal/com.apple.Terminal.plist",
-          darwin: join(
-            await paths.homeDir(),
-            "Library/Preferences/com.apple.Terminal.plist",
-          )
         }
       ]);
     });
