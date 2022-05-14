@@ -10,7 +10,7 @@ export SRK_INSTALL="/usr/local/bin"
 
 export DENO_INSTALL="${SRK_ROOT}/deno/install"
 export DENO_DIR="${SRK_ROOT}/deno/cache"
-export DENO_VERSION=$(grep deno < .tool-versions | sed 's/deno\ //')
+export DENO_VERSION=$(grep deno < "${SRK_ROOT}/.tool-versions" | sed 's/deno\ //')
 export DENO_BIN="${DENO_INSTALL}/bin/deno"
 
 function main {
