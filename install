@@ -38,7 +38,8 @@ function main {
   chmod +x "${SRK_BIN}"
 
   log "Installing srk on ${SRK_INSTALL}"
-  sudo cp -f "${SRK_BIN}" "${SRK_INSTALL}"
+  rm -f "${SRK_INSTALL}/${SRK_EXEC}"
+  sudo cp "${SRK_BIN}" "${SRK_INSTALL}"
 
   log "Running '${SRK_EXEC} install'"
   "${SRK_EXEC}" install
