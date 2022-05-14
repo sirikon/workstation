@@ -10,7 +10,6 @@ export SRK_INSTALL="/usr/local/bin"
 
 export DENO_INSTALL="${SRK_ROOT}/deno/install"
 export DENO_DIR="${SRK_ROOT}/deno/cache"
-export DENO_VERSION=$(grep deno < "${SRK_ROOT}/.tool-versions" | sed 's/deno\ //')
 export DENO_BIN="${DENO_INSTALL}/bin/deno"
 
 function main {
@@ -21,6 +20,7 @@ function main {
   cd "${SRK_ROOT}"
   git pull
 
+  export DENO_VERSION=$(grep deno < "${SRK_ROOT}/.tool-versions" | sed 's/deno\ //')
   log "Ensuring Deno ${DENO_VERSION}"
   if [ ! -d "${DENO_INSTALL}" ]; then
     curl -fsSL "https://deno.land/x/install/install.sh" | sh -s "v${DENO_VERSION}"
