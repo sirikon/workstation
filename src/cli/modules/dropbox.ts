@@ -21,8 +21,8 @@ export async function link(links: DropboxLinkOpts[]) {
     if (!localPath) return;
 
     const dropboxPath = join(dropboxRoot, link.dropbox);
-    if (!(await Deno.stat(join(dropboxRoot, link.dropbox))).isDirectory) {
-      throw new Error(`${join(dropboxRoot, link.dropbox)} is not a directory`);
+    if (!await exists(dropboxPath)) {
+      throw new Error(`${dropboxPath} does not exist`);
     }
 
     if (await exists(localPath)) {
