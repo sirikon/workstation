@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-clear
 export PATH=/opt/homebrew/bin:~/bin:$PATH
 
 function upgrade-xcodes { (

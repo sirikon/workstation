@@ -15,5 +15,5 @@ export async function ensureBrew() {
 }
 
 export async function ensurePackages(...packages: string[]) {
-  await cmd(["brew", "install", "--quiet", ...packages]);
+  await cmd(["/opt/homebrew/bin/brew", "install", "--quiet", ...packages]);
 }
