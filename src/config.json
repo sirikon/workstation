@@ -1,0 +1,22 @@
+{
+  "git": {
+    "name": "Carlos Fdez. Llamas",
+    "email": "hello@sirikon.me"
+  },
+  "brew": {
+    "packages": ["coreutils", "bash", "jq", "git"]
+  },
+  "asdf": {
+    "config": {
+      "legacy_version_file": "yes"
+    }
+  },
+  "dropbox": {
+    "links": [
+      {
+        "dropbox": "ProgramData/DBeaver/General",
+        "darwin": "~/Library/DBeaverData/workspace6/General"
+      }
+    ]
+  }
+}

@@ -8,7 +8,7 @@ import { extendFile } from "../core/fs.ts";
 import { ensureDir } from "std/fs/mod.ts";
 import { join } from "std/path/mod.ts";
 import { CommandGroupBuilder } from "denox/ui/cli/commandGroup.ts";
-import { config } from "../core/config.ts";
+import { config, localConfig } from "../core/config.ts";
 
 export const installCommand = (srk: CommandGroupBuilder) => {
   srk.command("install")
@@ -18,22 +18,22 @@ export const installCommand = (srk: CommandGroupBuilder) => {
         log.title("Ensuring brew is installed");
         await brew.ensureBrew();
         log.title("Ensuring brew dependencies");
-        await brew.ensurePackages("coreutils", "bash", "jq", "git");
+        await brew.ensurePackages(...config.brew.packages);
       }
 
       log.title("Configuring git");
       await git.configure({
         "pull.rebase": "true",
         "submodule.recurse": "true",
-        "user.name": "Carlos Fdez. Llamas",
-        "user.email": "hello@sirikon.me",
+        "user.name": config.git.name,
+        "user.email": config.git.email,
       });
 
       log.title("Ensuring asdf is installed and updated");
       await asdf.ensureAsdf();
       log.title("Configuring asdf");
       await asdf.writeAsdfrc([
-        "legacy_version_file = yes",
+        ...Object.entries(config.asdf.config).map(([k, v]) => `${k} = ${v}`),
         "",
       ]);
 
@@ -43,8 +43,8 @@ export const installCommand = (srk: CommandGroupBuilder) => {
         prefix: "### srk",
         suffix: "### /srk",
         data: [
-          ...Object.keys(config.environment)
-            .map((k) => `export ${k}="${config.environment[k]}"`),
+          ...Object.keys(localConfig.environment)
+            .map((k) => `export ${k}="${localConfig.environment[k]}"`),
           "",
           ...(Deno.build.os === "linux"
             ? ["source ~/.srk/src/shell/activate.linux.sh"]
@@ -60,14 +60,12 @@ export const installCommand = (srk: CommandGroupBuilder) => {
       await ensureDir(join(await paths.homeDir(), "bin"));
 
       log.title("Linking Dropbox to applications");
-      await dropbox.link([
-        {
-          dropbox: "ProgramData/DBeaver/General",
-          darwin: join(
-            await paths.homeDir(),
-            "Library/DBeaverData/workspace6/General",
-          ),
-        }
-      ]);
+      const homeDir = await paths.homeDir();
+      await dropbox.link(
+        config.dropbox.links.map((l) => ({
+          ...l,
+          darwin: l.darwin ? l.darwin.replace(/^~/g, homeDir) : undefined,
+        })),
+      );
     });
 };
