@@ -34,7 +34,7 @@ export async function link(links: DropboxLinkOpts[]) {
       ? await ensureSymlink(dropboxPath, localPath)
       : await ensureLink(dropboxPath, localPath);
 
-    console.log(`[${useSoftLink ? "S" : "H"}] ${dropboxPath} -> ${localPath}`);
+    console.log(`[${useSoftLink ? "S" : "H"}] ${localPath}\n    ${dropboxPath}`);
   }
 }
 
