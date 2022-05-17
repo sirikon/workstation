@@ -1,5 +1,6 @@
 import * as log from "../core/logging.ts";
 import * as brew from "../modules/brew.ts";
+import * as apt from "../modules/apt.ts";
 import * as git from "../modules/git.ts";
 import * as asdf from "../modules/asdf.ts";
 import * as dropbox from "../modules/dropbox.ts";
@@ -8,7 +9,8 @@ import { extendFile } from "../core/fs.ts";
 import { ensureDir } from "std/fs/mod.ts";
 import { join } from "std/path/mod.ts";
 import { CommandGroupBuilder } from "denox/ui/cli/commandGroup.ts";
-import { config, localConfig } from "../core/config.ts";
+import { localConfig } from "../core/config.ts";
+import config from "../config.ts";
 
 export const installCommand = (srk: CommandGroupBuilder) => {
   srk.command("install")
@@ -19,6 +21,19 @@ export const installCommand = (srk: CommandGroupBuilder) => {
         await brew.ensureBrew();
         log.title("Ensuring brew dependencies");
         await brew.ensurePackages(...config.brew.packages);
+      }
+
+      if (Deno.build.os === "linux") {
+        log.title("Ensuring apt packages");
+        await apt.ensurePackages(
+          "apt-transport-https",
+          "ca-certificates",
+          "curl",
+          "git",
+          "gnupg",
+          "lsb-release",
+          "debian-archive-keyring",
+        );
       }
 
       log.title("Configuring git");
@@ -46,12 +61,8 @@ export const installCommand = (srk: CommandGroupBuilder) => {
           ...Object.keys(localConfig.environment)
             .map((k) => `export ${k}="${localConfig.environment[k]}"`),
           "",
-          ...(Deno.build.os === "linux"
-            ? ["source ~/.srk/src/shell/activate.linux.sh"]
-            : []),
-          ...(Deno.build.os === "darwin"
-            ? ["source ~/.srk/src/shell/activate.mac.sh"]
-            : []),
+          ...(Deno.build.os === "linux" ? ["source ~/.srk/src/shell/activate.linux.sh"] : []),
+          ...(Deno.build.os === "darwin" ? ["source ~/.srk/src/shell/activate.mac.sh"] : []),
           "source ~/.srk/src/shell/activate.sh",
         ],
       });

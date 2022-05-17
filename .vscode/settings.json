@@ -2,6 +2,7 @@
   "editor.detectIndentation": false,
   "editor.tabSize": 2,
   "deno.enable": true,
+  "deno.config": "./src/cli/deno.json",
   "deno.importMap": "./src/cli/import_map.json",
   "shellcheck.enable": true,
   "shellcheck.customArgs": ["--exclude", "SC2155,SC1090,SC2002"],

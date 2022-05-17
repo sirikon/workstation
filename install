@@ -20,7 +20,7 @@ function main {
   cd "${SRK_ROOT}"
   git pull
 
-  export DENO_VERSION=$(grep deno < "${SRK_ROOT}/.tool-versions" | sed 's/deno\ //')
+  export DENO_VERSION=$(grep deno <"${SRK_ROOT}/.tool-versions" | sed 's/deno\ //')
   log "Ensuring Deno ${DENO_VERSION}"
   if [ ! -d "${DENO_INSTALL}" ]; then
     curl -fsSL "https://deno.land/x/install/install.sh" | sh -s "v${DENO_VERSION}"
@@ -32,6 +32,7 @@ function main {
   rm -rf "${SRK_OUT}"
   "$DENO_BIN" compile \
     -A --unstable \
+    --config "src/cli/deno.json" \
     --import-map "src/cli/import_map.json" \
     --output "${SRK_BIN}" \
     "src/cli/main.ts"
