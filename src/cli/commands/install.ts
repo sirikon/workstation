@@ -74,7 +74,7 @@ export const installCommand = (srk: CommandGroupBuilder) => {
         data: [
           ...Object.keys(localConfig.environment)
             .map((k) => `export ${k}="${localConfig.environment[k]}"`),
-          "",
+          ...(Object.keys(localConfig.environment).length > 0 ? [""] : []),
           ...(Deno.build.os === "linux" ? ["source ~/.srk/src/shell/activate.linux.sh"] : []),
           ...(Deno.build.os === "darwin" ? ["source ~/.srk/src/shell/activate.mac.sh"] : []),
           "source ~/.srk/src/shell/activate.sh",

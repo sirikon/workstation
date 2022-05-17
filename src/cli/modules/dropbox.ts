@@ -11,7 +11,8 @@ export type DropboxLinkOpts = {
 export async function link(links: DropboxLinkOpts[]) {
   const dropboxRoot = await getDropboxRootPath();
   if (!dropboxRoot) {
-    throw new Error("Could not find Dropbox root path. Is it installed?");
+    console.log("Could not find Dropbox root path. Is it installed?");
+    return;
   }
   for (const link of links) {
     const localPath = (() => {
