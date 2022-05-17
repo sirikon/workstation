@@ -14,7 +14,7 @@ function main {
     log "Downloading Debian image"
     wget -O "base.qcow2" \
       "https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-nocloud-amd64.qcow2"
-    rm "image.qcow2"
+    rm -f "image.qcow2"
   fi
 
   log "Ensuring APT dependencies"
@@ -32,6 +32,7 @@ function main {
   if [ ! -f "bridge.conf" ]; then
     printf "%s\n" "allow virbr0" | tee "bridge.conf"
     sudo mkdir -p "/etc/qemu"
+    sudo rm -f "/etc/qemu/bridge.conf"
     sudo ln -s "$(pwd)/bridge.conf" "/etc/qemu/bridge.conf"
   fi
 
@@ -49,7 +50,8 @@ function main {
     -netdev "bridge,id=hn0,br=virbr0" \
     -device "virtio-net-pci,netdev=hn0,id=nic1" \
     -hda "image.qcow2" \
-    -m "1024"
+    -m "1024" \
+    --enable-kvm
 }
 
 function log {
