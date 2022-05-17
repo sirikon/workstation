@@ -18,7 +18,6 @@ function main {
     git clone "${SRK_REPO}" "${SRK_ROOT}"
   fi
   cd "${SRK_ROOT}"
-  git pull
 
   export DENO_VERSION=$(grep deno <"${SRK_ROOT}/.tool-versions" | sed 's/deno\ //')
   log "Ensuring Deno ${DENO_VERSION}"

@@ -121,15 +121,23 @@ const config: Config = {
 };
 
 async function getDebianVersion() {
-  const result = await cmd(["lsb_release", "-cs"], { stdout: "piped" });
-  if (!result.success) return null;
-  return await result.output();
+  try {
+    const result = await cmd(["lsb_release", "-cs"], { stdout: "piped" });
+    if (!result.success) return null;
+    return await result.output();
+  } catch (err) {
+    return null;
+  }
 }
 
 async function getDpkgArch() {
-  const result = await cmd(["dpkg", "--print-architecture"], { stdout: "piped" });
-  if (!result.success) return null;
-  return await result.output();
+  try {
+    const result = await cmd(["dpkg", "--print-architecture"], { stdout: "piped" });
+    if (!result.success) return null;
+    return await result.output();
+  } catch (err) {
+    return null;
+  }
 }
 
 export default config;
