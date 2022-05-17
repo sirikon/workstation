@@ -6,7 +6,7 @@ import * as asdf from "../modules/asdf.ts";
 import * as dropbox from "../modules/dropbox.ts";
 import * as paths from "../core/paths.ts";
 import { extendFile } from "../core/fs.ts";
-import { ensureDir } from "std/fs/mod.ts";
+import { ensureDir, exists } from "std/fs/mod.ts";
 import { join } from "std/path/mod.ts";
 import { CommandGroupBuilder } from "denox/ui/cli/commandGroup.ts";
 import { localConfig } from "../core/config.ts";
@@ -52,9 +52,23 @@ export const installCommand = (srk: CommandGroupBuilder) => {
         "",
       ]);
 
-      log.title("Extending ~/.bash_profile");
+      const bashFiles = (await Promise.all([
+        join(await paths.homeDir(), ".bash_profile"),
+        join(await paths.homeDir(), ".bashrc"),
+      ].map((f) => exists(f).then((e) => [f, e] as const))))
+        .filter(([_, e]) => e)
+        .map(([f]) => f);
+
+      const bashFile = bashFiles.length > 0 ? bashFiles[0] : null;
+
+      if (bashFile == null) {
+        console.log("No bash file found to extend");
+        Deno.exit(1);
+      }
+
+      log.title("Extending " + bashFile);
       await extendFile({
-        file: join(await paths.homeDir(), ".bash_profile"),
+        file: bashFile,
         prefix: "### srk",
         suffix: "### /srk",
         data: [

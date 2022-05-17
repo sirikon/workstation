@@ -13,6 +13,9 @@ export DENO_DIR="${SRK_ROOT}/deno/cache"
 export DENO_BIN="${DENO_INSTALL}/bin/deno"
 
 function main {
+  log "Ensuring apt dependencies"
+  apt-get install -y git unzip
+
   log "Ensuring repository on ${SRK_ROOT}"
   if [ ! -d "${SRK_ROOT}" ]; then
     git clone "${SRK_REPO}" "${SRK_ROOT}"
@@ -38,7 +41,7 @@ function main {
   chmod +x "${SRK_BIN}"
 
   log "Installing srk on ${SRK_INSTALL}"
-  sudo rm "${SRK_INSTALL}/${SRK_EXEC}"
+  sudo rm -f "${SRK_INSTALL}/${SRK_EXEC}"
   sudo cp "${SRK_BIN}" "${SRK_INSTALL}"
 
   log "Running '${SRK_EXEC} install'"
