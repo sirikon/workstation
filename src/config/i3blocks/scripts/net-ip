@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+function main {
+    printf "%s" "🌍 "
+    dig +short myip.opendns.com @resolver1.opendns.com.
+}
+
+main

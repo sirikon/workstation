@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+function main {
+	case $BLOCK_BUTTON in
+	4) brightnessctl set +20 &>/dev/null ;;
+	5) brightnessctl set 20- &>/dev/null ;;
+	esac
+
+	printf "%s" "🔆"
+	printf "%s\n" "$(brightnessctl get)"
+}
+
+main

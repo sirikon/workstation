@@ -1,0 +1,28 @@
+# i3blocks config file
+# http://vivien.github.io/i3blocks
+
+# Global properties
+command=$HOME/.config/i3blocks/scripts/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+[net-ip]
+interval=once
+
+[lan-ip]
+interval=60
+markup=pango
+
+[volume]
+interval=once
+signal=1
+markup=pango
+
+[battery]
+interval=60
+
+[brightness]
+interval=60
+
+[time]
+interval=1
