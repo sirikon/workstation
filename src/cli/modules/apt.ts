@@ -38,7 +38,9 @@ export async function setRepositories(repositories: Config["apt"]["repositories"
     "",
   ]);
 
-  const updateAfterWrite = (await readFile(tempFilePath)) !== (await readFile("/etc/apt/sources.list.d/sirikon.list"));
+  const updateAfterWrite = (await exists('/etc/apt/sources.list.d/sirikon.list"'))
+    ? (await readFile(tempFilePath)) !== (await readFile("/etc/apt/sources.list.d/sirikon.list"))
+    : true;
   await cmd(["sudo", "mv", tempFilePath, "/etc/apt/sources.list.d/sirikon.list"]);
   updateAfterWrite && await cmd(["sudo", "apt-get", "update"]);
 }
