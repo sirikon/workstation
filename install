@@ -14,7 +14,7 @@ export DENO_BIN="${DENO_INSTALL}/bin/deno"
 
 function main {
   log "Ensuring apt dependencies"
-  apt-get install -y git unzip
+  sudo apt-get install -y git unzip
 
   log "Ensuring repository on ${SRK_ROOT}"
   if [ ! -d "${SRK_ROOT}" ]; then
