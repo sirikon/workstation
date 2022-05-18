@@ -31,6 +31,8 @@ function main {
     sudo cp -r "guest-scripts/prepare.sh" "temp-mount/usr/local/bin/guest-prepare"
 
     sudo umount "temp-mount"
+
+    qemu-img resize "image.qcow2" +15G
   fi
 
   if [ ! -f "bridge.conf" ]; then
