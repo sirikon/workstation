@@ -1,6 +1,7 @@
 import * as log from "../core/logging.ts";
 import * as brew from "../modules/brew.ts";
 import * as apt from "../modules/apt.ts";
+import * as devices from "../modules/devices.ts";
 import * as git from "../modules/git.ts";
 import * as asdf from "../modules/asdf.ts";
 import * as dropbox from "../modules/dropbox.ts";
@@ -39,7 +40,10 @@ export const installCommand = (srk: CommandGroupBuilder) => {
         log.title("Configuring apt pins");
         await apt.setPins(config.apt.pins);
         log.title("Ensuring all required apt packages");
-        await apt.ensurePackages(...config.apt.packages);
+        await apt.ensurePackages(
+          ...(await devices.getRequiredAptPackages()),
+          ...config.apt.packages,
+        );
       }
 
       log.title("Configuring git");
