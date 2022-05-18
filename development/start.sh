@@ -25,7 +25,11 @@ function main {
     cp "base.qcow2" "image.qcow2"
     sudo mkdir -p "temp-mount"
     sudo guestmount -a "image.qcow2" -m "/dev/sda1" --rw "temp-mount"
-    sudo cp -r "guest-scripts" "temp-mount/guest-scripts"
+
+    # customisation
+    sudo mkdir -p "temp-mount/usr/local/bin"
+    sudo cp -r "guest-scripts/prepare.sh" "temp-mount/usr/local/bin/guest-prepare"
+
     sudo umount "temp-mount"
   fi
 
