@@ -124,7 +124,7 @@ async function getDebianVersion() {
   try {
     const result = await cmd(["lsb_release", "-cs"], { stdout: "piped" });
     if (!result.success) return null;
-    return await result.output();
+    return (await result.output()).trim().replace("\n", "");
   } catch (err) {
     return null;
   }
@@ -134,7 +134,7 @@ async function getDpkgArch() {
   try {
     const result = await cmd(["dpkg", "--print-architecture"], { stdout: "piped" });
     if (!result.success) return null;
-    return await result.output();
+    return (await result.output()).trim().replace("\n", "");
   } catch (err) {
     return null;
   }

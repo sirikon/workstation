@@ -24,7 +24,7 @@ export const installCommand = (srk: CommandGroupBuilder) => {
       }
 
       if (Deno.build.os === "linux") {
-        log.title("Ensuring apt packages");
+        log.title("Ensuring base apt packages");
         await apt.ensurePackages(
           "apt-transport-https",
           "ca-certificates",
@@ -34,6 +34,12 @@ export const installCommand = (srk: CommandGroupBuilder) => {
           "lsb-release",
           "debian-archive-keyring",
         );
+        log.title("Configuring apt repositories");
+        await apt.setRepositories(config.apt.repositories);
+        log.title("Configuring apt pins");
+        await apt.setPins(config.apt.pins);
+        log.title("Ensuring all required apt packages");
+        await apt.ensurePackages(...config.apt.packages);
       }
 
       log.title("Configuring git");

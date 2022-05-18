@@ -19,6 +19,9 @@ export async function ensureAsdf() {
     }
     throw err;
   }
+}
+
+export async function updateAsdf() {
   await bash("~/.asdf/bin/asdf update");
 }
 
