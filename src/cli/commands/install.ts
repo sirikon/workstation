@@ -4,8 +4,8 @@ import * as apt from "../modules/apt.ts";
 import * as devices from "../modules/devices.ts";
 import * as git from "../modules/git.ts";
 import * as asdf from "../modules/asdf.ts";
-import * as dropbox from "../modules/dropbox.ts";
 import * as paths from "../core/paths.ts";
+import * as links from "../modules/links.ts";
 import { extendFile } from "../core/fs.ts";
 import { ensureDir, exists } from "std/fs/mod.ts";
 import { join } from "std/path/mod.ts";
@@ -94,13 +94,7 @@ export const installCommand = (srk: CommandGroupBuilder) => {
       log.title("Ensure ~/bin folder");
       await ensureDir(join(await paths.homeDir(), "bin"));
 
-      log.title("Linking Dropbox to applications");
-      const homeDir = await paths.homeDir();
-      await dropbox.link(
-        config.dropbox.links.map((l) => ({
-          ...l,
-          darwin: l.darwin ? l.darwin.replace(/^~/g, homeDir) : undefined,
-        })),
-      );
+      log.title("Linking files");
+      await links.apply(config.links);
     });
 };
