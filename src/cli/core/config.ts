@@ -25,12 +25,10 @@ export type Config = {
   asdf: {
     config: Record<string, string>;
   };
-  dropbox: {
-    links: {
-      dropbox: string;
-      darwin?: string;
-    }[];
-  };
+  links: {
+    from: { linux?: string; darwin?: string };
+    to: ["dropbox", string] | ["config", string];
+  }[];
 };
 
 const LocalConfigModel = z.object({

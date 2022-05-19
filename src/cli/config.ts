@@ -110,14 +110,51 @@ const config: Config = {
       "legacy_version_file": "yes",
     },
   },
-  dropbox: {
-    links: [
-      {
-        dropbox: "ProgramData/DBeaver/General",
+  links: [
+    {
+      from: {
+        linux: "~/.local/share/DBeaverData/workspace6/General",
         darwin: "~/Library/DBeaverData/workspace6/General",
       },
-    ],
-  },
+      to: ["dropbox", "ProgramData/DBeaver/General"],
+    },
+    {
+      from: { linux: "~/.local/share/data/qBittorrent/BT_backup" },
+      to: ["dropbox", "ProgramData/qBittorrent/BT_backup"],
+    },
+    {
+      from: { linux: "~/.config/i3" },
+      to: ["config", "i3"],
+    },
+    {
+      from: { linux: "~/.config/i3blocks" },
+      to: ["config", "i3blocks"],
+    },
+    {
+      from: { linux: "~/.config/VSCodium/User/settings.json" },
+      to: ["config", "vscode/settings.json"],
+    },
+    {
+      from: { linux: "~/.config/xfce4/terminal/terminalrc" },
+      to: ["config", "xfce4-terminal/terminalrc"],
+    },
+    {
+      from: { linux: "~/.config/sublime-text/Packages/User/Preferences.sublime-settings" },
+      to: ["config", "sublime-text/Preferences.sublime-settings"],
+    },
+    {
+      from: { linux: "~/.config/sublime-merge/Packages/User/Preferences.sublime-settings" },
+      to: ["config", "sublime-merge/Preferences.sublime-settings"],
+    },
+    {
+      from: { linux: "~/.Xresources" },
+      to: ["config", "x/Xresources"],
+    },
+    {
+      from: { linux: "~/.xsessionrc" },
+      to: ["config", "x/xsessionrc"],
+    },
+  ],
 };
 
 async function getDebianVersion() {
