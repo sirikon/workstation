@@ -23,6 +23,8 @@ function main {
   if [ ! -f "image.qcow2" ]; then
     log "Customising base image"
     cp "base.qcow2" "image.qcow2"
+    qemu-img resize "image.qcow2" +15G
+
     sudo mkdir -p "temp-mount"
     sudo guestmount -a "image.qcow2" -m "/dev/sda1" --rw "temp-mount"
 
@@ -31,8 +33,6 @@ function main {
     sudo cp -r "guest-scripts/prepare.sh" "temp-mount/usr/local/bin/guest-prepare"
 
     sudo umount "temp-mount"
-
-    qemu-img resize "image.qcow2" +15G
   fi
 
   if [ ! -f "bridge.conf" ]; then
