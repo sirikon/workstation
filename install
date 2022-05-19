@@ -13,8 +13,10 @@ export DENO_DIR="${SRK_ROOT}/deno/cache"
 export DENO_BIN="${DENO_INSTALL}/bin/deno"
 
 function main {
-  log "Ensuring apt dependencies"
-  sudo apt-get install -y git unzip
+  if [ "$OSTYPE" = "linux-gnu" ]; then
+    log "Ensuring apt dependencies"
+    sudo apt-get install -y git unzip
+  fi
 
   log "Ensuring repository on ${SRK_ROOT}"
   if [ ! -d "${SRK_ROOT}" ]; then
