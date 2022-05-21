@@ -8,15 +8,18 @@ markup=none
 
 [net-ip]
 interval=once
+markup=pango
+signal=1
 
 [lan-ip]
 interval=60
 markup=pango
+signal=2
 
 [volume]
 interval=once
-signal=1
 markup=pango
+signal=3
 
 [battery]
 interval=60

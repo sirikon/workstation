@@ -135,7 +135,7 @@ default_border pixel 2
 ###### SYSTEM CONTROL ######
 
 # Volume control
-set $refresh_volume pkill -RTMIN+1 i3blocks # Refresh volume indicator on i3blocks
+set $refresh_volume pkill -RTMIN+3 i3blocks # Refresh volume indicator on i3blocks
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_volume

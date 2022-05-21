@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 function main {
-    printf "%s" "🌍 "
-    dig +short myip.opendns.com @resolver1.opendns.com.
+  printf "%s" "🌍 "
+  dig +short myip.opendns.com @resolver1.opendns.com. || printf "%s" "<span color=\"#ff4f4f\">offline</span>"
 }
 
 main

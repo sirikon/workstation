@@ -8,11 +8,12 @@ import * as paths from "../core/paths.ts";
 import * as links from "../modules/links.ts";
 import { extendFile } from "../core/fs.ts";
 import { ensureDir, exists } from "std/fs/mod.ts";
-import { join } from "std/path/mod.ts";
+import { dirname, join } from "std/path/mod.ts";
 import { CommandGroupBuilder } from "denox/ui/cli/commandGroup.ts";
 import { localConfig } from "../core/config.ts";
 import config from "../config.ts";
-import { bash } from "denox/shell/mod.ts";
+import { bash, cmd } from "denox/shell/mod.ts";
+import { writeFile } from "denox/fs/mod.ts";
 
 export const installCommand = (srk: CommandGroupBuilder) => {
   srk.command("install")
@@ -81,6 +82,20 @@ export const installCommand = (srk: CommandGroupBuilder) => {
 
         log.title("Configuring graphics cards for X11");
         await devices.configureXorgGraphicsCard();
+
+        log.title("Configuring event hook for NetworkManager and i3blocks network information");
+        const scriptPath = join(await paths.homeDir(), ".srk", "src", "config", "i3blocks", "refresh-i3blocks-netinfo");
+        const tempFilePath = join(await paths.homeDir(), ".srk", "temp", "srk-i3blocks-hook");
+        await ensureDir(dirname(tempFilePath));
+        await writeFile(tempFilePath, [
+          "#!/usr/bin/env bash",
+          "set -euo pipefail",
+          scriptPath,
+          "",
+        ]);
+        await cmd(["sudo", "mv", tempFilePath, "/etc/NetworkManager/dispatcher.d/srk-i3blocks-hook"]);
+        await cmd(["sudo", "chown", "root:root", "/etc/NetworkManager/dispatcher.d/srk-i3blocks-hook"]);
+        await cmd(["sudo", "chmod", "+x", "/etc/NetworkManager/dispatcher.d/srk-i3blocks-hook"]);
       }
 
       log.title("Configuring git");

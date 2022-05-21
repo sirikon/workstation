@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+pkill -RTMIN+1 i3blocks
+pkill -RTMIN+2 i3blocks
