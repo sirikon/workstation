@@ -72,6 +72,9 @@ export const installCommand = (srk: CommandGroupBuilder) => {
           prefix: "### srk",
           suffix: "### /srk",
           data: [
+            ...Object.keys(localConfig.environment)
+              .map((k) => `export ${k}="${localConfig.environment[k]}"`),
+            ...(Object.keys(localConfig.environment).length > 0 ? [""] : []),
             `PATH="$HOME/.srk/src/bin:$PATH"`,
           ],
         });
