@@ -132,9 +132,9 @@ default_border pixel 2
 
 
 
-###### VOLUME CONTROL ######
+###### SYSTEM CONTROL ######
 
-# Use pactl to adjust volume in PulseAudio.
+# Volume control
 set $refresh_volume pkill -RTMIN+1 i3blocks # Refresh volume indicator on i3blocks
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_volume
@@ -142,6 +142,20 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_volume
 # Launch pavucontrol on mod + raise volume
 bindsym $mod+XF86AudioRaiseVolume exec pavucontrol -t 3
+
+# System mode
+set $mode_system (l)ock (r)eboot (s)hutdown
+bindsym $mod+Escape mode "$mode_system"
+mode "$mode_system" {
+  bindsym l exec --no-startup-id loginctl lock-session, mode "default"
+  bindsym r exec --no-startup-id systemctl reboot, mode "default"
+  bindsym s exec --no-startup-id systemctl poweroff -i, mode "default" 
+
+  # back to normal
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+Escape mode "default"
+}
 
 
 
@@ -188,20 +202,6 @@ exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agen
 
 
 ###### MISC ######
-
-# System mode
-set $mode_system (l)ock (r)eboot (s)hutdown
-bindsym $mod+Escape mode "$mode_system"
-mode "$mode_system" {
-  bindsym l exec --no-startup-id loginctl lock-session, mode "default"
-  bindsym r exec --no-startup-id systemctl reboot, mode "default"
-  bindsym s exec --no-startup-id systemctl poweroff -i, mode "default" 
-
-  # back to normal
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-  bindsym $mod+Escape mode "default"
-}
 
 # Use i3blocks for the bar
 bar {
