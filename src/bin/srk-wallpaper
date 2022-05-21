@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-nitrogen --save --head=0 --set-zoom-fill ~/.sirikon/assets/wallpapers/klaus-workshop.jpg
-nitrogen --save --head=1 --set-zoom-fill ~/.sirikon/assets/wallpapers/klaus-workshop.jpg
+nitrogen --save --head=0 --set-zoom-fill ~/.srk/src/assets/wallpapers/klaus-workshop.jpg
+nitrogen --save --head=1 --set-zoom-fill ~/.srk/src/assets/wallpapers/klaus-workshop.jpg
 
 # nitrogen --save --set-zoom-fill ~/.sirikon/assets/wallpapers/klaus-outside-winter.jpg
 

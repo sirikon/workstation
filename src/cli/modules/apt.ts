@@ -1,16 +1,24 @@
 import * as paths from "../core/paths.ts";
 import { bash, cmd } from "denox/shell/mod.ts";
-import { readFile, writeFile } from "denox/fs/mod.ts";
+import { writeFile } from "denox/fs/mod.ts";
 import { ensureDir, exists } from "std/fs/mod.ts";
 import { Config } from "../core/config.ts";
 import { dirname, join } from "std/path/mod.ts";
 
 type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
 
+let alreadyUpdated = false;
+
 export async function ensurePackages(...packages: string[]) {
   const installedPackages = await getInstalledPackages();
   const packagesToInstall = packages.filter((p) => installedPackages.indexOf(p) === -1);
   if (packagesToInstall.length === 0) return;
+
+  if (!alreadyUpdated) {
+    await cmd(["sudo", "apt-get", "update"]);
+    alreadyUpdated = true;
+  }
+
   await cmd(["sudo", "apt-get", "install", "-y", ...packagesToInstall]);
 }
 
@@ -38,11 +46,8 @@ export async function setRepositories(repositories: Config["apt"]["repositories"
     "",
   ]);
 
-  const updateAfterWrite = (await exists('/etc/apt/sources.list.d/sirikon.list"'))
-    ? (await readFile(tempFilePath)) !== (await readFile("/etc/apt/sources.list.d/sirikon.list"))
-    : true;
   await cmd(["sudo", "mv", tempFilePath, "/etc/apt/sources.list.d/sirikon.list"]);
-  updateAfterWrite && await cmd(["sudo", "apt-get", "update"]);
+  alreadyUpdated = false;
 }
 
 export async function setPins(pins: Config["apt"]["pins"]) {
