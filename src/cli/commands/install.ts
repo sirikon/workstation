@@ -65,6 +65,16 @@ export const installCommand = (srk: CommandGroupBuilder) => {
           sudo systemctl enable NetworkManager
           sudo systemctl start NetworkManager
         `);
+
+        log.title("Extending .profile");
+        await extendFile({
+          file: join(await paths.homeDir(), ".profile"),
+          prefix: "### srk",
+          suffix: "### /srk",
+          data: [
+            `PATH="$HOME/.srk/src/bin:$PATH"`,
+          ],
+        });
       }
 
       log.title("Configuring git");

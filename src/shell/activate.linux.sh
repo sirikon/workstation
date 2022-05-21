@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Add sbin to PATH
-export PATH=/usr/local/sbin:/usr/sbin:/sbin:~/.srk/src/bin:$PATH
+export PATH=/usr/local/sbin:/usr/sbin:/sbin:~/.srk/src/bin:~/.local/bin:$PATH
 
 function used-ports {
   sudo lsof -i -P -n | grep LISTEN
@@ -172,6 +172,10 @@ function upgrade-dnie-tools { (
   sudo chmod 644 /usr/local/share/ca-certificates/AC_RAIZ_DNIE_2.crt
 
   sudo update-ca-certificates
+); }
+
+function clear-demnu-cache { (
+  rm ~/.cache/dmenu_run
 ); }
 
 function backup-anbernic { (
