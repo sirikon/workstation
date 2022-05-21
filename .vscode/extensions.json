@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "foxundermoon.shell-format",
-    "timonwong.shellcheck"
+    "timonwong.shellcheck",
+    "dcasella.i3"
   ]
 }
