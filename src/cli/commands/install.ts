@@ -78,6 +78,9 @@ export const installCommand = (srk: CommandGroupBuilder) => {
             `PATH="$HOME/.srk/src/bin:$PATH"`,
           ],
         });
+
+        log.title("Configuring graphics cards for X11");
+        await devices.configureXorgGraphicsCard();
       }
 
       log.title("Configuring git");

@@ -3,6 +3,7 @@ import { join } from "std/path/mod.ts";
 import { Config } from "../core/config.ts";
 import { readFile } from "denox/fs/mod.ts";
 import { ensureSymlink } from "std/fs/mod.ts";
+import { cmd } from "denox/shell/mod.ts";
 
 type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
 
@@ -12,6 +13,7 @@ export async function apply(links: Config["links"]) {
     const destinationPath = await getDestinationPath(link.from);
     if (sourcePath == null || destinationPath == null) continue;
 
+    await cmd(["rm", "-rf", destinationPath]);
     await ensureSymlink(sourcePath, destinationPath);
   }
 }

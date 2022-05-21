@@ -29,7 +29,7 @@ export async function getRequiredAptPackages() {
   }
 
   result.sort();
-  return result;
+  return [...new Set(result)];
 }
 
 export async function configureXorgGraphicsCard() {
