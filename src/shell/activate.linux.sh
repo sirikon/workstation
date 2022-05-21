@@ -25,6 +25,7 @@ function upgrade-pipx { (
 ); }
 
 function upgrade-telegram { (
+  rm -rf ~/Software/Telegram
   mkdir -p ~/Software/Telegram
   cd ~/Software/Telegram || return
   wget -O telegram.tar.xz https://telegram.org/dl/desktop/linux
@@ -33,6 +34,7 @@ function upgrade-telegram { (
   mv t/* .
   rmdir t
   rm telegram.tar.xz
+  rm -f ~/bin/telegram
   ln -s "$(pwd)/Telegram" ~/bin/telegram
 ); }
 
@@ -172,6 +174,12 @@ function upgrade-dnie-tools { (
   sudo chmod 644 /usr/local/share/ca-certificates/AC_RAIZ_DNIE_2.crt
 
   sudo update-ca-certificates
+); }
+
+function upgrade { (
+  sudo apt-get update
+  sudo apt-get upgrade
+  patch-vscodium-marketplace
 ); }
 
 function clear-demnu-cache { (
