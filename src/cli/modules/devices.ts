@@ -1,4 +1,7 @@
+import * as paths from "../core/paths.ts";
 import { cmd } from "denox/shell/mod.ts";
+import { join } from "std/path/mod.ts";
+import { writeFile } from "denox/fs/mod.ts";
 
 export async function getRequiredAptPackages() {
   const pciList = await getPciList();
@@ -27,6 +30,42 @@ export async function getRequiredAptPackages() {
 
   result.sort();
   return result;
+}
+
+export async function configureXorgGraphicsCard() {
+  const brand = await getGraphicsCardBrand();
+  console.log("Graphics card brand: " + brand);
+
+  const result = ((): [string, string[]] | null => {
+    if (brand === "amd") {
+      return ["20-amdgpu.conf", [
+        'Section "Device"',
+        '     Identifier "AMD"',
+        '     Driver "amdgpu"',
+        '     Option "TearFree" "true"',
+        "EndSection",
+        "",
+      ]];
+    }
+    if (brand === "intel") {
+      return ["20-intel.conf", [
+        'Section "Device"',
+        '     Identifier "Intel Graphics"',
+        '     Driver "intel"',
+        '     Option "TearFree" "true"',
+        "EndSection",
+        "",
+      ]];
+    }
+    return null;
+  })();
+
+  if (result === null) return;
+  const [filename, content] = result;
+
+  const tempFilePath = join(await paths.homeDir(), ".srk", "temp", filename);
+  await writeFile(tempFilePath, content);
+  await cmd(["sudo", "mv", tempFilePath, `/etc/X11/xorg.conf.d/${filename}`]);
 }
 
 async function getGraphicsCardBrand() {

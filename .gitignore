@@ -1,3 +1,4 @@
 /deno
 /out
 /temp
+**/__pycache__

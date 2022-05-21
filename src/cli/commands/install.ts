@@ -12,6 +12,7 @@ import { join } from "std/path/mod.ts";
 import { CommandGroupBuilder } from "denox/ui/cli/commandGroup.ts";
 import { localConfig } from "../core/config.ts";
 import config from "../config.ts";
+import { bash } from "denox/shell/mod.ts";
 
 export const installCommand = (srk: CommandGroupBuilder) => {
   srk.command("install")
@@ -44,6 +45,26 @@ export const installCommand = (srk: CommandGroupBuilder) => {
           ...(await devices.getRequiredAptPackages()),
           ...config.apt.packages,
         );
+
+        log.title("Configure docker user");
+        await bash(`
+          sudo groupadd docker || echo "Docker group already exists"
+          sudo usermod -aG docker "$USER"
+        `);
+
+        log.title("Configure networking");
+        await bash(`
+          sudo systemctl disable systemd-networkd systemd-networkd.socket systemd-networkd-wait-online
+          sudo systemctl stop systemd-networkd systemd-networkd.socket systemd-networkd-wait-online
+        
+          sudo systemctl disable systemd-resolved
+          sudo systemctl stop systemd-resolved
+        
+          sudo rm -f /etc/network/interfaces
+        
+          sudo systemctl enable NetworkManager
+          sudo systemctl start NetworkManager
+        `);
       }
 
       log.title("Configuring git");

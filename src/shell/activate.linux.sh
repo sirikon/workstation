@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Add sbin to PATH
-export PATH=/usr/local/sbin:/usr/sbin:/sbin:$PATH
+export PATH=/usr/local/sbin:/usr/sbin:/sbin:~/.srk/src/bin:$PATH
 
 function used-ports {
   sudo lsof -i -P -n | grep LISTEN
@@ -19,6 +19,26 @@ function patch-vscodium-marketplace {
     jq -M |
     sudo tee "${productJson}" >/dev/null
 }
+
+function upgrade-pipx { (
+  pip3 install pipx
+); }
+
+function upgrade-telegram { (
+  mkdir -p ~/Software/Telegram
+  cd ~/Software/Telegram || return
+  wget -O telegram.tar.xz https://telegram.org/dl/desktop/linux
+  tar -xf telegram.tar.xz
+  mv Telegram t
+  mv t/* .
+  rmdir t
+  rm telegram.tar.xz
+  ln -s "$(pwd)/Telegram" ~/bin/telegram
+); }
+
+function upgrade-docker-compose { (
+  ~/.local/bin/pipx install docker-compose
+); }
 
 function upgrade-minecraft-launcher { (
   mkdir -p ~/Downloads/MinecraftLauncher
