@@ -177,8 +177,8 @@ function upgrade-dnie-tools { (
 ); }
 
 function upgrade { (
-  sudo apt-get update
-  sudo apt-get upgrade
+  sudo apt update
+  sudo apt upgrade
   patch-vscodium-marketplace
 ); }
 

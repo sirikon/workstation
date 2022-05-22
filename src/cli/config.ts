@@ -40,15 +40,15 @@ const config: Config = {
         key: ["virtualbox", "https://www.virtualbox.org/download/oracle_vbox_2016.asc"],
         arch: dpkgArch,
       }],
-      ["deb", "https://download.konghq.com/insomnia-ubuntu/", ["default", "all"], {
-        arch: dpkgArch,
-        trusted: true,
-      }],
+      // ["deb", "https://download.konghq.com/insomnia-ubuntu/", ["default", "all"], {
+      //   arch: dpkgArch,
+      //   trusted: true,
+      // }],
     ],
     pins: [
       ["*", "o=Debian,n=buster", 1],
       ["*", "o=packagecloud.io/slacktechnologies/slack", 1],
-      ["*", "l=insomnia-ubuntu", 1],
+      // ["*", "l=insomnia-ubuntu", 1],
     ],
     packages: [
       "xorg",
@@ -84,7 +84,7 @@ const config: Config = {
       "maim",
       "blueman",
       "codium",
-      "insomnia",
+      // "insomnia",
       "xclip",
       "xz-utils",
       "keepassxc",
