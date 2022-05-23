@@ -23,6 +23,7 @@ const config: Config = {
       "sublime-merge",
       "telegram-desktop",
       "jetbrains-toolbox",
+      "xcodes",
     ],
   },
   apt: {
