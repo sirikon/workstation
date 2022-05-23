@@ -11,7 +11,19 @@ const config: Config = {
   },
   brew: {
     formulae: ["coreutils", "bash", "jq", "git"],
-    casks: ["dbeaver-community", "keepassxc", "visual-studio-code"],
+    casks: [
+      "dropbox",
+      "slack",
+      "firefox",
+      "discord",
+      "docker",
+      "dbeaver-community",
+      "keepassxc",
+      "visual-studio-code",
+      "sublime-merge",
+      "telegram-desktop",
+      "jetbrains-toolbox",
+    ],
   },
   apt: {
     repositories: !(debianVersion && dpkgArch) ? [] : [
