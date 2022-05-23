@@ -10,7 +10,8 @@ const config: Config = {
     email: "hello@sirikon.me",
   },
   brew: {
-    packages: ["coreutils", "bash", "jq", "git"],
+    formulae: ["coreutils", "bash", "jq", "git"],
+    casks: ["dbeaver-community", "keepassxc"],
   },
   apt: {
     repositories: !(debianVersion && dpkgArch) ? [] : [
@@ -131,7 +132,10 @@ const config: Config = {
       to: ["config", "i3blocks"],
     },
     {
-      from: { linux: "~/.config/VSCodium/User/settings.json" },
+      from: {
+        linux: "~/.config/VSCodium/User/settings.json",
+        darwin: "~/Library/Application Support/Code/User/settings.json",
+      },
       to: ["config", "vscode/settings.json"],
     },
     {

@@ -23,7 +23,8 @@ export const installCommand = (srk: CommandGroupBuilder) => {
         log.title("Ensuring brew is installed");
         await brew.ensureBrew();
         log.title("Ensuring brew dependencies");
-        await brew.ensurePackages(...config.brew.packages);
+        await brew.ensureFormulae(...config.brew.formulae);
+        await brew.ensureCasks(...config.brew.casks);
       }
 
       if (Deno.build.os === "linux") {

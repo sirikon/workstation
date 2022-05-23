@@ -16,6 +16,11 @@ function restore-terminal-config { (
     ~/Library/Preferences/com.apple.Terminal.plist
 ); }
 
+function upgrade {(
+  brew update
+  brew upgrade
+)}
+
 function upgrade-xcodes { (
   mkdir -p ~/Software/xcodes
   cd ~/Software/xcodes || return

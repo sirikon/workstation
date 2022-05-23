@@ -10,7 +10,8 @@ export type Config = {
     email: string;
   };
   brew: {
-    packages: string[];
+    formulae: string[];
+    casks: string[];
   };
   apt: {
     repositories: [

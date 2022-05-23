@@ -14,6 +14,27 @@ export async function ensureBrew() {
   }
 }
 
-export async function ensurePackages(...packages: string[]) {
-  await cmd(["/opt/homebrew/bin/brew", "install", "--quiet", ...packages]);
+export async function ensureFormulae(...formulae: string[]) {
+  const installedFormulae = await getInstalledPackages("formulae");
+  const formulaeToInstall = formulae.filter((f) => installedFormulae.indexOf(f) === -1);
+  if (formulaeToInstall.length === 0) return;
+
+  await cmd(["/opt/homebrew/bin/brew", "install", "--formulae", "--quiet", ...formulaeToInstall]);
+}
+
+export async function ensureCasks(...casks: string[]) {
+  const installedCasks = await getInstalledPackages("casks");
+  const casksToInstall = casks.filter((c) => installedCasks.indexOf(c) === -1);
+  if (casksToInstall.length === 0) return;
+
+  await cmd(["/opt/homebrew/bin/brew", "install", "--casks", "--quiet", ...casksToInstall]);
+}
+
+export async function getInstalledPackages(kind: "formulae" | "casks") {
+  const result = await cmd(["/opt/homebrew/bin/brew", "list", "--" + kind, "-1"], { stdout: "piped" });
+  if (!result.success) {
+    throw result.error;
+  }
+  const output = await result.output();
+  return output.trim().split("\n").map((l) => l.trim());
 }
