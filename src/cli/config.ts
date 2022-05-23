@@ -11,7 +11,7 @@ const config: Config = {
   },
   brew: {
     formulae: ["coreutils", "bash", "jq", "git"],
-    casks: ["dbeaver-community", "keepassxc"],
+    casks: ["dbeaver-community", "keepassxc", "visual-studio-code"],
   },
   apt: {
     repositories: !(debianVersion && dpkgArch) ? [] : [
