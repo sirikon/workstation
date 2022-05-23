@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-export SRK_ROOT=~/.srk
-export DENO_INSTALL="${SRK_ROOT}/deno/install"
-export DENO_DIR="${SRK_ROOT}/deno/cache"
-
 commands=(
   run
   cache
@@ -11,7 +7,7 @@ commands=(
 )
 
 function run { (
-  "${DENO_INSTALL}/bin/deno" run \
+  deno run \
     -A --no-check \
     --lock "./lock.json" \
     --config "./deno.json" \
@@ -20,7 +16,7 @@ function run { (
 ); }
 
 function cache { (
-  "${DENO_INSTALL}/bin/deno" cache \
+  deno cache \
     --lock "./lock.json" \
     --config "./deno.json" \
     --import-map "./import_map.json" \
@@ -28,7 +24,7 @@ function cache { (
 ); }
 
 function lock { (
-  "${DENO_INSTALL}/bin/deno" cache \
+  deno cache \
     --lock "./lock.json" \
     --config "./deno.json" \
     --import-map "./import_map.json" \
