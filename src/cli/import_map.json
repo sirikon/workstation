@@ -2,6 +2,6 @@
   "imports": {
     "std/": "https://deno.land/std@0.139.0/",
     "denox/": "https://raw.githubusercontent.com/sirikon/denox/e19e1123251ab2b8bcb96c96c913db3bc3927eac/lib/",
-    "zod": "https://esm.sh/zod@3.16.0?pin=v78"
+    "zod": "https://esm.sh/zod@3.16.0?pin=v82"
   }
 }
