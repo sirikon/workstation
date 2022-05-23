@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+export SRK_ROOT=~/.srk
+export DENO_INSTALL="${SRK_ROOT}/deno/install"
+export DENO_DIR="${SRK_ROOT}/deno/cache"
+
+commands=(
+  run
+  cache
+  lock
+)
+
+function run { (
+  "${DENO_INSTALL}/bin/deno" run \
+    -A --no-check \
+    --lock "./lock.json" \
+    --config "./deno.json" \
+    --import-map "./import_map.json" \
+    "./main.ts" "${@}"
+); }
+
+function cache { (
+  deno cache \
+    --lock "./lock.json" \
+    --config "./deno.json" \
+    --import-map "./import_map.json" \
+    "./main.ts"
+); }
+
+function lock { (
+  deno cache \
+    --lock "./lock.json" \
+    --config "./deno.json" \
+    --import-map "./import_map.json" \
+    --lock-write \
+    "./main.ts"
+); }
+
+function help {
+  printf "%s\n" "Available commands:"
+  printf " %s\n" "${commands[@]}" help
+}
+
+function run-command {
+  for c in "${commands[@]}"; do if [ "$c" = "$1" ]; then
+    ("$1" "${@:2}")
+    return
+  fi; done
+  printf "%s\n" "Command '${1}' does not exist."
+}
+
+set -euo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")"
+[ -z "${1:-""}" ] || [ "${1:-""}" = "help" ] && help && exit 0
+run-command "${1}" "${@:2}"

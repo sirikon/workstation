@@ -36,6 +36,7 @@ function main {
   rm -rf "${SRK_OUT}"
   "$DENO_BIN" compile \
     -A --unstable \
+    --lock "src/cli/lock.json" \
     --config "src/cli/deno.json" \
     --import-map "src/cli/import_map.json" \
     --output "${SRK_BIN}" \
