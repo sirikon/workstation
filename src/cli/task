@@ -20,7 +20,7 @@ function run { (
 ); }
 
 function cache { (
-  deno cache \
+  "${DENO_INSTALL}/bin/deno" cache \
     --lock "./lock.json" \
     --config "./deno.json" \
     --import-map "./import_map.json" \
@@ -28,7 +28,7 @@ function cache { (
 ); }
 
 function lock { (
-  deno cache \
+  "${DENO_INSTALL}/bin/deno" cache \
     --lock "./lock.json" \
     --config "./deno.json" \
     --import-map "./import_map.json" \
