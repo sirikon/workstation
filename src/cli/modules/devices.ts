@@ -1,4 +1,5 @@
 import * as paths from "../core/paths.ts";
+import * as log from "../core/logging.ts";
 import { cmd } from "denox/shell/mod.ts";
 import { join } from "std/path/mod.ts";
 import { writeFile } from "denox/fs/mod.ts";
@@ -34,7 +35,7 @@ export async function getRequiredAptPackages() {
 
 export async function configureXorgGraphicsCard() {
   const brand = await getGraphicsCardBrand();
-  console.log("Graphics card brand: " + brand);
+  log.info("Graphics card brand: " + brand);
 
   const result = ((): [string, string[]] | null => {
     if (brand === "amd") {

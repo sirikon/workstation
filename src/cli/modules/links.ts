@@ -1,4 +1,5 @@
 import * as paths from "../core/paths.ts";
+import * as log from "../core/logging.ts";
 import { join } from "std/path/mod.ts";
 import { Config } from "../core/config.ts";
 import { readFile } from "denox/fs/mod.ts";
@@ -13,6 +14,10 @@ export async function apply(links: Config["links"]) {
     const destinationPath = await getDestinationPath(link.from);
     if (sourcePath == null || destinationPath == null) continue;
 
+    log.info([
+      `┌${sourcePath}`,
+      `└${destinationPath}`,
+    ].join("\n"));
     await cmd(["rm", "-rf", destinationPath]);
     await ensureSymlink(sourcePath, destinationPath);
   }

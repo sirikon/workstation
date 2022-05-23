@@ -49,7 +49,7 @@ export const installCommand = (srk: CommandGroupBuilder) => {
 
         log.title("Configure docker user");
         await bash(`
-          sudo groupadd docker || echo "Docker group already exists"
+          sudo groupadd docker 2>/dev/null
           sudo usermod -aG docker "$USER"
         `);
 
