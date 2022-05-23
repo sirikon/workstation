@@ -14,8 +14,12 @@ export DENO_BIN="${DENO_INSTALL}/bin/deno"
 
 function main {
   if [ "$OSTYPE" = "linux-gnu" ]; then
-    log "Ensuring apt dependencies"
-    sudo apt-get install -y git unzip
+    if ! command -v git &>/dev/null; then
+      sudo apt-get install -y git
+    fi
+    if ! command -v unzip &>/dev/null; then
+      sudo apt-get install -y unzip
+    fi
   fi
 
   log "Ensuring repository on ${SRK_ROOT}"
