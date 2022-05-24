@@ -16,7 +16,9 @@ function restore-terminal-config { (
     ~/Library/Preferences/com.apple.Terminal.plist
 ); }
 
-function upgrade {(
+function upgrade { (
   brew update
   brew upgrade
-)}
+  asdf update
+  asdf plugin update --all
+); }
