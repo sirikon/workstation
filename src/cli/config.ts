@@ -160,7 +160,10 @@ const config: Config = {
       to: ["config", "sublime-text/Preferences.sublime-settings"],
     },
     {
-      from: { linux: "~/.config/sublime-merge/Packages/User/Preferences.sublime-settings" },
+      from: {
+        linux: "~/.config/sublime-merge/Packages/User/Preferences.sublime-settings",
+        darwin: "~/Library/Application Support/Sublime Merge/Packages/User/Preferences.sublime-settings",
+      },
       to: ["config", "sublime-merge/Preferences.sublime-settings"],
     },
     {

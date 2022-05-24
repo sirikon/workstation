@@ -3,5 +3,5 @@
 	"theme": "Merge Dark.sublime-theme",
 	"expand_merge_commits_by_default": false,
 	"ignore_diff_white_space": false,
-	"hardware_acceleration": "none",
+	"hardware_acceleration": "opengl",
 }
