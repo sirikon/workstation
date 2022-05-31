@@ -16,6 +16,12 @@ function restore-terminal-config { (
     ~/Library/Preferences/com.apple.Terminal.plist
 ); }
 
+function xcode-prune { (
+  rm -rf ~/Library/Developer/Xcode/DerivedData
+  rm -rf ~/Library/Developer/Xcode/Archives
+  rm -rf ~/Library/Caches/com.apple.dt.Xcode
+); }
+
 function upgrade { (
   brew update
   brew upgrade
