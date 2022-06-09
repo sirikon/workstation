@@ -24,6 +24,7 @@ const config: Config = {
       "telegram-desktop",
       "jetbrains-toolbox",
       "xcodes",
+      "clipy",
     ],
   },
   apt: {
