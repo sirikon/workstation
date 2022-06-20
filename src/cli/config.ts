@@ -10,7 +10,13 @@ const config: Config = {
     email: "hello@sirikon.me",
   },
   brew: {
-    formulae: ["coreutils", "bash", "jq", "git"],
+    formulae: [
+      "coreutils",
+      "bash",
+      "jq",
+      "git",
+      "theseal/ssh-askpass/ssh-askpass",
+    ],
     casks: [
       "dropbox",
       "slack",
