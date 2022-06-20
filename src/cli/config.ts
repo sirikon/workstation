@@ -118,6 +118,7 @@ const config: Config = {
       "system-config-printer",
       "gnome-system-monitor",
       "brightnessctl",
+      "ssh-askpass-gnome",
     ],
   },
   asdf: {
