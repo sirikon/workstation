@@ -22,14 +22,6 @@ function xcode-prune { (
   rm -rf ~/Library/Caches/com.apple.dt.Xcode
 ); }
 
-function kill-gradle { (
-  pkill -9 -f gradle
-); }
-
-function prune-gradle { (
-  rm -rf ~/.gradle
-); }
-
 function upgrade { (
   brew update
   brew upgrade

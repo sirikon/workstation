@@ -53,3 +53,11 @@ function docker-prune {
   docker-destroy
   docker image prune -af
 }
+
+function gradle-destroy { (
+  pkill -9 -f gradle
+); }
+
+function gradle-prune { (
+  rm -rf ~/.gradle
+); }
