@@ -61,3 +61,8 @@ function gradle-destroy { (
 function gradle-prune { (
   rm -rf ~/.gradle
 ); }
+
+function ssh-forget { (
+  local host="${1}"
+  ssh-keygen -f ~/.ssh/known_hosts -R "${host}"
+); }
