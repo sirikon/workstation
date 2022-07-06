@@ -200,3 +200,9 @@ function my-commits-here {
 function to-clipboard {
   xclip -sel clip
 }
+
+function srk-launch-logs { (
+  local program="${1}"
+  sudo cat /var/log/syslog |
+    grep "${program}@srk-launch"
+); }

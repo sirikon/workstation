@@ -7,7 +7,5 @@ if ! command -v "${program}" &>/dev/null; then
   exit 1
 fi
 
-logsDir="${HOME}/.srk/data/app-logs/${program}"
-logsFile="${logsDir}/$(date "+%Y-%m-%d_%H-%M-%S").log"
-mkdir -p "${logsDir}"
-"${program}" >"${logsFile}" 2>&1
+logger --tag "${program}@srk-launch" "### ${program} started ###"
+"${program}" 2>&1 | logger --tag "${program}@srk-launch"
