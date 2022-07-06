@@ -184,7 +184,7 @@ function upgrade { (
   asdf plugin update --all
 ); }
 
-function clear-demnu-cache { (
+function dmenu-flush { (
   rm ~/.cache/dmenu_run
 ); }
 

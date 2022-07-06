@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+program=$(dmenu_path | dmenu)
+if ! command -v "${program}" &>/dev/null; then
+  echo "command ${program} could not be found"
+  exit 1
+fi
+
+logsDir="${HOME}/.srk/data/app-logs/${program}"
+logsFile="${logsDir}/$(date "+%Y-%m-%d_%H-%M-%S").log"
+mkdir -p "${logsDir}"
+"${program}" >"${logsFile}" 2>&1
