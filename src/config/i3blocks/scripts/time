@@ -1,2 +1,5 @@
 #!/usr/bin/env bash
-date '+%Y-%m-%d %H:%M:%S'
+set -euo pipefail
+
+printf "%s" "$(date '+%Y-%m-%d %H:%M:%S')"
+printf "%s" " <span color=\"gray\">$(date +"%Z")</span>$(date +"%z")"
