@@ -2,16 +2,16 @@
 set -euo pipefail
 
 function main {
-	package="$1"
+  package="$1"
 
-	printf "%s\n" "Publishing:"
-	printf "%s\n" " package: ${package}"
-	printf "%s\n" ""
+  printf "%s\n" "Publishing:"
+  printf "%s\n" " package: ${package}"
+  printf "%s\n" ""
 
-	curl \
-		-H "secret: ${APT_UPLOAD_SECRET}" \
-		--data-binary "@${package}" \
-		https://apt.srk.bz/upload
+  curl \
+    -H "secret: ${APT_UPLOAD_SECRET}" \
+    --data-binary "@${package}" \
+    https://apt.srk.bz/upload
 }
 
 main "$@"

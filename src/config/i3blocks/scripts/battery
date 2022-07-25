@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 
 function main {
-    batteryFolder=$(get-battery-folder)
-    if [ ! -d "${batteryFolder}" ]; then
-        exit 0
-    fi
+  batteryFolder=$(get-battery-folder)
+  if [ ! -d "${batteryFolder}" ]; then
+    exit 0
+  fi
 
-    case $BLOCK_BUTTON in
-        1) zenity --info --width=600 --text="$(acpi -b)\n$(acpi -a)" &>/dev/null & ;;
-    esac
+  case $BLOCK_BUTTON in
+  1) zenity --info --width=600 --text="$(acpi -b)\n$(acpi -a)" &>/dev/null & ;;
+  esac
 
-    capacity=$(cat "${batteryFolder}/capacity")
-    printf "%s" "⚡"
-    printf "%s\n" "${capacity}%"
+  capacity=$(cat "${batteryFolder}/capacity")
+  printf "%s" "⚡"
+  printf "%s\n" "${capacity}%"
 }
 
 function get-battery-folder {
-    printf "%s" "/sys/class/power_supply/BAT0"
+  printf "%s" "/sys/class/power_supply/BAT0"
 }
 
 main

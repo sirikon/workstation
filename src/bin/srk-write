@@ -3,6 +3,7 @@ import sys
 from subprocess import run
 from utils import zenity
 
+# fmt:off
 stripeCards = [
     { "number": "4242 4242 4242 4242", "setup": True,  "3ds": False, "pay": True,                 },
     { "number": "4000 0000 0000 0341", "setup": True,  "3ds": False, "pay": False,                },
@@ -13,12 +14,15 @@ stripeCards = [
     { "number": "4000 0082 6000 3178", "setup": True,  "3ds": True,  "pay": "insufficient_funds", },
     { "number": "4000 0535 6000 0011", "setup": False, "3ds": False, "pay": False,                }
 ]
+# fmt:on
+
 
 def provideStripeCard():
     data = []
     for card in stripeCards:
         setup = "✔️" if card["setup"] else "❌"
-        pay = ("✔️" if card["pay"] else "❌") if type(card["pay"]) is bool else "❌ " + card["pay"]
+        pay = ("✔️" if card["pay"] else "❌") if type(
+            card["pay"]) is bool else "❌ " + card["pay"]
         _3ds = "⚠️" if card["3ds"] else ""
 
         data += [card["number"], setup, _3ds, pay]
@@ -35,17 +39,20 @@ def provideStripeCard():
     if result == 'More cards':
         run(["xdg-open", "https://stripe.com/docs/testing#cards"])
         exit(0)
-    
+
     return result.replace(" ", "")
+
 
 providers = {
     "stripe-card": provideStripeCard
 }
 
+
 def runProvider(provider):
     text = providers[provider]()
     run(["bash", "-c", f'printf "%s" "{text}" | xclip -sel clip'])
     run(["notify-send", f"Copied to clipboard: {text}"])
+
 
 if len(sys.argv) == 1:
     result = zenity.list(
