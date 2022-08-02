@@ -125,6 +125,7 @@ const config: Config = {
       "gnome-system-monitor",
       "brightnessctl",
       "ssh-askpass-gnome",
+      "ncdu",
     ],
   },
   asdf: {
