@@ -16,6 +16,10 @@ interval=60
 markup=pango
 signal=2
 
+[disk]
+interval=60
+markup=pango
+
 [volume]
 interval=once
 markup=pango

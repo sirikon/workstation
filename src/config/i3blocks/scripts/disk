@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+function main {
+  IFS=' ' read -r size used usedPercent <<<"$(get_data)"
+  printf "%s\n" "💽 $usedPercent <span color='gray'>$size/$used</span>"
+}
+
+function get_data {
+  df -h 2>/dev/null |
+    tail -n +2 |        # Remove first line
+    grep " /$" |        # Find the line that ends with " /"
+    tr -s ' ' |         # Remove extra spaces between columns
+    cut -d ' ' -f 2,3,5 # Select Size, Used and Used% columns
+}
+
+main
