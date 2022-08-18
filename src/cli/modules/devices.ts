@@ -5,6 +5,7 @@ import { join } from "std/path/mod.ts";
 import { writeFile } from "denox/fs/mod.ts";
 
 export async function getRequiredAptPackages() {
+  await updatePciids();
   const pciList = await getPciList();
 
   const result = [
@@ -81,13 +82,11 @@ async function getGraphicsCardBrand() {
 }
 
 async function getPciList() {
-  const result = await cmd(["lspci"], { stdout: "piped" });
-  if (!result.success) {
-    throw result.error;
-  }
-  return (await result.output()).trim().split("\n");
+  return await cmd(["lspci"], { stdout: "piped" })
+    .then((r) => r.output())
+    .then((r) => r.trim().split("\n"));
 }
 
 async function updatePciids() {
-  await cmd(["sudo", "update-pciids"]);
+  await cmd(["sudo", "update-pciids", "-q"]);
 }

@@ -31,10 +31,7 @@ export async function ensureCasks(...casks: string[]) {
 }
 
 export async function getInstalledPackages(kind: "formulae" | "casks") {
-  const result = await cmd(["/opt/homebrew/bin/brew", "list", "--" + kind, "-1"], { stdout: "piped" });
-  if (!result.success) {
-    throw result.error;
-  }
-  const output = await result.output();
-  return output.trim().split("\n").map((l) => l.trim());
+  return await cmd(["/opt/homebrew/bin/brew", "list", "--" + kind, "-1"], { stdout: "piped" })
+    .then((r) => r.output())
+    .then((r) => r.trim().split("\n").map((l) => l.trim()));
 }

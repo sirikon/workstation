@@ -1,19 +1,19 @@
-import * as log from "../core/logging.ts";
-import * as brew from "../modules/brew.ts";
-import * as apt from "../modules/apt.ts";
-import * as devices from "../modules/devices.ts";
-import * as git from "../modules/git.ts";
-import * as asdf from "../modules/asdf.ts";
-import * as paths from "../core/paths.ts";
-import * as links from "../modules/links.ts";
-import { extendFile } from "../core/fs.ts";
+import * as log from "$/core/logging.ts";
+import * as brew from "$/modules/brew.ts";
+import * as apt from "$/modules/apt.ts";
+import * as devices from "$/modules/devices.ts";
+import * as git from "$/modules/git.ts";
+import * as asdf from "$/modules/asdf.ts";
+import * as paths from "$/core/paths.ts";
+import * as links from "$/modules/links.ts";
+import { extendFile } from "$/core/fs.ts";
 import { ensureDir, exists } from "std/fs/mod.ts";
 import { dirname, join } from "std/path/mod.ts";
 import { CommandGroupBuilder } from "denox/ui/cli/commandGroup.ts";
-import { localConfig } from "../core/config.ts";
-import config from "../config.ts";
-import { bash, cmd } from "denox/shell/mod.ts";
+import { localConfig } from "$/core/config.ts";
+import config from "$/config.ts";
 import { writeFile } from "denox/fs/mod.ts";
+import { bash, cmd } from "denox/shell/mod.ts";
 
 export const installCommand = (srk: CommandGroupBuilder) => {
   srk.command("install")
@@ -97,6 +97,9 @@ export const installCommand = (srk: CommandGroupBuilder) => {
         await cmd(["sudo", "mv", tempFilePath, "/etc/NetworkManager/dispatcher.d/srk-i3blocks-hook"]);
         await cmd(["sudo", "chown", "root:root", "/etc/NetworkManager/dispatcher.d/srk-i3blocks-hook"]);
         await cmd(["sudo", "chmod", "+x", "/etc/NetworkManager/dispatcher.d/srk-i3blocks-hook"]);
+
+        log.title("Setting default apps");
+        await cmd(["xdg-mime", "default", "thunar.desktop", "inode/directory"]);
       }
 
       log.title("Configuring git");

@@ -79,10 +79,7 @@ async function ensureKeyring(repository: ArrayElement<Config["apt"]["repositorie
 }
 
 async function getInstalledPackages() {
-  const result = await cmd(["bash", "-c", "dpkg --get-selections | grep -v deinstall"], { stdout: "piped" });
-  if (!result.success) {
-    throw result.error;
-  }
-  const output = await result.output();
-  return output.trim().split("\n").map((l) => l.split("\t")[0]);
+  return await cmd(["bash", "-c", "dpkg --get-selections | grep -v deinstall"], { stdout: "piped" })
+    .then((r) => r.output())
+    .then((r) => r.trim().split("\n").map((l) => l.split("\t")[0]));
 }

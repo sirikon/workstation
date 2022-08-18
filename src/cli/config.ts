@@ -188,20 +188,20 @@ const config: Config = {
 
 async function getDebianVersion() {
   try {
-    const result = await cmd(["lsb_release", "-cs"], { stdout: "piped" });
-    if (!result.success) return null;
-    return (await result.output()).trim().replace("\n", "");
-  } catch (err) {
+    return await cmd(["lsb_release", "-cs"], { stdout: "piped" })
+      .then((r) => r.output())
+      .then((r) => r.trim().replace("\n", ""));
+  } catch (_) {
     return null;
   }
 }
 
 async function getDpkgArch() {
   try {
-    const result = await cmd(["dpkg", "--print-architecture"], { stdout: "piped" });
-    if (!result.success) return null;
-    return (await result.output()).trim().replace("\n", "");
-  } catch (err) {
+    return await cmd(["dpkg", "--print-architecture"], { stdout: "piped" })
+      .then((r) => r.output())
+      .then((r) => r.trim().replace("\n", ""));
+  } catch (_) {
     return null;
   }
 }
