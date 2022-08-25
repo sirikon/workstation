@@ -1,5 +1,5 @@
-import * as paths from "../core/paths.ts";
-import * as log from "../core/logging.ts";
+import * as paths from "$/core/paths.ts";
+import * as log from "$/core/logging.ts";
 import { cmd } from "denox/shell/mod.ts";
 import { join } from "std/path/mod.ts";
 import { writeFile } from "denox/fs/mod.ts";

@@ -1,4 +1,4 @@
-import * as paths from "../core/paths.ts";
+import * as paths from "$/core/paths.ts";
 import { bash } from "denox/shell/mod.ts";
 import { writeFile } from "denox/fs/mod.ts";
 import { join } from "std/path/mod.ts";

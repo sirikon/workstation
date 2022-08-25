@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { homeDir } from "./paths.ts";
+import { homeDir } from "$/core/paths.ts";
 import { readFile } from "denox/fs/mod.ts";
 import { exists } from "std/fs/mod.ts";
 import { join } from "std/path/mod.ts";

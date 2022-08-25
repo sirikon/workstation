@@ -1,8 +1,8 @@
-import * as paths from "../core/paths.ts";
+import * as paths from "$/core/paths.ts";
 import { bash, cmd } from "denox/shell/mod.ts";
 import { writeFile } from "denox/fs/mod.ts";
 import { ensureDir, exists } from "std/fs/mod.ts";
-import { Config } from "../core/config.ts";
+import { Config } from "$/core/config.ts";
 import { dirname, join } from "std/path/mod.ts";
 
 type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType extends readonly (infer ElementType)[] ? ElementType : never;

@@ -1,7 +1,7 @@
-import * as paths from "../core/paths.ts";
-import * as log from "../core/logging.ts";
+import * as paths from "$/core/paths.ts";
+import * as log from "$/core/logging.ts";
 import { join } from "std/path/mod.ts";
-import { Config } from "../core/config.ts";
+import { Config } from "$/core/config.ts";
 import { readFile } from "denox/fs/mod.ts";
 import { ensureSymlink } from "std/fs/mod.ts";
 import { cmd } from "denox/shell/mod.ts";
@@ -23,7 +23,7 @@ export async function apply(links: Config["links"]) {
   }
 }
 
-export async function getDestinationPath(from: ArrayElement<Config["links"]>["from"]) {
+export function getDestinationPath(from: ArrayElement<Config["links"]>["from"]) {
   if (Deno.build.os === "darwin") {
     return from.darwin ? expandPath(from.darwin) : null;
   }

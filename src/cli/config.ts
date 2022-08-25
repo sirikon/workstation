@@ -1,5 +1,5 @@
 import { cmd } from "denox/shell/mod.ts";
-import { Config } from "./core/config.ts";
+import { Config } from "$/core/config.ts";
 
 const debianVersion = await getDebianVersion();
 const dpkgArch = await getDpkgArch();
