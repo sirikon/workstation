@@ -1,5 +1,5 @@
-import { cmd } from "denox/shell/mod.ts";
 import { Config } from "$/core/config.ts";
+import { getDebianVersion, getDpkgArch } from "$/core/system.ts";
 
 const debianVersion = await getDebianVersion();
 const dpkgArch = await getDpkgArch();
@@ -185,25 +185,5 @@ const config: Config = {
     },
   ],
 };
-
-async function getDebianVersion() {
-  try {
-    return await cmd(["lsb_release", "-cs"], { stdout: "piped" })
-      .then((r) => r.output())
-      .then((r) => r.trim().replace("\n", ""));
-  } catch (_) {
-    return null;
-  }
-}
-
-async function getDpkgArch() {
-  try {
-    return await cmd(["dpkg", "--print-architecture"], { stdout: "piped" })
-      .then((r) => r.output())
-      .then((r) => r.trim().replace("\n", ""));
-  } catch (_) {
-    return null;
-  }
-}
 
 export default config;

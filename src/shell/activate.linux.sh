@@ -103,6 +103,7 @@ function upgrade-firefox { (
   sudo ln -s /opt/firefox/firefox /usr/local/bin/firefox
   sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /opt/firefox/firefox 200
   sudo update-alternatives --set x-www-browser /opt/firefox/firefox
+  srk firefox configure
 ); }
 
 function upgrade-yq { (
