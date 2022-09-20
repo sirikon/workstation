@@ -177,6 +177,16 @@ function upgrade-dnie-tools { (
   sudo update-ca-certificates
 ); }
 
+function upgrade-aws-cli { (
+  rm -rf ~/Software/aws-cli
+  mkdir -p ~/Software/aws-cli
+  cd ~/Software/aws-cli || return
+
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  unzip "awscliv2.zip"
+  sudo ./aws/install --update
+); }
+
 function upgrade { (
   sudo apt update
   sudo apt upgrade
