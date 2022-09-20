@@ -115,6 +115,7 @@ export const installCommand = (srk: CommandGroupBuilder) => {
 
       log.title("Configuring git");
       await git.configure({
+        "init.defaultBranch": "master",
         "pull.rebase": "true",
         "submodule.recurse": "true",
         "user.name": config.git.name,
