@@ -126,6 +126,7 @@ const config: Config = {
       "brightnessctl",
       "ssh-askpass-gnome",
       "ncdu",
+      "flatpak",
     ],
   },
   asdf: {
