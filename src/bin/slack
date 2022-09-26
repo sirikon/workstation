@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -euo pipefail
+flatpak run com.slack.Slack

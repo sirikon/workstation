@@ -68,7 +68,7 @@ const config: Config = {
     ],
     pins: [
       ["*", "o=Debian,n=buster", 1],
-      ["*", "o=packagecloud.io/slacktechnologies/slack", 1],
+      // ["*", "o=packagecloud.io/slacktechnologies/slack", 1],
       // ["*", "l=insomnia-ubuntu", 1],
     ],
     packages: [
