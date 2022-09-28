@@ -111,6 +111,7 @@ const config: Config = {
       "keepassxc",
       "docker-ce",
       "docker-ce-cli",
+      "docker-compose-plugin",
       "containerd.io",
       "dbeaver-ce",
       "sublime-text",

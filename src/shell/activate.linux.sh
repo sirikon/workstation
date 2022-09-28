@@ -38,10 +38,6 @@ function upgrade-telegram { (
   ln -s "$(pwd)/Telegram" ~/bin/telegram
 ); }
 
-function upgrade-docker-compose { (
-  ~/.local/bin/pipx install docker-compose
-); }
-
 function upgrade-minecraft-launcher { (
   mkdir -p ~/Downloads/MinecraftLauncher
   cd ~/Downloads/MinecraftLauncher || return
