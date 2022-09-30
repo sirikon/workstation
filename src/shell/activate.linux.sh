@@ -189,7 +189,7 @@ function upgrade { (
   patch-vscodium-marketplace
   asdf update
   asdf plugin update --all
-  flatpak update
+  flatpak update --assumeyes
 ); }
 
 function dmenu-flush { (
