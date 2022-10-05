@@ -31,6 +31,7 @@ const config: Config = {
       "jetbrains-toolbox",
       "xcodes",
       "clipy",
+      "flipper",
     ],
   },
   apt: {
