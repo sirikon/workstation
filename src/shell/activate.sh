@@ -66,3 +66,7 @@ function ssh-forget { (
   local host="${1}"
   ssh-keygen -f ~/.ssh/known_hosts -R "${host}"
 ); }
+
+function zip-here { (
+  zip -0r "${1}.zip" ./*
+); }
