@@ -52,6 +52,7 @@ function docker-destroy {
 function docker-prune {
   docker-destroy
   docker image prune -af
+  docker system prune -af
 }
 
 function gradle-destroy { (
