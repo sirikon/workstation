@@ -2,5 +2,6 @@
     "window.menuBarVisibility": "hidden",
     "explorer.openEditors.visible": 0,
     "explorer.confirmDelete": false,
-    "redhat.telemetry.enabled": false
+    "redhat.telemetry.enabled": false,
+    "editor.inlayHints.enabled": "off"
 }
