@@ -89,6 +89,7 @@ export const installCommand = (srk: CommandGroupBuilder) => {
               .map((k) => `export ${k}="${localConfig.environment[k]}"`),
             ...(Object.keys(localConfig.environment).length > 0 ? [""] : []),
             `PATH="$HOME/.srk/src/bin:$PATH"`,
+            "xset b off # Disable xorg bell",
           ],
         });
 
