@@ -183,6 +183,17 @@ function upgrade-aws-cli { (
   sudo ./aws/install --update
 ); }
 
+function upgrade-yt-dlp { (
+  rm -rf ~/Software/yt-dlp
+  mkdir -p ~/Software/yt-dlp
+  cd ~/Software/yt-dlp || return
+
+  curl -L "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp" -o "yt-dlp"
+  chmod +x "yt-dlp"
+  rm -rf /usr/local/bin/yt-dlp
+  sudo ln -s "$(pwd)/yt-dlp" /usr/local/bin/yt-dlp
+); }
+
 function upgrade { (
   sudo apt update
   sudo apt upgrade
