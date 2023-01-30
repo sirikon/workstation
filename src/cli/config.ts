@@ -56,7 +56,7 @@ const config: Config = {
         key: ["vscodium", "https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg"],
       }],
       ["deb", "http://repository.spotify.com", ["stable", "non-free"], {
-        key: ["spotify-5E3C45D7B312C643", "https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg"],
+        key: ["spotify-7A3A762FAFD4A51F", "https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg"],
       }],
       ["deb", "https://download.virtualbox.org/virtualbox/debian", [debianVersion, "contrib"], {
         key: ["virtualbox", "https://www.virtualbox.org/download/oracle_vbox_2016.asc"],
