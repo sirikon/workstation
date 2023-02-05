@@ -85,12 +85,17 @@ function upgrade-binmerge { (
   ln -s "$(pwd)/binmerge" ~/bin/binmerge
 ); }
 
+# https://ftp.mozilla.org/pub/firefox/releases/
 function upgrade-firefox { (
+  target_version="${1:-""}"
+  url="https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US"
+  if [ "${target_version}" != "" ]; then
+    url="https://ftp.mozilla.org/pub/firefox/releases/${target_version}/linux-x86_64/en-US/firefox-${target_version}.tar.bz2"
+  fi
   rm -rf ~/Software/firefox
   mkdir -p ~/Software/firefox
   cd ~/Software/firefox || return
-  curl -Lo firefox.tar.bz2 \
-    "https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US"
+  curl -Lo firefox.tar.bz2 "${url}"
   tar -xvf firefox.tar.bz2
   sudo rm -rf /opt/firefox
   sudo mv ./firefox /opt/firefox
