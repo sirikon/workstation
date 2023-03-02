@@ -22,6 +22,10 @@ function xcode-prune { (
   rm -rf ~/Library/Caches/com.apple.dt.Xcode
 ); }
 
+function cocoapods-prune { (
+  pod cache clean --all
+); }
+
 function upgrade { (
   brew update
   brew upgrade
