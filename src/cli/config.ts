@@ -16,6 +16,7 @@ const config: Config = {
       "jq",
       "git",
       "theseal/ssh-askpass/ssh-askpass",
+      "jdxcode/tap/rtx",
     ],
     casks: [
       "dropbox",
@@ -61,6 +62,9 @@ const config: Config = {
       ["deb", "https://download.virtualbox.org/virtualbox/debian", [debianVersion, "contrib"], {
         key: ["virtualbox", "https://www.virtualbox.org/download/oracle_vbox_2016.asc"],
         arch: dpkgArch,
+      }],
+      ["deb", "https://rtx.pub/deb", ["stable", "main"], {
+        key: ["rtx", "https://rtx.pub/gpg-key.pub"],
       }],
       // ["deb", "https://download.konghq.com/insomnia-ubuntu/", ["default", "all"], {
       //   arch: dpkgArch,

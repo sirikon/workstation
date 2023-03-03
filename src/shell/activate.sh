@@ -3,9 +3,12 @@
 # Enable colors
 export CLICOLOR=1 # ls
 
-# Add asdf
-. ~/.asdf/asdf.sh
-. ~/.asdf/completions/asdf.bash
+# # Add asdf
+# . ~/.asdf/asdf.sh
+# . ~/.asdf/completions/asdf.bash
+
+# Add rtx
+eval "$(rtx activate bash)"
 
 # Prevent virtualenv automatic prompt
 export VIRTUAL_ENV_DISABLE_PROMPT=1
