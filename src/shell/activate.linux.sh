@@ -202,8 +202,8 @@ function upgrade { (
   sudo apt update
   sudo apt upgrade
   patch-vscodium-marketplace
-  asdf update
-  asdf plugin update --all
+  # asdf update
+  # asdf plugin update --all
   flatpak update --assumeyes
 ); }
 

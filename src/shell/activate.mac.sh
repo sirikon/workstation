@@ -29,6 +29,6 @@ function cocoapods-prune { (
 function upgrade { (
   brew update
   brew upgrade
-  asdf update
-  asdf plugin update --all
+  # asdf update
+  # asdf plugin update --all
 ); }
