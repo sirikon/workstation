@@ -123,13 +123,13 @@ export const installCommand = (srk: CommandGroupBuilder) => {
         "user.email": config.git.email,
       });
 
-      log.title("Ensuring asdf is installed and updated");
-      await asdf.ensureAsdf();
-      log.title("Configuring asdf");
-      await asdf.writeAsdfrc([
-        ...Object.entries(config.asdf.config).map(([k, v]) => `${k} = ${v}`),
-        "",
-      ]);
+      // log.title("Ensuring asdf is installed and updated");
+      // await asdf.ensureAsdf();
+      // log.title("Configuring asdf");
+      // await asdf.writeAsdfrc([
+      //   ...Object.entries(config.asdf.config).map(([k, v]) => `${k} = ${v}`),
+      //   "",
+      // ]);
 
       const bashFiles = (await Promise.all([
         join(await paths.homeDir(), ".bash_profile"),
