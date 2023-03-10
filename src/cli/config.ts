@@ -133,6 +133,7 @@ const config: Config = {
       "ssh-askpass-gnome",
       "ncdu",
       "flatpak",
+      "rtx",
     ],
   },
   asdf: {
