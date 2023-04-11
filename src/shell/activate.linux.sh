@@ -163,7 +163,7 @@ function upgrade-dnie-tools { (
   printf "%s\n" ""
 
   pdf_download_url="https://www.dnielectronico.es$(curl -sL 'https://www.dnielectronico.es/portaldnie/PRF1_Cons02.action?pag=REF_1111' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:99.0) Gecko/20100101 Firefox/99.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' -H 'Accept-Encoding: gzip, deflate, br' -H 'Referer: https://www.dnielectronico.es/portaldnie/PRF1_Cons02.action?pag=REF_1110' -H 'DNT: 1' -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' -H 'Sec-Fetch-Dest: document' -H 'Sec-Fetch-Mode: navigate' -H 'Sec-Fetch-Site: same-origin' -H 'Sec-Fetch-User: ?1' -H 'TE: trailers' | htmlq --attribute href 'a[href*=".pdf"]' | tail -n1)"
-  printf "%s\n%s\n\n" "Downloading PDF:" "${deb_download_url}"
+  printf "%s\n%s\n\n" "Downloading PDF:" "${pdf_download_url}"
   curl -Lo instructions.pdf "${pdf_download_url}"
   printf "%s\n" ""
 
