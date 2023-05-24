@@ -2,6 +2,7 @@
   "recommendations": [
     "foxundermoon.shell-format",
     "timonwong.shellcheck",
-    "dcasella.i3"
+    "dcasella.i3",
+    "denoland.vscode-deno"
   ]
 }
