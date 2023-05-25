@@ -48,7 +48,7 @@ function docker-destroy {
   docker ps -aq | while IFS=$'\n' read -r containerId; do
     docker rm -f "$containerId"
   done
-  docker volume prune -f
+  docker volume prune -af
   docker network prune -f
 }
 
