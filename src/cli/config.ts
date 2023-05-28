@@ -33,6 +33,7 @@ const config: Config = {
       "xcodes",
       "clipy",
       "flipper",
+      "tigase/tigase/beagleim",
     ],
   },
   apt: {
