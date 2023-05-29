@@ -3,7 +3,6 @@ import * as brew from "$/modules/brew.ts";
 import * as apt from "$/modules/apt.ts";
 import * as devices from "$/modules/devices.ts";
 import * as git from "$/modules/git.ts";
-import * as asdf from "$/modules/asdf.ts";
 import * as paths from "$/core/paths.ts";
 import * as links from "$/modules/links.ts";
 import { extendFile } from "$/core/fs.ts";
