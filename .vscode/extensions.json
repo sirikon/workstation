@@ -3,6 +3,7 @@
     "foxundermoon.shell-format",
     "timonwong.shellcheck",
     "dcasella.i3",
-    "denoland.vscode-deno"
+    "ms-python.python",
+    "ms-python.black-formatter"
   ]
 }

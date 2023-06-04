@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-firefox --new-window "https://egin.sirikon.me"

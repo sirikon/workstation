@@ -1,56 +1,21 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-export SRK_REPO="git@github.com:sirikon/workstation.git"
+export SRK_REPO="https://github.com/sirikon/workstation.git"
 export SRK_ROOT=~/.srk
-export SRK_OUT="${SRK_ROOT}/out"
 export SRK_EXEC="srk"
-export SRK_BIN="${SRK_OUT}/${SRK_EXEC}"
 export SRK_INSTALL="/usr/local/bin"
 
-export DENO_INSTALL="${SRK_ROOT}/deno/install"
-export DENO_DIR="${SRK_ROOT}/deno/cache"
-export DENO_BIN="${DENO_INSTALL}/bin/deno"
-
 function main {
-  if [ "$OSTYPE" = "linux-gnu" ]; then
-    if ! command -v git &>/dev/null; then
-      sudo apt-get install -y git
-    fi
-    if ! command -v unzip &>/dev/null; then
-      sudo apt-get install -y unzip
-    fi
-  fi
-
   log "Ensuring repository on ${SRK_ROOT}"
   if [ ! -d "${SRK_ROOT}" ]; then
     git clone "${SRK_REPO}" "${SRK_ROOT}"
   fi
   cd "${SRK_ROOT}"
 
-  export DENO_VERSION=$(grep deno <"${SRK_ROOT}/.tool-versions" | sed 's/deno\ //')
-  log "Ensuring Deno ${DENO_VERSION}"
-  if [ ! -d "${DENO_INSTALL}" ]; then
-    curl -fsSL "https://deno.land/x/install/install.sh" | sh -s "v${DENO_VERSION}"
-  else
-    "$DENO_BIN" upgrade --version "${DENO_VERSION}"
-  fi
-
-  log "Building srk"
-  rm -rf "${SRK_OUT}"
-  "$DENO_BIN" compile \
-    -A --unstable \
-    --lock "src/cli/lock.json" \
-    --config "src/cli/deno.json" \
-    --import-map "src/cli/import_map.json" \
-    --output "${SRK_BIN}" \
-    "src/cli/main.ts"
-  chmod +x "${SRK_BIN}"
-
   log "Installing srk on ${SRK_INSTALL}"
   sudo mkdir -p "${SRK_INSTALL}"
   sudo rm -f "${SRK_INSTALL}/${SRK_EXEC}"
-  sudo cp "${SRK_BIN}" "${SRK_INSTALL}"
 
   log "Running '${SRK_EXEC} install'"
   "${SRK_EXEC}" install
