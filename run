@@ -2,4 +2,4 @@
 set -euo pipefail
 
 export PYTHONPATH="$(pwd)/src/python:${PYTHONPATH:-''}"
-python3 -m srk
+pipenv run python -m srk
