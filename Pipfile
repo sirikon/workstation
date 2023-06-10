@@ -5,3 +5,4 @@ name = "pypi"
 
 [packages]
 pydantic = "~=1.0"
+pyinstaller = "~=5.12"
