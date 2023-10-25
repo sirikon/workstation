@@ -58,6 +58,13 @@ function docker-prune {
   docker system prune -af
 }
 
+function pycharm-docker-destroy {
+  local pycharm_container_id="$(docker ps -aqf 'name=pycharm_helpers_PY-*')"
+  if [ "${pycharm_container_id}" != "" ]; then
+    docker rm -f "${pycharm_container_id}"
+  fi
+}
+
 function gradle-destroy { (
   pkill -9 -f gradle
 ); }
