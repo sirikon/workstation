@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export PATH=/opt/homebrew/bin:~/bin:$PATH
+export PATH=/opt/homebrew/bin:~/bin:~/.local/bin:$PATH
 
 function sm {
   /Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/smerge -n .
