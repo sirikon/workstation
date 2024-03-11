@@ -44,7 +44,7 @@ function prompt-tiny {
 
 prompt-normal
 
-function docker-destroy {
+function docker-killall {
   docker ps -aq | while IFS=$'\n' read -r containerId; do
     docker rm -f "$containerId"
   done
@@ -52,24 +52,25 @@ function docker-destroy {
   docker network prune -f
 }
 
-function docker-prune {
-  docker-destroy
+function docker-cleanup {
+  docker-killall
   docker image prune -af
+  docker builder prune -f
   docker system prune -af
 }
 
-function pycharm-docker-destroy {
+function pycharm-docker-killall {
   local pycharm_container_id="$(docker ps -aqf 'name=pycharm_helpers_PY-*')"
   if [ "${pycharm_container_id}" != "" ]; then
     docker rm -f "${pycharm_container_id}"
   fi
 }
 
-function gradle-destroy { (
+function gradle-killall { (
   pkill -9 -f gradle
 ); }
 
-function gradle-prune { (
+function gradle-cleanup { (
   rm -rf ~/.gradle
 ); }
 
