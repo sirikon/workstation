@@ -3,5 +3,8 @@
     "explorer.openEditors.visible": 0,
     "explorer.confirmDelete": false,
     "redhat.telemetry.enabled": false,
-    "editor.inlayHints.enabled": "off"
+    "editor.inlayHints.enabled": "off",
+    "extensions.ignoreRecommendations": true,
+    "diffEditor.hideUnchangedRegions.enabled": true,
+    "workbench.startupEditor": "none"
 }
