@@ -36,12 +36,17 @@ function link_dbeaver_config {
 }
 
 function command_exists {
+    log "Checking command exists: $1"
     command -v "$1" >/dev/null
 }
 
 function link {
+    log "Linking $1 to $2"
     ln -fFs "$1" "$2"
 }
 
-set -x
+function log {
+    printf "\e[1m\033[38;5;208m###\033[0m \e[1m%s\n\033[0m" "${1}"
+}
+
 main "$@"
