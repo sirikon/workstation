@@ -4,33 +4,15 @@ set -euo pipefail
 export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
 
 function main {
-    install_mise
-    link_alacritty_config
-    link_vscode_config
-    link_sublime_merge_config
-    link_dbeaver_config
-}
-
-function install_mise {
     command_exists mise || brew install mise
-}
+    command_exists alacritty || brew install --cask alacritty
 
-function link_alacritty_config {
     link "$SRK_ROOT/config/alacritty/alacritty.toml" \
         "$HOME/.alacritty.toml"
-}
-
-function link_vscode_config {
     link "$SRK_ROOT/config/vscode/settings.json" \
         "$HOME/Library/Application Support/Code/User/settings.json"
-}
-
-function link_sublime_merge_config {
     link "$SRK_ROOT/config/sublime-merge/preferences.json" \
         "$HOME/Library/Application Support/Sublime Merge/Packages/User/Preferences.sublime-settings"
-}
-
-function link_dbeaver_config {
     link "$HOME/Dropbox/_SoftwareConfig/dbeaver" \
         "$HOME/Library/DBeaverData/workspace6/General"
 }
