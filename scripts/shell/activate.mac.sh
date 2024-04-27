@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 export PATH=/opt/homebrew/bin:~/bin:~/.local/bin:$PATH
+# shellcheck disable=SC1091
+source "$(dirname "${BASH_SOURCE[0]}")/activate.sh"
 
 function sm {
   /Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/smerge -n .

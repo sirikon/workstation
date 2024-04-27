@@ -1,20 +1,17 @@
 {
-  "editor.detectIndentation": false,
-  "editor.tabSize": 2,
-  "shellcheck.enable": true,
-  "shellcheck.customArgs": [
-    "--exclude",
-    "SC2155,SC1090,SC2002"
-  ],
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features",
-    "files.insertFinalNewline": true
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features",
-    "files.insertFinalNewline": true
-  },
-  "[python]": {
-    "editor.tabSize": 4
-  }
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "shellcheck.enable": true,
+    "shellcheck.customArgs": [
+        "--exclude",
+        "SC2155,SC1090,SC2002"
+    ],
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "files.insertFinalNewline": true
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "files.insertFinalNewline": true
+    },
 }
