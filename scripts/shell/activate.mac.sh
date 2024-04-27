@@ -5,32 +5,30 @@ export PATH=/opt/homebrew/bin:~/bin:~/.local/bin:$PATH
 source "$(dirname "${BASH_SOURCE[0]}")/activate.sh"
 
 function sm {
-  /Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/smerge -n .
+    /Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/smerge -n .
 }
 
 function backup-terminal-config { (
-  cp ~/Library/Preferences/com.apple.Terminal.plist \
-    ~/Dropbox/ProgramData/MacOsTerminal/com.apple.Terminal.plist
+    cp ~/Library/Preferences/com.apple.Terminal.plist \
+        ~/Dropbox/ProgramData/MacOsTerminal/com.apple.Terminal.plist
 ); }
 
 function restore-terminal-config { (
-  cp ~/Dropbox/ProgramData/MacOsTerminal/com.apple.Terminal.plist \
-    ~/Library/Preferences/com.apple.Terminal.plist
+    cp ~/Dropbox/ProgramData/MacOsTerminal/com.apple.Terminal.plist \
+        ~/Library/Preferences/com.apple.Terminal.plist
 ); }
 
 function xcode-prune { (
-  rm -rf ~/Library/Developer/Xcode/DerivedData
-  rm -rf ~/Library/Developer/Xcode/Archives
-  rm -rf ~/Library/Caches/com.apple.dt.Xcode
+    rm -rf ~/Library/Developer/Xcode/DerivedData
+    rm -rf ~/Library/Developer/Xcode/Archives
+    rm -rf ~/Library/Caches/com.apple.dt.Xcode
 ); }
 
 function cocoapods-prune { (
-  pod cache clean --all
+    pod cache clean --all
 ); }
 
 function upgrade { (
-  brew update
-  brew upgrade
-  # asdf update
-  # asdf plugin update --all
+    brew update
+    brew upgrade
 ); }
