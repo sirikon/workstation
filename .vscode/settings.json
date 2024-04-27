@@ -1,23 +1,18 @@
 {
   "editor.detectIndentation": false,
   "editor.tabSize": 2,
-  "deno.enable": true,
-  "deno.config": "./src/cli/deno.json",
-  "deno.importMap": "./src/cli/import_map.json",
-  "deno.cache": "./deno/cache",
   "shellcheck.enable": true,
-  "shellcheck.customArgs": ["--exclude", "SC2155,SC1090,SC2002"],
+  "shellcheck.customArgs": [
+    "--exclude",
+    "SC2155,SC1090,SC2002"
+  ],
   "[json]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "files.insertFinalNewline": true
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
-  },
-  "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "files.insertFinalNewline": true
   },
   "[python]": {
     "editor.tabSize": 4
