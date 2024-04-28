@@ -4,6 +4,7 @@ set -euo pipefail
 export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
 
 function main {
+    command_exists brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     command_exists mise || brew install mise
     command_exists alacritty || brew install --cask alacritty
     directory_exists '/Applications/iCanHazShortcut.app' || brew install --cask icanhazshortcut
