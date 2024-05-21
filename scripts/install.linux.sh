@@ -8,6 +8,8 @@ function main {
     command_exists i3 || apt-get install -y i3
     command_exists ssh-askpass || apt-get install -y ssh-askpass
     command_exists firefox || apt-get install -y firefox-esr
+    command_exists pavucontrol || apt-get install -y pavucontrol
+    # fonts-noto-color-emoji
 
     link "$SRK_ROOT/config/i3" "$HOME/.config/i3"
     link "$SRK_ROOT/config/i3blocks" "$HOME/.config/i3blocks"

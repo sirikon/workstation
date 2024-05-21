@@ -25,12 +25,9 @@ def get_network_device_ip(device):
 def get_default_network_devices():
     routes = [l.split(' ')
               for l in cmd('ip', 'route') if l.startswith('default')]
-
     network_devices = []
     for route in routes:
         if 'linkdown' in route:
-            continue
-        if 'metric' not in route:
             continue
         network_device_pos = route.index('dev')+1
         network_devices.append(route[network_device_pos])
