@@ -6,5 +6,6 @@
     "editor.inlayHints.enabled": "off",
     "extensions.ignoreRecommendations": true,
     "diffEditor.hideUnchangedRegions.enabled": true,
-    "workbench.startupEditor": "none"
+    "workbench.startupEditor": "none",
+    "git.openRepositoryInParentFolders": "never"
 }
