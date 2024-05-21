@@ -10,6 +10,7 @@ function main {
     command_exists firefox || apt-get install -y firefox-esr
     command_exists pavucontrol || apt-get install -y pavucontrol
     # fonts-noto-color-emoji
+    # https://mise.jdx.dev/getting-started.html#apt
 
     link "$SRK_ROOT/config/i3" "$HOME/.config/i3"
     link "$SRK_ROOT/config/i3blocks" "$HOME/.config/i3blocks"

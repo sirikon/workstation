@@ -2,6 +2,8 @@
 
 # Add sbin to PATH
 export PATH=/usr/local/sbin:/usr/sbin:/sbin:~/.srk/src/bin:~/.local/bin:$PATH
+# shellcheck disable=SC1091
+source "$(dirname "${BASH_SOURCE[0]}")/activate.sh"
 
 function used-ports {
   sudo lsof -i -P -n | grep LISTEN
