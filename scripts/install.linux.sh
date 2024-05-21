@@ -4,6 +4,8 @@ set -euo pipefail
 export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
 
 function main {
+    install-metapackage
+
     # command_exists git || apt-get install -y git
     # command_exists i3 || apt-get install -y i3
     # command_exists ssh-askpass || apt-get install -y ssh-askpass
@@ -26,6 +28,16 @@ function main {
 
     link "$SRK_ROOT/config/vscode/settings.json" \
         "$HOME/.config/Code/User/settings.json"
+}
+
+function install-metapackage {
+    command_exists dpkg-deb || apt-get install -y dpkg-deb
+    log "Installing metapackage"
+    (
+        cd packages
+        dpkg-deb --build sirikon-workstation
+    )
+    sudo apt-get install ./packages/sirikon-workstation.deb
 }
 
 function command_exists {

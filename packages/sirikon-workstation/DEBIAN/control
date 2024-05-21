@@ -1,0 +1,6 @@
+Package: sirikon-workstation
+Version: 0.0.1
+Maintainer: Carlos Fdez. Llamas <hello@sirikon.me>
+Architecture: all
+Description: Metapackage containing all the packages needed in Sirikon's workstation
+Depends: sway

@@ -201,6 +201,19 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+set $mode_system (l)ock (r)eboot (s)hutdown
+bindsym $mod+Escape mode "$mode_system"
+mode "$mode_system" {
+  bindsym l exec --no-startup-id loginctl lock-session, mode "default"
+  bindsym r exec --no-startup-id systemctl reboot, mode "default"
+  bindsym s exec --no-startup-id systemctl poweroff -i, mode "default" 
+
+  # back to normal
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+Escape mode "default"
+}
+
 #
 # Status Bar:
 #
