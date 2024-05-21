@@ -1,5 +1,6 @@
 # Workstation Scripts
 
 ```bash
-./scripts/install.sh
+./scripts/install.linux.sh
+./scripts/install.mac.sh
 ```

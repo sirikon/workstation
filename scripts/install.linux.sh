@@ -4,19 +4,22 @@ set -euo pipefail
 export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
 
 function main {
-    command_exists git || apt-get install -y git
-    command_exists i3 || apt-get install -y i3
-    command_exists ssh-askpass || apt-get install -y ssh-askpass
-    command_exists firefox || apt-get install -y firefox-esr
-    command_exists pavucontrol || apt-get install -y pavucontrol
+    # command_exists git || apt-get install -y git
+    # command_exists i3 || apt-get install -y i3
+    # command_exists ssh-askpass || apt-get install -y ssh-askpass
+    # command_exists firefox || apt-get install -y firefox-esr
+    # command_exists pavucontrol || apt-get install -y pavucontrol
     # fonts-noto-color-emoji
     # https://mise.jdx.dev/getting-started.html#apt
 
-    link "$SRK_ROOT/config/x/Xresources" "$HOME/.Xresources"
-    link "$SRK_ROOT/config/x/xsessionrc" "$HOME/.xsessionrc"
+    # link "$SRK_ROOT/config/x/Xresources" "$HOME/.Xresources"
+    # link "$SRK_ROOT/config/x/xsessionrc" "$HOME/.xsessionrc"
 
-    link "$SRK_ROOT/config/i3" "$HOME/.config/i3"
-    link "$SRK_ROOT/config/i3blocks" "$HOME/.config/i3blocks"
+    # link "$SRK_ROOT/config/i3" "$HOME/.config/i3"
+    # link "$SRK_ROOT/config/i3blocks" "$HOME/.config/i3blocks"
+
+    link "$SRK_ROOT/config/sway" \
+        "$HOME/.config/sway"
 
     link "$SRK_ROOT/config/alacritty/alacritty.toml" \
         "$HOME/.alacritty.toml"
