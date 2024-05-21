@@ -195,7 +195,6 @@ exec --no-startup-id dunst
 exec --no-startup-id ~/.screenlayout/default.sh
 exec --no-startup-id dropbox start
 exec --no-startup-id blueman-applet
-exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 
 
 
