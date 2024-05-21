@@ -6,11 +6,17 @@ export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
 function main {
     command_exists git || apt-get install -y git
     command_exists i3 || apt-get install -y i3
+    command_exists ssh-askpass || apt-get install -y ssh-askpass
+    command_exists firefox || apt-get install -y firefox-esr
 
     link "$SRK_ROOT/config/i3" "$HOME/.config/i3"
+    link "$SRK_ROOT/config/i3blocks" "$HOME/.config/i3blocks"
 
     link "$SRK_ROOT/config/alacritty/alacritty.toml" \
         "$HOME/.alacritty.toml"
+
+    link "$SRK_ROOT/config/vscode/settings.json" \
+        "$HOME/.config/Code/User/settings.json"
 }
 
 function command_exists {
