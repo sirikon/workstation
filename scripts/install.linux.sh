@@ -8,6 +8,9 @@ function main {
     command_exists i3 || apt-get install -y i3
 
     link "$SRK_ROOT/config/i3" "$HOME/.config/i3"
+
+    link "$SRK_ROOT/config/alacritty/alacritty.toml" \
+        "$HOME/.alacritty.toml"
 }
 
 function command_exists {
