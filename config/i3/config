@@ -164,7 +164,7 @@ mode "$mode_system" {
 ###### PROGRAMS ######
 
 # Launcher
-bindsym $mod+d exec --no-startup-id srk-launch
+bindsym $mod+d exec --no-startup-id dmenu
 
 bindsym $mod+Return exec alacritty
 bindsym XF86Calculator exec gnome-calculator
