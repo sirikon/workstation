@@ -1,22 +1,12 @@
 #!/usr/bin/env bash
 
-export PATH=/opt/homebrew/bin:~/bin:~/.local/bin:$PATH
-# shellcheck disable=SC1091
+export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../..")"
+export PATH="/opt/homebrew/bin:~/bin:~/.local/bin:$PATH"
 source "$(dirname "${BASH_SOURCE[0]}")/activate.sh"
 
 function sm {
     /Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/smerge -n .
 }
-
-function backup-terminal-config { (
-    cp ~/Library/Preferences/com.apple.Terminal.plist \
-        ~/Dropbox/ProgramData/MacOsTerminal/com.apple.Terminal.plist
-); }
-
-function restore-terminal-config { (
-    cp ~/Dropbox/ProgramData/MacOsTerminal/com.apple.Terminal.plist \
-        ~/Library/Preferences/com.apple.Terminal.plist
-); }
 
 function xcode-prune { (
     rm -rf ~/Library/Developer/Xcode/DerivedData

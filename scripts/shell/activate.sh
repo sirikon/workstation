@@ -3,10 +3,6 @@
 # Enable colors
 export CLICOLOR=1 # ls
 
-# # Add asdf
-# . ~/.asdf/asdf.sh
-# . ~/.asdf/completions/asdf.bash
-
 # Add mise
 eval "$(mise activate bash)"
 
