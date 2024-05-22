@@ -1,11 +1,5 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
+# man 5 sway
 
-### Variables
-#
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
@@ -22,46 +16,24 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+
+
+# man 5 sway-output
+# swaymsg -t get_outputs
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+output HDMI-A-1 transform 270
+output DVI-D-1 position 0 0
+output HDMI-A-1 position 1920 -500
 
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+
+# man 5 sway-input
+# swaymsg -t get_inputs
 input "type:keyboard" {
     xkb_layout es
 }
+
+
 
 ### Key bindings
 #
@@ -176,9 +148,10 @@ input "type:keyboard" {
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
-#
-# Resizing containers:
-#
+
+
+
+# Resizing mode
 mode "resize" {
     # left will shrink the containers width
     # right will grow the containers width
@@ -201,6 +174,9 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+
+
+# Lock, Reboot and Shutdown mode
 set $mode_system (l)ock (r)eboot (s)hutdown
 bindsym $mod+Escape mode "$mode_system"
 mode "$mode_system" {
@@ -214,16 +190,16 @@ mode "$mode_system" {
   bindsym $mod+Escape mode "default"
 }
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
+
+
+# man 5 sway-bar
 bar {
     position bottom
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+    status_command while date +'%Y-%m-%d %H:%M:%S <span color="gray">%Z</span>%z'; do sleep 1; done
+    pango_markup enabled
 
     colors {
         statusline #ffffff
