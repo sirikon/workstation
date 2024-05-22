@@ -194,18 +194,7 @@ mode "$mode_system" {
 
 # man 5 sway-bar
 bar {
-    position bottom
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %H:%M:%S <span color="gray">%Z</span>%z'; do sleep 1; done
-    pango_markup enabled
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #323232 #323232 #5c5c5c
-    }
+    swaybar_command waybar
 }
 
 include /etc/sway/config.d/*

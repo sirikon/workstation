@@ -1,0 +1,30 @@
+[
+    {
+        "position": "bottom",
+        "output": "DVI-D-1",
+        "spacing": 4,
+        "modules-left": [
+            "sway/workspaces",
+            "sway/mode",
+            "sway/scratchpad"
+        ],
+        "modules-center": [],
+        "modules-right": [
+            "custom/date",
+            "tray"
+        ],
+        "custom/date": {
+            "exec": "while date +'%Y-%m-%d %H:%M:%S <span color=\"gray\">%Z</span>%z'; do sleep 1; done"
+        }
+    },
+    {
+        "position": "bottom",
+        "output": "HDMI-A-1",
+        "spacing": 4,
+        "modules-left": [
+            "sway/workspaces"
+        ],
+        "modules-center": [],
+        "modules-right": []
+    }
+]

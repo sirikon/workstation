@@ -4,18 +4,13 @@ set -euo pipefail
 export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
 
 function main {
-    install-metapackage
-
-    # command_exists git || apt-get install -y git
-    # command_exists i3 || apt-get install -y i3
-    # command_exists ssh-askpass || apt-get install -y ssh-askpass
-    # command_exists firefox || apt-get install -y firefox-esr
-    # command_exists pavucontrol || apt-get install -y pavucontrol
-    # fonts-noto-color-emoji
-    # https://mise.jdx.dev/getting-started.html#apt
+    # install-metapackage
 
     link "$SRK_ROOT/config/sway" \
         "$HOME/.config/sway"
+
+    link "$SRK_ROOT/config/waybar" \
+        "$HOME/.config/waybar"
 
     link "$SRK_ROOT/config/alacritty/alacritty.toml" \
         "$HOME/.alacritty.toml"
