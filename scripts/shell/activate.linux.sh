@@ -8,7 +8,7 @@ export PATH="/usr/local/sbin:/usr/sbin:/sbin:$SRK_ROOT/scripts/bin:$HOME/bin:$SR
 source "$(dirname "${BASH_SOURCE[0]}")/activate.sh"
 
 if [ -z "${SSH_AGENT_PID}" ]; then
-    eval "$(DISPLAY="${DISPLAY:-':0'}" ssh-agent)"
+    eval "$(DISPLAY=:0 ssh-agent)"
 fi
 
 function upgrade-keepassxc {
