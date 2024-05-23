@@ -19,6 +19,10 @@ function used-ports {
     sudo lsof -i -P -n | grep LISTEN
 }
 
+function my-commits-here {
+    smerge search 'author:"Carlos Fdez. Llamas <hello@sirikon.me>"' .
+}
+
 function upgrade-keepassxc {
     latest_tag=$(curl --silent "https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest" | jq -r ".tag_name")
     echo "Installing KeepassXC $latest_tag"
@@ -49,97 +53,10 @@ function upgrade-telegram { (
     )
 ); }
 
-# function upgrade-minecraft-launcher { (
-#     mkdir -p ~/Downloads/MinecraftLauncher
-#     cd ~/Downloads/MinecraftLauncher || return
-#     rm -f Minecraft.deb
-#     wget "https://launcher.mojang.com/download/Minecraft.deb"
-#     sudo apt install ./Minecraft.deb
-# ); }
-
-# function upgrade-discord { (
-#     mkdir -p ~/Downloads/Discord
-#     cd ~/Downloads/Discord || return
-#     rm -f discord.deb
-#     wget -O discord.deb "https://discord.com/api/download?platform=linux&format=deb"
-#     sudo apt install ./discord.deb
-# ); }
-
-# function upgrade-flipper { (
-#     mkdir -p ~/Software/Flipper
-#     cd ~/Software/Flipper || return
-#     rm -rf *
-#     curl -L --output __flipper.zip "https://www.facebook.com/fbflipper/public/linux"
-#     unzip __flipper.zip
-#     rm __flipper.zip
-#     ln -s "$(pwd)/flipper" ~/bin/flipper
-# ); }
-
-# function upgrade-appium { (
-#     mkdir -p ~/Software/Appium
-#     cd ~/Software/Appium || return
-#     rm -rf *
-#     latest_version=$(curl --silent "https://api.github.com/repos/appium/appium-desktop/releases/latest" | jq -r ".name")
-#     printf "%s\n\n" "Downloading Appium ${latest_version}"
-#     wget "https://github.com/appium/appium-desktop/releases/download/v${latest_version}/Appium-Server-GUI-linux-${latest_version}.AppImage"
-#     chmod +x "Appium-Server-GUI-linux-${latest_version}.AppImage"
-#     ln -s "$(pwd)/Appium-Server-GUI-linux-${latest_version}.AppImage" ~/bin/appium
-# ); }
-
-# function upgrade-binmerge { (
-#     rm -rf ~/Software/binmerge
-#     mkdir -p ~/Software/binmerge
-#     git clone "https://github.com/putnam/binmerge.git" ~/Software/binmerge
-#     cd ~/Software/binmerge || return
-#     git reset --hard "7218522aac721f6b0dcc2efc1b38f7d286979c7a"
-#     rm -rf ~/bin/binmerge
-#     ln -s "$(pwd)/binmerge" ~/bin/binmerge
-# ); }
-
-# # https://ftp.mozilla.org/pub/firefox/releases/
-# function upgrade-firefox { (
-#     target_version="${1:-""}"
-#     url="https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US"
-#     if [ "${target_version}" != "" ]; then
-#         url="https://ftp.mozilla.org/pub/firefox/releases/${target_version}/linux-x86_64/en-US/firefox-${target_version}.tar.bz2"
-#     fi
-#     rm -rf ~/Software/firefox
-#     mkdir -p ~/Software/firefox
-#     cd ~/Software/firefox || return
-#     curl -Lo firefox.tar.bz2 "${url}"
-#     tar -xvf firefox.tar.bz2
-#     sudo rm -rf /opt/firefox
-#     sudo mv ./firefox /opt/firefox
-#     sudo chown -R root:root /opt/firefox
-#     sudo rm -f /usr/local/bin/firefox
-#     sudo ln -s /opt/firefox/firefox /usr/local/bin/firefox
-#     sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /opt/firefox/firefox 200
-#     sudo update-alternatives --set x-www-browser /opt/firefox/firefox
-# ); }
-
-# function upgrade-yq { (
-#     rm -rf ~/Software/yq
-#     mkdir -p ~/Software/yq
-#     cd ~/Software/yq || return
-#     latest_version=$(curl --silent "https://api.github.com/repos/mikefarah/yq/releases/latest" | jq -r ".tag_name")
-#     printf "%s\n\n" "Downloading yq ${latest_version}"
-#     curl -Lo yq "https://github.com/mikefarah/yq/releases/download/${latest_version}/yq_linux_amd64"
-#     chmod +x yq
-#     rm -rf ~/bin/yq
-#     ln -s "$(pwd)/yq" ~/bin/yq
-# ); }
-
-# function upgrade-htmlq { (
-#     rm -rf ~/Software/htmlq
-#     mkdir -p ~/Software/htmlq
-#     cd ~/Software/htmlq || return
-#     latest_version=$(curl --silent "https://api.github.com/repos/mgdm/htmlq/releases/latest" | jq -r ".tag_name")
-#     printf "%s\n\n" "Downloading htmlq ${latest_version}"
-#     curl -Lo htmlq.tar.gz "https://github.com/mgdm/htmlq/releases/download/${latest_version}/htmlq-x86_64-linux.tar.gz"
-#     tar -xzf htmlq.tar.gz
-#     rm -rf ~/bin/htmlq
-#     ln -s "$(pwd)/htmlq" ~/bin/htmlq
-# ); }
+function upgrade { (
+    sudo apt-get update
+    sudo apt-get upgrade
+); }
 
 # function upgrade-fnmt-tools { (
 #     rm -rf ~/Software/fnmt
@@ -188,36 +105,6 @@ function upgrade-telegram { (
 #     sudo update-ca-certificates
 # ); }
 
-# function upgrade-aws-cli { (
-#     rm -rf ~/Software/aws-cli
-#     mkdir -p ~/Software/aws-cli
-#     cd ~/Software/aws-cli || return
-
-#     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-#     unzip "awscliv2.zip"
-#     sudo ./aws/install --update
-# ); }
-
-# function upgrade-yt-dlp { (
-#     rm -rf ~/Software/yt-dlp
-#     mkdir -p ~/Software/yt-dlp
-#     cd ~/Software/yt-dlp || return
-
-#     curl -L "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp" -o "yt-dlp"
-#     chmod +x "yt-dlp"
-#     rm -rf /usr/local/bin/yt-dlp
-#     sudo ln -s "$(pwd)/yt-dlp" /usr/local/bin/yt-dlp
-# ); }
-
-# function upgrade { (
-#     sudo apt update
-#     sudo apt upgrade
-#     patch-vscodium-marketplace
-#     # asdf update
-#     # asdf plugin update --all
-#     flatpak update --assumeyes
-# ); }
-
 # function dmenu-flush { (
 #     rm ~/.cache/dmenu_run
 # ); }
@@ -225,18 +112,4 @@ function upgrade-telegram { (
 # function backup-anbernic { (
 #     cd ~/Dropbox/Backup/Anbernic_Saves/ReGBA || return
 #     scp root@10.1.1.2:/media/data/local/home/.gpsp/* .
-# ); }
-
-# function my-commits-here {
-#     smerge search 'author:"Carlos Fdez. Llamas <hello@sirikon.me>"' .
-# }
-
-# function to-clipboard {
-#     xclip -sel clip
-# }
-
-# function srk-launch-logs { (
-#     local program="${1}"
-#     sudo cat /var/log/syslog |
-#         grep "${program}@srk-launch"
 # ); }
