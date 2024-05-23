@@ -11,6 +11,10 @@ if [ -z "${SSH_AGENT_PID}" ]; then
     eval "$(DISPLAY=:0 ssh-agent)"
 fi
 
+function sm {
+    smerge .
+}
+
 function upgrade-keepassxc {
     latest_tag=$(curl --silent "https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest" | jq -r ".tag_name")
     echo "Installing KeepassXC $latest_tag"
