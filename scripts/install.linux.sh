@@ -10,7 +10,7 @@ function main {
     copy_sudo "$SRK_ROOT/config/apt/sirikon-workstation.list" \
         "/etc/apt/sources.list.d/sirikon-workstation.list"
 
-    # sudo apt-get update
+    sudo apt-get update
 
     install-metapackage
 
