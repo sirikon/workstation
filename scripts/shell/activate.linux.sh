@@ -33,19 +33,21 @@ function upgrade-vscode {
     sudo apt-get install -y "$HOME/Software/VSCode/vscode.deb"
 }
 
-# function upgrade-telegram { (
-#     rm -rf ~/Software/Telegram
-#     mkdir -p ~/Software/Telegram
-#     cd ~/Software/Telegram || return
-#     wget -O telegram.tar.xz https://telegram.org/dl/desktop/linux
-#     tar -xf telegram.tar.xz
-#     mv Telegram t
-#     mv t/* .
-#     rmdir t
-#     rm telegram.tar.xz
-#     rm -f ~/bin/telegram
-#     ln -s "$(pwd)/Telegram" ~/bin/telegram
-# ); }
+function upgrade-telegram { (
+    rm -rf ~/Software/Telegram
+    mkdir -p ~/Software/Telegram
+    (
+        cd ~/Software/Telegram || return
+        wget -O telegram.tar.xz https://telegram.org/dl/desktop/linux
+        tar -xf telegram.tar.xz
+        mv Telegram t
+        mv t/* .
+        rmdir t
+        rm telegram.tar.xz
+        rm -f "$HOME/bin/telegram"
+        ln -s "$(pwd)/Telegram" ~/bin/telegram
+    )
+); }
 
 # function upgrade-minecraft-launcher { (
 #     mkdir -p ~/Downloads/MinecraftLauncher
