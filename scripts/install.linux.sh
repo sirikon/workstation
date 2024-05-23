@@ -4,10 +4,16 @@ set -euo pipefail
 export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
 
 function main {
+    command_exists wget || sudo apt-get install -y wget
+
     file_exists /etc/apt/trusted.gpg.d/sublimehq-archive.gpg ||
         wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg >/dev/null
     file_exists /etc/apt/keyrings/mise-archive-keyring.gpg ||
         wget -qO - https://mise.jdx.dev/gpg-key.pub | gpg --dearmor | sudo tee /etc/apt/keyrings/mise-archive-keyring.gpg >/dev/null
+    file_exists /etc/apt/keyrings/docker.asc || (
+        sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+        sudo chmod a+r /etc/apt/keyrings/docker.asc
+    )
 
     copy_sudo "$SRK_ROOT/config/apt/sirikon-workstation.list" \
         "/etc/apt/sources.list.d/sirikon-workstation.list"
@@ -33,14 +39,15 @@ function main {
 }
 
 function install-metapackage {
-    directory_exists /usr/share/doc/apt-transport-https || apt-get install -y apt-transport-https
-    command_exists dpkg-deb || apt-get install -y dpkg-deb
+    directory_exists /usr/share/doc/apt-transport-https || sudo apt-get install -y apt-transport-https
+    command_exists dpkg-deb || sudo apt-get install -y dpkg-deb
     log "Installing metapackage"
     (
         cd packages
         dpkg-deb --build sirikon-workstation
     )
     sudo apt-get install -y ./packages/sirikon-workstation.deb
+    sudo usermod -aG docker "$USER"
 }
 
 function command_exists {
