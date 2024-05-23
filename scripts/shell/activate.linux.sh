@@ -5,7 +5,7 @@ if [ -z "${SRK_ORIGINAL_PATH}" ]; then
     export SRK_ORIGINAL_PATH="$PATH"
 fi
 export PATH="/usr/local/sbin:/usr/sbin:/sbin:$SRK_ROOT/scripts/bin:$HOME/bin:$SRK_ORIGINAL_PATH"
-source "$(dirname "${BASH_SOURCE[0]}")/activate.sh"
+source "$SRK_ROOT/scripts/shell/activate.sh"
 
 if [ -z "${SSH_AGENT_PID}" ]; then
     eval "$(DISPLAY=:0 ssh-agent)"
