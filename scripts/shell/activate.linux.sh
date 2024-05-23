@@ -12,7 +12,11 @@ if [ -z "${SSH_AGENT_PID}" ]; then
 fi
 
 function sm {
-    smerge .
+    smerge -n .
+}
+
+function used-ports {
+    sudo lsof -i -P -n | grep LISTEN
 }
 
 function upgrade-keepassxc {
@@ -23,26 +27,11 @@ function upgrade-keepassxc {
     chmod +x "$HOME/bin/keepassxc"
 }
 
-# function used-ports {
-#     sudo lsof -i -P -n | grep LISTEN
-# }
-
-# function sm {
-#     smerge -n .
-# }
-
-# function patch-vscodium-marketplace {
-#     productJson="/usr/share/codium/resources/app/product.json"
-#     cat "${productJson}" |
-#         jq '.extensionsGallery.serviceUrl = "https://marketplace.visualstudio.com/_apis/public/gallery"' |
-#         jq '.extensionsGallery.itemUrl = "https://marketplace.visualstudio.com/items"' |
-#         jq -M |
-#         sudo tee "${productJson}" >/dev/null
-# }
-
-# function upgrade-pipx { (
-#     pip3 install pipx
-# ); }
+function upgrade-vscode {
+    mkdir -p "$HOME/Software/VSCode"
+    wget -O "$HOME/Software/VSCode/vscode.deb" 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
+    sudo apt-get install -y "$HOME/Software/VSCode/vscode.deb"
+}
 
 # function upgrade-telegram { (
 #     rm -rf ~/Software/Telegram

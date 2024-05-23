@@ -4,8 +4,10 @@ set -euo pipefail
 export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
 
 function main {
-    file_exists /etc/apt/trusted.gpg.d/sublimehq-archive.gpg || wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg |
-        gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg >/dev/null
+    file_exists /etc/apt/trusted.gpg.d/sublimehq-archive.gpg ||
+        wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg >/dev/null
+    file_exists /etc/apt/keyrings/mise-archive-keyring.gpg ||
+        wget -qO - https://mise.jdx.dev/gpg-key.pub | gpg --dearmor | sudo tee /etc/apt/keyrings/mise-archive-keyring.gpg >/dev/null
 
     copy_sudo "$SRK_ROOT/config/apt/sirikon-workstation.list" \
         "/etc/apt/sources.list.d/sirikon-workstation.list"

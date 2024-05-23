@@ -1,1 +1,2 @@
 deb https://download.sublimetext.com/ apt/stable/
+deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main
