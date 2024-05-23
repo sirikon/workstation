@@ -19,12 +19,6 @@ function upgrade-keepassxc {
     chmod +x "$HOME/bin/keepassxc"
 }
 
-function upgrade-dropbox {
-    mkdir -p "$HOME/Software/Dropbox"
-    wget -O "$HOME/Software/Dropbox/dropbox.deb" "https://www.dropbox.com/download?dl=packages/debian/dropbox_2024.04.17_amd64.deb"
-    echo "#### Now go and install <home>/Software/Dropbox/dropbox.deb"
-}
-
 # function used-ports {
 #     sudo lsof -i -P -n | grep LISTEN
 # }

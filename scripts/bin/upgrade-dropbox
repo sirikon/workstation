@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+from html.parser import HTMLParser
+from os import makedirs, remove
+from os.path import exists
+from pathlib import Path
+from subprocess import run, CalledProcessError
+import http.client
+import re
+
+DROPBOX_HOME = Path.home() / "Software" / "Dropbox"
+DROPBOX_DEB = DROPBOX_HOME / "dropbox.deb"
+DEB_PACKAGE_RE = re.compile("^dropbox_([0-9]{4})\.([0-9]{2})\.([0-9]{2})_amd64\.deb")
+
+
+def main():
+    makedirs(DROPBOX_HOME, exist_ok=True)
+    if exists(DROPBOX_DEB):
+        remove(DROPBOX_DEB)
+
+    install_page = get_install_page()
+    link_extractor = LinkExtractor()
+    link_extractor.feed(install_page)
+
+    packages = [
+        (l, int("".join(m.groups()), base=10))
+        for l, m in [(l, DEB_PACKAGE_RE.match(l)) for l in link_extractor.links]
+        if m is not None
+    ]
+    packages.sort(key=lambda t: t[1], reverse=True)
+    latest_package, _ = packages[0]
+    print(f"### Downloading latest package: {latest_package}")
+    cmd(
+        [
+            "wget",
+            "-O",
+            DROPBOX_DEB,
+            f"https://linux.dropboxstatic.com/packages/debian/{latest_package}",
+        ],
+    )
+
+    print("### Installing package")
+    cmd(["sudo", "apt-get", "install", DROPBOX_DEB])
+
+
+def get_install_page():
+    print("### Getting installation page")
+    host = "linux.dropboxstatic.com"
+    conn = http.client.HTTPSConnection(host)
+    conn.request("GET", "/packages/debian/", headers={"Host": host})
+    response = conn.getresponse()
+    print(f"### Install page: {response.status} {response.reason}")
+    return response.read().decode("utf-8")
+
+
+def cmd(args):
+    try:
+        run(args, check=True)
+    except CalledProcessError as e:
+        exit(e.returncode)
+
+
+class LinkExtractor(HTMLParser):
+    links: list[str]
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.links = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "a":
+            for k, v in attrs:
+                if k == "href":
+                    self.links.append(v)
+
+
+if __name__ == "__main__":
+    main()

@@ -14,4 +14,7 @@
         "editor.defaultFormatter": "vscode.json-language-features",
         "files.insertFinalNewline": true
     },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    }
 }
