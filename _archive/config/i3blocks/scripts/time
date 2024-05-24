@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-date '+%Y-%m-%d %H:%M:%S <span color="gray">%Z</span>%z'

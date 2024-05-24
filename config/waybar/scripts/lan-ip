@@ -3,7 +3,7 @@ from subprocess import run, PIPE
 
 
 def main():
-    print('🖥️ ', end='')
+    print('🖥️', end='')
 
     parts = []
     for device in get_default_network_devices():

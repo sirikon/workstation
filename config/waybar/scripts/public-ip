@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function main {
-  printf "%s" "🌍 "
+  printf "%s" "🌍"
   curl 'http://checkip.amazonaws.com' || printf "%s" "<span color=\"#ff4f4f\">offline</span>"
 }
 

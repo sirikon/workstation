@@ -2,7 +2,7 @@
 
 function main {
   IFS=' ' read -r size used usedPercent <<<"$(get_data)"
-  printf "%s\n" "💽 $usedPercent <span color='gray'>$used/$size</span>"
+  printf "%s\n" "💽$usedPercent <span color='gray'>$used/$size</span>"
 }
 
 function get_data {

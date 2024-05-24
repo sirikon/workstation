@@ -2,7 +2,7 @@
     {
         "position": "bottom",
         "output": "DVI-D-1",
-        "spacing": 4,
+        "spacing": 18,
         "modules-left": [
             "sway/workspaces",
             "sway/mode",
@@ -10,9 +10,24 @@
         ],
         "modules-center": [],
         "modules-right": [
+            "custom/disk",
+            "custom/public-ip",
+            "custom/lan-ip",
             "custom/date",
             "tray"
         ],
+        "custom/disk": {
+            "interval": 60,
+            "exec": "$SRK_ROOT/config/waybar/scripts/disk"
+        },
+        "custom/public-ip": {
+            "interval": 60,
+            "exec": "$SRK_ROOT/config/waybar/scripts/public-ip"
+        },
+        "custom/lan-ip": {
+            "interval": 60,
+            "exec": "$SRK_ROOT/config/waybar/scripts/lan-ip"
+        },
         "custom/date": {
             "exec": "while date +'%Y-%m-%d %H:%M:%S <span color=\"gray\">%Z</span>%z'; do sleep 1; done"
         }
@@ -20,7 +35,6 @@
     {
         "position": "bottom",
         "output": "HDMI-A-1",
-        "spacing": 4,
         "modules-left": [
             "sway/workspaces"
         ],
