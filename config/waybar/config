@@ -39,6 +39,11 @@
             "sway/workspaces"
         ],
         "modules-center": [],
-        "modules-right": []
+        "modules-right": [
+            "custom/date"
+        ],
+        "custom/date": {
+            "exec": "while date +'%Y-%m-%d %H:%M:%S <span color=\"gray\">%Z</span>%z'; do sleep 1; done"
+        }
     }
 ]
