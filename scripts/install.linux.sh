@@ -28,8 +28,8 @@ function main {
     link "$SRK_ROOT/config/waybar" \
         "$HOME/.config/waybar"
 
-    link "$SRK_ROOT/config/alacritty/alacritty.toml" \
-        "$HOME/.alacritty.toml"
+    link "$SRK_ROOT/config/alacritty" \
+        "$HOME/.config/alacritty"
 
     link "$SRK_ROOT/config/vscode/settings.json" \
         "$HOME/.config/Code/User/settings.json"
