@@ -23,36 +23,6 @@ function my-commits-here {
     smerge search 'author:"Carlos Fdez. Llamas <hello@sirikon.me>"' .
 }
 
-function upgrade-keepassxc {
-    latest_tag=$(curl --silent "https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest" | jq -r ".tag_name")
-    echo "Installing KeepassXC $latest_tag"
-    mkdir -p "$HOME/bin"
-    wget -O "$HOME/bin/keepassxc" "https://github.com/keepassxreboot/keepassxc/releases/download/${latest_tag}/KeePassXC-${latest_tag}-x86_64.AppImage"
-    chmod +x "$HOME/bin/keepassxc"
-}
-
-function upgrade-vscode {
-    mkdir -p "$HOME/Software/VSCode"
-    wget -O "$HOME/Software/VSCode/vscode.deb" 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
-    sudo apt-get install -y "$HOME/Software/VSCode/vscode.deb"
-}
-
-function upgrade-telegram { (
-    rm -rf ~/Software/Telegram
-    mkdir -p ~/Software/Telegram
-    (
-        cd ~/Software/Telegram || return
-        wget -O telegram.tar.xz https://telegram.org/dl/desktop/linux
-        tar -xf telegram.tar.xz
-        mv Telegram t
-        mv t/* .
-        rmdir t
-        rm telegram.tar.xz
-        rm -f "$HOME/bin/telegram"
-        ln -s "$(pwd)/Telegram" ~/bin/telegram
-    )
-); }
-
 function upgrade { (
     sudo apt-get update
     sudo apt-get upgrade

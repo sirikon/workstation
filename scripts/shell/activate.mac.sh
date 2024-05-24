@@ -8,13 +8,13 @@ function sm {
     /Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/smerge -n .
 }
 
-function xcode-prune { (
+function xcode-cleanup { (
     rm -rf ~/Library/Developer/Xcode/DerivedData
     rm -rf ~/Library/Developer/Xcode/Archives
     rm -rf ~/Library/Caches/com.apple.dt.Xcode
 ); }
 
-function cocoapods-prune { (
+function cocoapods-cleanup { (
     pod cache clean --all
 ); }
 
