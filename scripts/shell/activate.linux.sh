@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 
 export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../..")"
-if [ -z "${SRK_ORIGINAL_PATH}" ]; then
-    export SRK_ORIGINAL_PATH="$PATH"
-fi
-export PATH="/usr/local/sbin:/usr/sbin:/sbin:$SRK_ROOT/scripts/bin:$HOME/bin:$SRK_ORIGINAL_PATH"
-source "$SRK_ROOT/scripts/shell/activate.sh"
+source "$SRK_ROOT/scripts/utils/utils.sh"
 
-if [ -z "${SSH_AGENT_PID}" ]; then
+if [ -z "${SRK_ACTIVATED}" ]; then
+    export SRK_ACTIVATED="true"
+    export SRK_ORIGINAL_PATH="$PATH"
+    log "Starting SSH Agent"
     eval "$(DISPLAY=:0 ssh-agent)"
 fi
+
+export PATH="/usr/local/sbin:/usr/sbin:/sbin:$SRK_ROOT/scripts/bin:$HOME/bin:$SRK_ORIGINAL_PATH"
+source "$SRK_ROOT/scripts/shell/activate.sh"
 
 function sm {
     smerge -n .

@@ -198,3 +198,9 @@ bar {
 }
 
 include /etc/sway/config.d/*
+
+
+
+# Dropbox needs to start after waybar so the tray
+# icon works
+exec dropbox start
