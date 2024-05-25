@@ -10,6 +10,7 @@ if [ -z "${SRK_ACTIVATED}" ]; then
     eval "$(DISPLAY=:0 ssh-agent)"
 fi
 
+export POETRY_KEYRING_ENABLED="false"
 export PATH="/usr/local/sbin:/usr/sbin:/sbin:$SRK_ROOT/scripts/bin:$HOME/bin:$SRK_ORIGINAL_PATH"
 source "$SRK_ROOT/scripts/shell/activate.sh"
 
