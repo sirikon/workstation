@@ -40,12 +40,20 @@ function main {
     sudo mkdir -p /srv/public
     sudo chmod -R +rx /srv/public
     sudo chown sirikon:sirikon /srv/public
+
     if ! file_exists /etc/samba/smb.conf.bak; then
         copy_sudo "/etc/samba/smb.conf" "/etc/samba/smb.conf.bak"
     fi
     copy_sudo "$SRK_ROOT/config/samba/smb.conf" \
         "/etc/samba/smb.conf"
     sudo systemctl restart smbd.service
+
+    if ! file_exists /etc/minidlna.conf.bak; then
+        copy_sudo "/etc/minidlna.conf" "/etc/minidlna.conf.bak"
+    fi
+    copy_sudo "$SRK_ROOT/config/minidlna/minidlna.conf" \
+        "/etc/minidlna.conf"
+    sudo systemctl restart minidlna.service
 }
 
 function install-metapackage {
