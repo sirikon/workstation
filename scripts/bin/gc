@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+from sys import argv
+from os import makedirs
+from os.path import exists, dirname
+from re import compile
+from pathlib import Path
+from subprocess import run
+
+
+def main():
+    if len(argv) <= 1:
+        help()
+
+    address = argv[1]
+    path = extract_path(address)
+
+    if path is None:
+        print("Could not determine a path to clone the repository to")
+        exit(1)
+
+    complete_path = Path.home() / "repos" / path
+    if exists(complete_path):
+        print(f"The path {complete_path} already exists")
+        exit(1)
+
+    makedirs(dirname(complete_path))
+    run(["git", "clone", address, complete_path], check=True)
+
+
+PATH_EXTRACTORS = [
+    compile("^https?://[a-zA-Z0-9\.-]+/(.*)\.git"),
+    compile("^git@[a-zA-Z0-9\.-]+:(.+)\.git"),
+]
+
+
+def extract_path(address):
+    for path_extractor in PATH_EXTRACTORS:
+        res = path_extractor.match(address)
+        if res is not None:
+            return res.group(1)
+    return None
+
+
+def help():
+    print("gc - git clone")
+    print("  Given an address, clones it in the correct folder")
+    print("Usage: gc <repository>")
+    print("Example: gc https://github.com/sirikon/workstation")
+    exit(1)
+
+
+if __name__ == "__main__":
+    main()
