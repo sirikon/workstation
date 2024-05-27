@@ -4,7 +4,7 @@ from os import makedirs
 from os.path import exists, dirname
 from re import compile
 from pathlib import Path
-from subprocess import run
+from subprocess import run, PIPE
 
 
 def main():
@@ -23,8 +23,12 @@ def main():
         print(f"The path {complete_path} already exists")
         exit(1)
 
-    makedirs(dirname(complete_path))
-    run(["git", "clone", address, complete_path], check=True)
+    makedirs(dirname(complete_path), exist_ok=True)
+    run(
+        ["git", "clone", address, complete_path],
+        check=True,
+        stdin=PIPE,
+    )
 
 
 PATH_EXTRACTORS = [
