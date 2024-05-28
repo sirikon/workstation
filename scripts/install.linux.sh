@@ -37,6 +37,9 @@ function main {
     link "$SRK_ROOT/config/sublime-merge/preferences.json" \
         "$HOME/.config/sublime-merge/Packages/User/Preferences.sublime-settings"
 
+    link "$SRK_ROOT/config/neovim" \
+        "$HOME/.config/nvim"
+
     sudo mkdir -p /srv/public
     sudo chmod -R +rx /srv/public
     sudo chown sirikon:sirikon /srv/public
