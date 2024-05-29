@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../..")"
-export PATH="/opt/homebrew/bin:~/bin:~/.local/bin:$PATH"
+export PATH="/opt/homebrew/bin:~/bin:~/.local/bin:$SRK_ROOT/scripts/bin:$PATH"
 source "$(dirname "${BASH_SOURCE[0]}")/activate.sh"
 
 function sm {

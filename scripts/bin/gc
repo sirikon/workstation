@@ -27,13 +27,12 @@ def main():
     run(
         ["git", "clone", address, complete_path],
         check=True,
-        stdin=PIPE,
     )
 
 
 PATH_EXTRACTORS = [
-    compile("^https?://[a-zA-Z0-9\.-]+/(.*)\.git"),
-    compile("^git@[a-zA-Z0-9\.-]+:(.+)\.git"),
+    compile(r"^https?://[a-zA-Z0-9\.-]+/(.*)\.git"),
+    compile(r"^git@[a-zA-Z0-9\.-]+:(.+)\.git"),
 ]
 
 
