@@ -4,7 +4,7 @@ from os import makedirs
 from os.path import exists, dirname
 from re import compile
 from pathlib import Path
-from subprocess import run, PIPE
+from subprocess import run
 
 
 def main():
