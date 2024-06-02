@@ -40,6 +40,9 @@ function main {
     link "$SRK_ROOT/config/neovim" \
         "$HOME/.config/nvim"
 
+    link "$SRK_ROOT/config/xdg-desktop-portal-wlr" \
+        "$HOME/.config/xdg-desktop-portal-wlr"
+
     sudo mkdir -p /srv/public
     sudo chmod -R +rx /srv/public
     sudo chown sirikon:sirikon /srv/public

@@ -158,6 +158,7 @@ input "type:keyboard" {
 #
     bindsym Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
     bindsym Control+Print exec grim -g "$(slurp)" - | wl-copy
+    bindsym Alt+Print exec kooha
 
 
 # Resizing mode
