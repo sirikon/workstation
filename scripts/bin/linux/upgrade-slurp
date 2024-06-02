@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO="https://github.com/emersion/slurp"
+REF="v1.4.0"
+DEST="$HOME/Software/slurp"
+
+source "$SRK_ROOT/scripts/utils/utils.sh"
+log "Installing Slurp ${REF}"
+mkdir -p "$(dirname "${DEST}")"
+if [ ! -d "$DEST" ]; then
+    git clone "$REPO" "$DEST"
+fi
+(
+    cd "$DEST"
+    git fetch --all
+    git reset --hard >/dev/null
+    git clean -dfx
+    git checkout "$REF"
+
+    meson setup build
+    ninja -C build
+)
+mkdir -p "$HOME/bin"
+rm -rf "$HOME/bin/slurp"
+ln -s "$DEST/build/slurp" "$HOME/bin/slurp"
