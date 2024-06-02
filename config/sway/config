@@ -213,3 +213,4 @@ include /etc/sway/config.d/*
 # Dropbox needs to start after waybar so the tray
 # icon works
 exec dropbox start
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
