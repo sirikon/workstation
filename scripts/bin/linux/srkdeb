@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+source "$SRK_ROOT/scripts/utils/utils.sh"
+
+function main {
+    package="$1"
+    log "Building ${package}"
+    mkdir -p "$SRK_ROOT/packages/debs"
+    mkdir -p "$SRK_ROOT/packages/workdir/srk-${package}"
+    (
+        cd "$SRK_ROOT/packages/workdir/srk-${package}"
+        rm -rf deb
+        mkdir -p deb/DEBIAN
+        cat >deb/DEBIAN/control <<EOF
+Package: srk-${package}
+Version: 0.0.0
+Maintainer: Carlos Fdez. Llamas <hello@sirikon.me>
+Architecture: all
+EOF
+        "$SRK_ROOT/packages/src/${package}.sh"
+        dpkg-deb --build "deb" "$SRK_ROOT/packages/debs/srk-${package}.deb"
+    )
+
+    log "Installing ${package}"
+    sudo apt-get install -y "$SRK_ROOT/packages/debs/srk-${package}.deb"
+}
+
+main "$@"
