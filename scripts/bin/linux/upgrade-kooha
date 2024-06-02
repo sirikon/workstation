@@ -27,8 +27,8 @@ fi
     ninja -C _build install
     (
         cd __install__
-        cp -r bin /usr/local/
-        cp -r share /usr/local/
+        sudo cp -r bin /usr/local/
+        sudo cp -r share /usr/local/
     )
 )
 mkdir -p "$HOME/bin"
