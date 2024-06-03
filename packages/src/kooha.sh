@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+VERSION="2.2.3"
+
 REPO="https://github.com/SeaDve/Kooha"
-TAG="v2.2.3"
+TAG="v${VERSION}"
 
 if [ ! -d "repo" ]; then
     git clone "$REPO" "repo"
@@ -25,5 +27,6 @@ destdir="$(pwd)/deb"
 )
 
 cat >>deb/DEBIAN/control <<EOF
+Version: ${VERSION}
 Description: SeaDve's Kooha
 EOF

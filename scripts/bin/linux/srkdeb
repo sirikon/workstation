@@ -14,7 +14,6 @@ function main {
         mkdir -p deb/DEBIAN
         cat >deb/DEBIAN/control <<EOF
 Package: srk-${package}
-Version: 0.0.0
 Maintainer: Carlos Fdez. Llamas <hello@sirikon.me>
 Architecture: all
 EOF

@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+VERSION="1.4.0"
+
 REPO="https://github.com/emersion/slurp"
-REF="v1.4.0"
+REF="v${VERSION}"
 
 if [ ! -d "repo" ]; then
     git clone "$REPO" repo
@@ -21,5 +23,6 @@ mkdir -p "deb/usr/local/bin"
 cp "repo/build/slurp" "deb/usr/local/bin/slurp"
 
 cat >>deb/DEBIAN/control <<EOF
+Version: ${VERSION}
 Description: Emersion's Slurp
 EOF
