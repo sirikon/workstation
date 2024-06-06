@@ -4,6 +4,9 @@ set -euo pipefail
 source "$SRK_ROOT/scripts/utils/utils.sh"
 
 function main {
+    [ -d "/usr/share/doc/apt-transport-https" ] || sudo apt-get install -y apt-transport-https
+    command_exists dpkg-deb || sudo apt-get install -y dpkg-deb
+
     package="$1"
     log "Building ${package}"
     mkdir -p "$SRK_ROOT/packages/debs"
@@ -23,6 +26,10 @@ EOF
 
     log "Installing ${package}"
     sudo apt-get install -y "$SRK_ROOT/packages/debs/srk-${package}.deb"
+}
+
+function command_exists {
+    command -v "$1" >/dev/null
 }
 
 main "$@"

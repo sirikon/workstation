@@ -63,14 +63,8 @@ function main {
 }
 
 function install-metapackage {
-    directory_exists /usr/share/doc/apt-transport-https || sudo apt-get install -y apt-transport-https
-    command_exists dpkg-deb || sudo apt-get install -y dpkg-deb
     log "Installing metapackage"
-    (
-        cd packages
-        dpkg-deb --build sirikon-workstation
-    )
-    sudo apt-get install -y ./packages/sirikon-workstation.deb
+    "$SRK_ROOT/scripts/bin/linux/srkdeb" workstation
     sudo usermod -aG docker "$USER"
 }
 
