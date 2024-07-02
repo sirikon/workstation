@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+id="$(date +%s%N)"
+tag="srk-docker-build-context-ncdu:${id}"
+docker --debug build \
+    --tag "$tag" \
+    --file "$SRK_ROOT/assets/docker-build-context-ncdu/Dockerfile" .
+docker run --rm -it "$tag" ncdu
+docker rmi "$tag"
