@@ -24,6 +24,8 @@ function main {
 
     install-metapackage
 
+    mkdir -p "$HOME/.config"
+
     link "$SRK_ROOT/config/sway" \
         "$HOME/.config/sway"
 
@@ -33,9 +35,11 @@ function main {
     link "$SRK_ROOT/config/alacritty" \
         "$HOME/.config/alacritty"
 
+    mkdir -p "$HOME/.config/Code/User"
     link "$SRK_ROOT/config/vscode/settings.json" \
         "$HOME/.config/Code/User/settings.json"
 
+    mkdir -p "$HOME/.config/sublime-merge/Packages/User"
     link "$SRK_ROOT/config/sublime-merge/preferences.json" \
         "$HOME/.config/sublime-merge/Packages/User/Preferences.sublime-settings"
 
