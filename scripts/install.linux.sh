@@ -5,6 +5,7 @@ export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
 
 function main {
     command_exists wget || sudo apt-get install -y wget
+    command_exists gpg || sudo apt-get install -y gnupg
 
     file_exists /etc/apt/trusted.gpg.d/sublimehq-archive.gpg ||
         wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg >/dev/null
