@@ -7,6 +7,7 @@ function main {
     command_exists wget || sudo apt-get install -y wget
     command_exists gpg || sudo apt-get install -y gnupg
     command_exists curl || sudo apt-get install -y curl
+    command_exists gnome-keyring && sudo apt-get remove -y gnome-keyring
 
     file_exists /etc/apt/trusted.gpg.d/sublimehq-archive.gpg ||
         wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg >/dev/null
