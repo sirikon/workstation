@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+charging="$(cat /sys/class/power_supply/AC/online)"
+capacity="$(cat /sys/class/power_supply/BAT0/capacity)"
+
+if [ "$charging" == "1" ]; then
+    icon="⚡"
+else
+    icon="🔋"
+fi
+
+printf "%s" "${icon}${capacity}%"

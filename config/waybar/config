@@ -10,12 +10,17 @@
         ],
         "modules-center": [],
         "modules-right": [
+            "custom/battery",
             "custom/disk",
             "custom/public-ip",
             "custom/lan-ip",
             "custom/date",
             "tray"
         ],
+        "custom/battery": {
+            "interval": 10,
+            "exec": "$SRK_ROOT/config/waybar/scripts/battery"
+        },
         "custom/disk": {
             "interval": 60,
             "exec": "$SRK_ROOT/config/waybar/scripts/disk"
