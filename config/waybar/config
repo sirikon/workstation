@@ -10,6 +10,7 @@
         ],
         "modules-center": [],
         "modules-right": [
+            "custom/volume",
             "custom/battery",
             "custom/disk",
             "custom/public-ip",
@@ -17,6 +18,11 @@
             "custom/date",
             "tray"
         ],
+        "custom/volume": {
+            "exec": "$SRK_ROOT/config/waybar/scripts/volume",
+            "interval": "once",
+            "signal": 1
+        },
         "custom/battery": {
             "interval": 10,
             "exec": "$SRK_ROOT/config/waybar/scripts/battery"

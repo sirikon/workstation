@@ -144,14 +144,14 @@ input "type:keyboard" {
 # Audio:
 #
     # Volume control
-    set $refresh_volume pkill -RTMIN+3 i3blocks # Refresh volume indicator on i3blocks
+    set $refresh_volume pkill -RTMIN+1 waybar # Refresh volume indicator on i3blocks
     bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_volume
     bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_volume
     bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_volume
     bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_volume
     # Launch pavucontrol on mod + raise volume
     bindsym $mod+XF86AudioRaiseVolume exec pavucontrol -t 3
-    
+
     for_window [title="Volume Control"] floating enable
 
 #
