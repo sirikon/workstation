@@ -14,6 +14,10 @@ function xcode-cleanup { (
     rm -rf ~/Library/Caches/com.apple.dt.Xcode
 ); }
 
+function slack-reinstall { (
+    brew reinstall --cask slack
+); }
+
 function cocoapods-cleanup { (
     pod cache clean --all
 ); }
