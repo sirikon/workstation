@@ -8,6 +8,9 @@
     "diffEditor.hideUnchangedRegions.enabled": true,
     "workbench.startupEditor": "none",
     "git.openRepositoryInParentFolders": "never",
+    "gopls": {
+        "ui.navigation.importShortcut": "Definition"
+    },
     "[yaml]": {
         "editor.defaultFormatter": "redhat.vscode-yaml"
     },
@@ -23,5 +26,22 @@
     },
     "[jsonc]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "editor.minimap.enabled": false,
+    "editor.largeFileOptimizations": false,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "files.exclude": {
+        "**/__pycache__": true
     }
 }

@@ -44,12 +44,12 @@ function docker-killall {
     docker ps -aq | while IFS=$'\n' read -r containerId; do
         docker rm -f "$containerId"
     done
-    docker volume prune -af
-    docker network prune -f
 }
 
 function docker-cleanup {
     docker-killall
+    docker volume prune -af
+    docker network prune -f
     docker image prune -af
     docker builder prune -f
     docker system prune -af
