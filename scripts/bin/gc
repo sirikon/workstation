@@ -4,7 +4,7 @@ from os import makedirs
 from os.path import exists, dirname
 from re import compile
 from pathlib import Path
-from subprocess import run
+from subprocess import run, CalledProcessError
 
 
 def main():
@@ -24,10 +24,13 @@ def main():
         exit(1)
 
     makedirs(dirname(complete_path), exist_ok=True)
-    run(
-        ["git", "clone", address, complete_path],
-        check=True,
-    )
+    try:
+        run(
+            ["git", "clone", address, complete_path],
+            check=True,
+        )
+    except CalledProcessError as ex:
+        exit(ex.returncode)
 
 
 PATH_EXTRACTORS = [
