@@ -78,3 +78,8 @@ function ssh-forget { (
 function zip-here { (
     zip -0r "${1}.zip" ./*
 ); }
+
+function git-remove-hooks { (
+    git config --unset core.hooksPath
+    rm -rf .git/hooks
+); }
