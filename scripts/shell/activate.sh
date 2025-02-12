@@ -79,7 +79,7 @@ function zip-here { (
     zip -0r "${1}.zip" ./*
 ); }
 
-function git-remove-hooks { (
+function git-hooks-remove { (
     git config --unset core.hooksPath
     rm -rf .git/hooks
 ); }
