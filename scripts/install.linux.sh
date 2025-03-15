@@ -27,15 +27,6 @@ function main {
 
     mkdir -p "$HOME/.config"
 
-    link "$SRK_ROOT/config/sway" \
-        "$HOME/.config/sway"
-
-    link "$SRK_ROOT/config/waybar" \
-        "$HOME/.config/waybar"
-
-    link "$SRK_ROOT/config/alacritty" \
-        "$HOME/.config/alacritty"
-
     mkdir -p "$HOME/.config/Code/User"
     link "$SRK_ROOT/config/vscode/settings.json" \
         "$HOME/.config/Code/User/settings.json"

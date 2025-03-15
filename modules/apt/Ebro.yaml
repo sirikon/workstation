@@ -1,0 +1,11 @@
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    required_by: [query: 'tasks | filter("apt.packages" in .labels) | map(.id)']
+    interactive: true
+    script: |
+      sudo apt-get update
+      sudo apt-get install -y $(./packages.sh)
+    when:
+      output_changes: ./packages.sh

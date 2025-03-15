@@ -1,9 +1,0 @@
-{
-    "recommendations": [
-        "foxundermoon.shell-format",
-        "timonwong.shellcheck",
-        "dcasella.i3",
-        "ms-python.black-formatter",
-        "tamasfe.even-better-toml",
-    ]
-}

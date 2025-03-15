@@ -1,0 +1,14 @@
+environment:
+  CONFIG_HOME: $HOME/.config/waybar
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+      apt.packages: "waybar"
+    quiet: true
+    script: |
+      rm -rf "$CONFIG_HOME"
+      mkdir -p "$CONFIG_HOME"
+      cat config/config | envsubst > "$CONFIG_HOME/config"
+      cp config/style.css "$CONFIG_HOME/style.css"

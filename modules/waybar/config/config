@@ -1,7 +1,7 @@
 [
     {
         "position": "bottom",
-        "output": ["eDP-1", "DVI-D-1"],
+        "output": ["HDMI-A-1"],
         "spacing": 18,
         "modules-left": [
             "sway/workspaces",
@@ -19,25 +19,25 @@
             "tray"
         ],
         "custom/volume": {
-            "exec": "$SRK_ROOT/config/waybar/scripts/volume",
+            "exec": "$EBRO_TASK_WORKING_DIRECTORY/scripts/volume",
             "interval": "once",
             "signal": 1
         },
         "custom/battery": {
             "interval": 10,
-            "exec": "$SRK_ROOT/config/waybar/scripts/battery"
+            "exec": "$EBRO_TASK_WORKING_DIRECTORY/scripts/battery"
         },
         "custom/disk": {
             "interval": 60,
-            "exec": "$SRK_ROOT/config/waybar/scripts/disk"
+            "exec": "$EBRO_TASK_WORKING_DIRECTORY/scripts/disk"
         },
         "custom/public-ip": {
             "interval": 60,
-            "exec": "$SRK_ROOT/config/waybar/scripts/public-ip"
+            "exec": "$EBRO_TASK_WORKING_DIRECTORY/scripts/public-ip"
         },
         "custom/lan-ip": {
             "interval": 60,
-            "exec": "$SRK_ROOT/config/waybar/scripts/lan-ip"
+            "exec": "$EBRO_TASK_WORKING_DIRECTORY/scripts/lan-ip"
         },
         "custom/date": {
             "exec": "while date +'%Y-%m-%d %H:%M:%S <span color=\"gray\">%Z</span>%z'; do sleep 1; done"
@@ -45,16 +45,11 @@
     },
     {
         "position": "bottom",
-        "output": "HDMI-A-1",
+        "output": "eDP-1",
         "modules-left": [
             "sway/workspaces"
         ],
         "modules-center": [],
-        "modules-right": [
-            "custom/date"
-        ],
-        "custom/date": {
-            "exec": "while date +'%Y-%m-%d %H:%M:%S <span color=\"gray\">%Z</span>%z'; do sleep 1; done"
-        }
+        "modules-right": []
     }
 ]

@@ -1,0 +1,12 @@
+environment:
+  CONFIG_HOME: $HOME/.config/alacritty
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+      apt.packages: "alacritty"
+    quiet: true
+    script: |
+      rm -rf "$CONFIG_HOME"
+      ln -fFs "$(pwd)/config" "$CONFIG_HOME"
