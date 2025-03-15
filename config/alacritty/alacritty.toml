@@ -1,8 +1,0 @@
-[colors.primary]
-background = "#2E3436"
-
-[font]
-size = 12
-
-[window]
-padding = { x = 5, y = 5 }
