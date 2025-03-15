@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd "profiles/$(cat PROFILE)" && exec ./ebrow "$@"
+profile="$(cat PROFILE)"
+cd "profiles/$profile" && exec ./ebrow "$@"
