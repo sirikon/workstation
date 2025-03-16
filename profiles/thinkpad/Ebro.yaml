@@ -3,6 +3,7 @@ environment:
 
 imports:
   apt: { from: "../../modules/apt" }
+  networkmanager: { from: "../../modules/networkmanager" }
   sway: { from: "../../modules/sway" }
   waybar: { from: "../../modules/waybar" }
   alacritty: { from: "../../modules/alacritty" }

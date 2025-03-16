@@ -1,0 +1,22 @@
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    interactive: true
+    script: |
+      sudo systemctl disable systemd-networkd systemd-networkd.socket systemd-networkd-wait-online
+      sudo systemctl stop systemd-networkd systemd-networkd.socket systemd-networkd-wait-online
+
+      sudo rm -f /etc/network/interfaces
+
+      sudo systemctl enable NetworkManager
+      sudo systemctl start NetworkManager
+    when:
+      check_fails: |
+        ! systemctl status systemd-networkd
+        ! systemctl status systemd-networkd.socket
+        ! systemctl status systemd-networkd-wait-online
+
+        ! test -d /etc/network/interfaces
+
+        systemctl status NetworkManager
