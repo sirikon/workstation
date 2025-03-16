@@ -1,5 +1,5 @@
 environment:
-  CACHE_DIR: ".cache"
+  CACHE_DIR: "${EBRO_ROOT}/.cache"
 
 imports:
   apt: { from: "../../modules/apt" }
@@ -11,6 +11,7 @@ imports:
   docker: { from: "../../modules/docker" }
   sublime: { from: "../../modules/sublime/debian" }
   vscode: { from: "../../modules/vscode/debian" }
+  keepassxc: { from: "../../modules/keepassxc/linux" }
 
 tasks:
   default:

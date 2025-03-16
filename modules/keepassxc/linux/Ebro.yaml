@@ -1,0 +1,30 @@
+environment:
+  KEEPASSXC_CACHE: "${CACHE_DIR}/keepassxc"
+  KEEPASSXC_VERSION_TTL_SECONDS: "86400"
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: ["version"]
+    script: |
+      mkdir -p "$KEEPASSXC_CACHE/bin"
+      version="$(cat "$KEEPASSXC_CACHE/VERSION")"
+      wget -O "$KEEPASSXC_CACHE/bin/keepassxc" "https://github.com/keepassxreboot/keepassxc/releases/download/${version}/KeePassXC-${version}-$(uname -m).AppImage"
+      chmod +x "$KEEPASSXC_CACHE/bin/keepassxc"
+      rm -f "$HOME/bin/keepassxc"
+      cp "$KEEPASSXC_CACHE/bin/keepassxc" "$HOME/bin/keepassxc"
+    when:
+      check_fails: |
+        command -v keepassxc
+        current_version="$(keepassxc --version 2>/dev/null)"
+        [ "$current_version" == "KeePassXC $(cat "$KEEPASSXC_CACHE/VERSION")" ]
+
+  version:
+    script: |
+      mkdir -p "$KEEPASSXC_CACHE"
+      curl --silent "https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest" | jq -r ".tag_name" > "$KEEPASSXC_CACHE/VERSION"
+    when:
+      check_fails: |
+        test -f "$KEEPASSXC_CACHE/VERSION"
+        [ $(("$(date -r "$KEEPASSXC_CACHE/VERSION" "+%s")" + "$KEEPASSXC_VERSION_TTL_SECONDS")) -gt "$(date "+%s")" ]
