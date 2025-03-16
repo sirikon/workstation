@@ -1,0 +1,59 @@
+environment:
+  KOOHA_CACHE: "${CACHE_DIR}/kooha"
+  REPO: "https://github.com/SeaDve/Kooha"
+  REV: "5be60d054106c5e1ba79e42b176a3838b89c79fb" # 2.2.3
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [build]
+
+  build:
+    labels:
+      apt.packages: "meson libpixman-1-dev wayland-protocols libpng-dev libjpeg-dev"
+    requires: [repo]
+    script: |
+      cd "$KOOHA_CACHE/repo"
+
+      echo "rust 1.78.0" >.tool-versions
+      mise install
+      eval "$(mise env)"
+
+      set -x
+
+      if ! test -d _build; then
+        meson setup _build --prefix="/usr/local"
+      fi
+
+      DESTDIR="$KOOHA_CACHE/dist" ninja -C _build install
+      cd "$KOOHA_CACHE/dist"
+      sudo cp -R * /
+
+      glib-compile-schemas /usr/local/share/glib-2.0/schemas
+      gtk4-update-icon-cache -q -t -f /usr/local/share/icons/hicolor
+      update-desktop-database -q /usr/local/share/applications
+    when:
+      check_fails: test -f /usr/local/bin/kooha
+      output_changes: echo "$REV"
+
+  repo:
+    labels:
+      apt.packages: "git"
+    script: |
+      mkdir -p "$KOOHA_CACHE"
+      cd "$KOOHA_CACHE"
+      if ! test -d repo; then
+        git clone "$REPO" repo
+        cd repo
+      else
+        cd repo
+        git fetch --all
+      fi
+      git reset --hard >/dev/null
+      git clean -dfx
+      git checkout "$REV"
+    when:
+      check_fails: |
+        cd "$KOOHA_CACHE/repo"
+        [ "$(git rev-parse HEAD)" == "$REV" ]

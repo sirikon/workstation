@@ -1,0 +1,51 @@
+environment:
+  SLURP_CACHE: "${CACHE_DIR}/slurp"
+  REPO: "https://github.com/emersion/slurp"
+  REV: "2d0a2d9fada99a5c4c556632f04e4301b3bd5d0e" # 1.4.0
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [build]
+    script: |
+      rm -f "$HOME/bin/slurp"
+      cp "$SLURP_CACHE/repo/build/slurp" "$HOME/bin/slurp"
+    when:
+      check_fails: test -f "$HOME/bin/slurp"
+      output_changes: date -r "$SLURP_CACHE/repo/build/slurp"
+
+  build:
+    labels:
+      apt.packages: "meson libxkbcommon-dev wayland-protocols libcairo2-dev"
+    requires: [repo]
+    script: |
+      cd "$SLURP_CACHE/repo"
+      set -x
+
+      meson setup build
+      ninja -C build
+    when:
+      check_fails: test -f "$SLURP_CACHE/repo/build/slurp"
+      output_changes: echo "$REV"
+
+  repo:
+    labels:
+      apt.packages: "git"
+    script: |
+      mkdir -p "$SLURP_CACHE"
+      cd "$SLURP_CACHE"
+      if ! test -d repo; then
+        git clone "$REPO" repo
+        cd repo
+      else
+        cd repo
+        git fetch --all
+      fi
+      git reset --hard >/dev/null
+      git clean -dfx
+      git checkout "$REV"
+    when:
+      check_fails: |
+        cd "$SLURP_CACHE/repo"
+        [ "$(git rev-parse HEAD)" == "$REV" ]

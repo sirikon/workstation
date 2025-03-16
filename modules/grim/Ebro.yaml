@@ -1,0 +1,51 @@
+environment:
+  GRIM_CACHE: "${CACHE_DIR}/grim"
+  REPO: "https://git.sr.ht/~emersion/grim"
+  REV: "7ba46364ab95141c79e0e18093aa66597256182c" # 1.4.1
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [build]
+    script: |
+      rm -f "$HOME/bin/grim"
+      cp "$GRIM_CACHE/repo/build/grim" "$HOME/bin/grim"
+    when:
+      check_fails: test -f "$HOME/bin/grim"
+      output_changes: date -r "$GRIM_CACHE/repo/build/grim"
+
+  build:
+    labels:
+      apt.packages: "meson libpixman-1-dev wayland-protocols libpng-dev libjpeg-dev"
+    requires: [repo]
+    script: |
+      cd "$GRIM_CACHE/repo"
+      set -x
+
+      meson setup build
+      ninja -C build
+    when:
+      check_fails: test -f "$GRIM_CACHE/repo/build/grim"
+      output_changes: echo "$REV"
+
+  repo:
+    labels:
+      apt.packages: "git"
+    script: |
+      mkdir -p "$GRIM_CACHE"
+      cd "$GRIM_CACHE"
+      if ! test -d repo; then
+        git clone "$REPO" repo
+        cd repo
+      else
+        cd repo
+        git fetch --all
+      fi
+      git reset --hard >/dev/null
+      git clean -dfx
+      git checkout "$REV"
+    when:
+      check_fails: |
+        cd "$GRIM_CACHE/repo"
+        [ "$(git rev-parse HEAD)" == "$REV" ]

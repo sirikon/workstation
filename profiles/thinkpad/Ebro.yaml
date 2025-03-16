@@ -13,6 +13,9 @@ imports:
   vscode: { from: "../../modules/vscode/debian" }
   keepassxc: { from: "../../modules/keepassxc/linux" }
   dino: { from: "../../modules/dino" }
+  slurp: { from: "../../modules/slurp" }
+  grim: { from: "../../modules/grim" }
+  kooha: { from: "../../modules/kooha" }
 
 tasks:
   default:
