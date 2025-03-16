@@ -1,0 +1,57 @@
+environment:
+  DINO_CACHE: "${CACHE_DIR}/dino"
+  DINO_REPO: "https://github.com/dino/dino.git"
+  DINO_VERSION: "0.4.5"
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [build]
+    script: |
+      mkdir -p "$HOME/bin"
+      rm -f "$HOME/bin/dino"
+      cp "$DINO_CACHE/repo/build/dino" "$HOME/bin/dino"
+    when:
+      check_fails: |
+        test -f "$HOME/bin/dino"
+      output_changes: |
+        date -r "$DINO_CACHE/repo/build/dino"
+
+  build:
+    labels:
+      apt.packages: "meson ninja-build valac gettext libgee-0.8-dev libsqlite3-dev libgtk-4-dev libadwaita-1-0 libgpgme-dev libsoup2.4-dev libgcrypt20-dev libqrencode-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libwebrtc-audio-processing-dev libsrtp2-dev libnice-dev glib-networking gstreamer1.0-plugins-good libsignal-protocol-c-dev libadwaita-1-dev"
+    requires: [repo]
+    script: |
+      cd "$DINO_CACHE/repo"
+      set -x
+
+      git clean -dfx
+      ./configure
+      make
+    when:
+      check_fails: |
+        test -f "$DINO_CACHE/repo/build/dino"
+      output_changes: |
+        cd "$DINO_CACHE/repo"
+        git rev-parse HEAD
+
+  repo:
+    labels:
+      apt.packages: "git"
+    script: |
+      mkdir -p "$DINO_CACHE"
+      cd "$DINO_CACHE"
+      if ! test -d repo; then
+        git clone --recurse-submodules "$DINO_REPO" repo
+      fi
+      cd repo
+      git checkout "v${DINO_VERSION}"
+    when:
+      check_fails: |
+        test -d "$DINO_CACHE/repo"
+        cd "$DINO_CACHE/repo"
+
+        current_tag="$(git describe --exact-match --tags)"
+        expected_tag="v${DINO_VERSION}"
+        [ "${current_tag}" == "${expected_tag}" ]

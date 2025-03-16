@@ -12,6 +12,7 @@ imports:
   sublime: { from: "../../modules/sublime/debian" }
   vscode: { from: "../../modules/vscode/debian" }
   keepassxc: { from: "../../modules/keepassxc/linux" }
+  dino: { from: "../../modules/dino" }
 
 tasks:
   default:
