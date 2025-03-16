@@ -1,3 +1,6 @@
+environment:
+  CACHE_DIR: ".cache"
+
 imports:
   apt: { from: "../../modules/apt" }
   sway: { from: "../../modules/sway" }
@@ -6,8 +9,17 @@ imports:
   mise: { from: "../../modules/mise/debian" }
   docker: { from: "../../modules/docker" }
   sublime: { from: "../../modules/sublime/debian" }
+  vscode: { from: "../../modules/vscode/debian" }
 
 tasks:
   default:
     requires:
       - query: tasks | filter(.labels["autorequire"] == "true") | map(.id)
+
+  remove-gnome-keyring:
+    labels:
+      autorequire: "true"
+    script: |
+      sudo apt-get remove -y gnome-keyring
+    when:
+      check_fails: "! command -v gnome-keyring"

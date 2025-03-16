@@ -1,0 +1,17 @@
+environment:
+  VSCODE_CACHE: "${CACHE_DIR}/vscode"
+
+imports:
+  config: { from: "../" }
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    interactive: true
+    script: |
+      mkdir -p "$VSCODE_CACHE"
+      wget -O "$VSCODE_CACHE/vscode.deb" 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
+      sudo apt-get install -y "$VSCODE_CACHE/vscode.deb"
+    when:
+      check_fails: command -v code

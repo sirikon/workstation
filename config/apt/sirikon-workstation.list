@@ -1,2 +1,0 @@
-deb https://download.sublimetext.com/ apt/stable/
-deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable

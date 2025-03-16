@@ -4,36 +4,9 @@ set -euo pipefail
 export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
 
 function main {
-    command_exists wget || sudo apt-get install -y wget
-    command_exists gpg || sudo apt-get install -y gnupg
-    command_exists curl || sudo apt-get install -y curl
-    command_exists gnome-keyring && sudo apt-get remove -y gnome-keyring
-
-    file_exists /etc/apt/trusted.gpg.d/sublimehq-archive.gpg ||
-        wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg >/dev/null
-    file_exists /etc/apt/keyrings/mise-archive-keyring.gpg ||
-        wget -qO - https://mise.jdx.dev/gpg-key.pub | gpg --dearmor | sudo tee /etc/apt/keyrings/mise-archive-keyring.gpg >/dev/null
-    file_exists /etc/apt/keyrings/docker.asc || (
-        sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-        sudo chmod a+r /etc/apt/keyrings/docker.asc
-    )
-
-    copy_sudo "$SRK_ROOT/config/apt/sirikon-workstation.list" \
-        "/etc/apt/sources.list.d/sirikon-workstation.list"
-
-    sudo apt-get update
-
     install-metapackage
 
     mkdir -p "$HOME/.config"
-
-    mkdir -p "$HOME/.config/Code/User"
-    link "$SRK_ROOT/config/vscode/settings.json" \
-        "$HOME/.config/Code/User/settings.json"
-
-    mkdir -p "$HOME/.config/sublime-merge/Packages/User"
-    link "$SRK_ROOT/config/sublime-merge/preferences.json" \
-        "$HOME/.config/sublime-merge/Packages/User/Preferences.sublime-settings"
 
     link "$SRK_ROOT/config/neovim" \
         "$HOME/.config/nvim"
