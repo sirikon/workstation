@@ -12,7 +12,7 @@ tasks:
   build:
     labels:
       apt.packages: "meson libpixman-1-dev wayland-protocols libpng-dev libjpeg-dev"
-    requires: [repo]
+    requires: [":mise", repo]
     script: |
       cd "$KOOHA_CACHE/repo"
 
