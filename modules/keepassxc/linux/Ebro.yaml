@@ -10,6 +10,7 @@ tasks:
     script: |
       mkdir -p "$KEEPASSXC_CACHE/bin"
       version="$(cat "$KEEPASSXC_CACHE/VERSION")"
+      rm -f "$KEEPASSXC_CACHE/bin/keepassxc"
       wget -O "$KEEPASSXC_CACHE/bin/keepassxc" "https://github.com/keepassxreboot/keepassxc/releases/download/${version}/KeePassXC-${version}-$(uname -m).AppImage"
       chmod +x "$KEEPASSXC_CACHE/bin/keepassxc"
       rm -f "$HOME/bin/keepassxc"
