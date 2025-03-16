@@ -1,0 +1,31 @@
+tasks:
+  default:
+    labels:
+      apt.packages: "docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
+      autorequire: "true"
+    requires: [apt-source]
+    script: |
+      sudo groupadd docker
+      sudo usermod -aG docker $USER
+      newgrp docker
+    when:
+      check_fails: cat /etc/group | grep -E "^docker:.+:[0-9]+:$USER$"
+
+  apt-source:
+    interactive: true
+    requires: [apt-key]
+    required_by: [":apt"]
+    script: |
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    when:
+      check_fails: test -f /etc/apt/sources.list.d/docker.list
+
+  apt-key:
+    required_by: [":apt"]
+    script: |
+      sudo apt-get install ca-certificates curl
+      sudo install -m 0755 -d /etc/apt/keyrings
+      sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+      sudo chmod a+r /etc/apt/keyrings/docker.asc
+    when:
+      check_fails: test -f /etc/apt/keyrings/docker.asc
