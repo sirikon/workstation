@@ -2,6 +2,7 @@ tasks:
   default:
     labels:
       autorequire: "true"
+      apt.packages: "network-manager"
     interactive: true
     script: |
       sudo systemctl disable systemd-networkd systemd-networkd.socket systemd-networkd-wait-online
