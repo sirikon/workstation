@@ -1,0 +1,31 @@
+environment:
+  YTDLP_CACHE: "${CACHE_DIR}/yt-dlp"
+  YTDLP_VERSION_TTL_SECONDS: "86400"
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+      apt.packages: "wget"
+    requires: [version]
+    script: |
+      version="$(cat "$YTDLP_CACHE/VERSION")"
+      rm -f "$HOME/bin/yt-dlp"
+      wget -O "$HOME/bin/yt-dlp" "https://github.com/yt-dlp/yt-dlp/releases/download/${version}/yt-dlp_linux"
+      chmod +x "$HOME/bin/yt-dlp"
+    when:
+      check_fails: |
+        test -f "$HOME/bin/yt-dlp"
+      output_changes: |
+        cat "$YTDLP_CACHE/VERSION"
+
+  version:
+    labels:
+      apt.packages: "curl"
+    script: |
+      mkdir -p "$YTDLP_CACHE"
+      curl --silent "https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest" | jq -r ".tag_name" > "$YTDLP_CACHE/VERSION"
+    when:
+      check_fails: |
+        test -f "$YTDLP_CACHE/VERSION"
+        [ $(("$(date -r "$YTDLP_CACHE/VERSION" "+%s")" + "$YTDLP_VERSION_TTL_SECONDS")) -gt "$(date "+%s")" ]

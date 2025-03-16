@@ -17,6 +17,7 @@ imports:
   grim: { from: "../../modules/grim" }
   kooha: { from: "../../modules/kooha" }
   telegram: { from: "../../modules/telegram/debian" }
+  yt-dlp: { from: "../../modules/yt-dlp/debian" }
 
 tasks:
   default:
