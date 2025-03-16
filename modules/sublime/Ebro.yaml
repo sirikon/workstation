@@ -1,0 +1,10 @@
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [":sublime"]
+    script: |
+      mkdir -p "$HOME/.config/sublime-merge/Packages/User"
+      ln -fs "$EBRO_TASK_WORKING_DIRECTORY/config/sublime-merge/preferences.json" "$HOME/.config/sublime-merge/Packages/User/Preferences.sublime-settings"
+    when:
+      check_fails: test -f "$HOME/.config/sublime-merge/Packages/User/Preferences.sublime-settings"
