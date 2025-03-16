@@ -18,8 +18,8 @@ tasks:
     when:
       check_fails: |
         command -v keepassxc
-        current_version="$(keepassxc --version 2>/dev/null)"
-        [ "$current_version" == "KeePassXC $(cat "$KEEPASSXC_CACHE/VERSION")" ]
+      output_changes: |
+        cat "$KEEPASSXC_CACHE/VERSION"
 
   version:
     script: |

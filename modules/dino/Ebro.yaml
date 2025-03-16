@@ -3,4 +3,3 @@ tasks:
     labels:
       apt.packages: "dino-im"
       autorequire: "true"
-
