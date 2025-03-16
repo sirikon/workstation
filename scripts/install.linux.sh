@@ -13,14 +13,6 @@ function main {
 
     link "$SRK_ROOT/config/xdg-desktop-portal-wlr" \
         "$HOME/.config/xdg-desktop-portal-wlr"
-    
-    sudo systemctl disable systemd-networkd systemd-networkd.socket systemd-networkd-wait-online
-    sudo systemctl stop systemd-networkd systemd-networkd.socket systemd-networkd-wait-online
-
-    sudo rm -f /etc/network/interfaces
-
-    sudo systemctl enable NetworkManager
-    sudo systemctl start NetworkManager
 }
 
 function install-metapackage {
