@@ -9,10 +9,10 @@ tasks:
       autorequire: "true"
     requires: [build]
     script: |
-      rm -f "$HOME/bin/slurp"
-      cp "$SLURP_CACHE/repo/build/slurp" "$HOME/bin/slurp"
+      rm -f "/usr/local/bin/slurp"
+      sudo cp "$SLURP_CACHE/repo/build/slurp" "/usr/local/bin/slurp"
     when:
-      check_fails: test -f "$HOME/bin/slurp"
+      check_fails: test -f "/usr/local/bin/slurp"
       output_changes: date -r "$SLURP_CACHE/repo/build/slurp"
 
   build:
