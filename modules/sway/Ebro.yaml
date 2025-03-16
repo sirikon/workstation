@@ -1,12 +1,14 @@
-environment:
-  CONFIG_HOME: $HOME/.config/sway
-
 tasks:
   default:
     labels:
       autorequire: "true"
-      apt.packages: "sway"
+      apt.packages: "sway xdg-desktop-portal-wlr"
     quiet: true
     script: |
-      rm -rf "$CONFIG_HOME"
-      ln -fFs "$(pwd)/config" "$CONFIG_HOME"
+      mkdir -p "$HOME/.config"
+
+      rm -rf "$HOME/.config/sway"
+      ln -fFs "$(pwd)/config/sway" "$HOME/.config/sway"
+
+      rm -rf "$HOME/.config/xdg-desktop-portal-wlr"      
+      ln -fFs "$(pwd)/config/xdg-desktop-portal-wlr" "$HOME/.config/xdg-desktop-portal-wlr"
