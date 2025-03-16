@@ -16,6 +16,7 @@ imports:
   slurp: { from: "../../modules/slurp" }
   grim: { from: "../../modules/grim" }
   kooha: { from: "../../modules/kooha" }
+  telegram: { from: "../../modules/telegram/debian" }
 
 tasks:
   default:

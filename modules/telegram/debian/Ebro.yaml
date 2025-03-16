@@ -1,0 +1,16 @@
+environment:
+  TELEGRAM_CACHE: "${CACHE_DIR}/telegram"
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+      apt.packages: "wget"
+    script: |
+      mkdir -p "$TELEGRAM_CACHE"
+      cd "$TELEGRAM_CACHE"
+      wget -O telegram.tar.xz https://telegram.org/dl/desktop/linux
+      tar -xf telegram.tar.xz
+      ln -s "$(pwd)/Telegram/Telegram" "$HOME/bin/telegram"
+    when:
+      check_fails: test -f "$HOME/bin/telegram"
