@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-source "$SRK_ROOT/scripts/utils/utils.sh"
-latest_tag=$(curl --silent "https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest" | jq -r ".tag_name")
-log "Installing yt-dlp $latest_tag"
-mkdir -p "$HOME/bin"
-wget -O "$HOME/bin/yt-dlp" "https://github.com/yt-dlp/yt-dlp/releases/download/$latest_tag/yt-dlp_linux"
-chmod +x "$HOME/bin/yt-dlp"
