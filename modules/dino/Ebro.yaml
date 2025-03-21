@@ -1,5 +1,0 @@
-tasks:
-  default:
-    labels:
-      apt.packages: "dino-im"
-      autorequire: "true"
