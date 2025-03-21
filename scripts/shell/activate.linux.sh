@@ -26,6 +26,7 @@ function my-commits-here {
 function upgrade { (
     sudo apt-get update
     sudo apt-get upgrade
+    (cd "$SRK_ROOT" && ./ebrow)
 ); }
 
 # function upgrade-fnmt-tools { (
