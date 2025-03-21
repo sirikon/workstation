@@ -18,6 +18,7 @@ imports:
   kooha: { from: "../../modules/kooha" }
   telegram: { from: "../../modules/telegram/debian" }
   yt-dlp: { from: "../../modules/yt-dlp/debian" }
+  shell: { from: "../../modules/shell/linux" }
 
 tasks:
   default:

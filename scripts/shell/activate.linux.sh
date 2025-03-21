@@ -1,18 +1,15 @@
 #!/usr/bin/env bash
 
-export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../..")"
-source "$SRK_ROOT/scripts/utils/utils.sh"
-
+# Run this only once, on first activation
 if [ -z "${SRK_ACTIVATED}" ]; then
     export SRK_ACTIVATED="true"
     export SRK_ORIGINAL_PATH="$PATH"
-    log "Starting SSH Agent"
+    echo "### Starting SSH Agent"
     eval "$(DISPLAY=:0 ssh-agent)"
 fi
 
 export POETRY_KEYRING_ENABLED="false"
 export PATH="/usr/local/sbin:/usr/sbin:/sbin:$SRK_ROOT/scripts/bin:$SRK_ROOT/scripts/bin/linux:$HOME/bin:$SRK_ORIGINAL_PATH"
-source "$SRK_ROOT/scripts/shell/activate.sh"
 
 function sm {
     smerge -n .

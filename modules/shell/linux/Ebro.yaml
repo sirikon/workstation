@@ -1,0 +1,7 @@
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    script: ./update-bashrc.sh
+    when:
+      output_changes: cat ./update-bashrc.sh
