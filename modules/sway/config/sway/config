@@ -23,7 +23,7 @@ include /etc/sway/config-vars.d/*
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # output HDMI-A-1 transform 270
 # output DVI-D-1 position 0 500
-# output HDMI-A-1 position 1920 0
+output HDMI-A-1 position 0 0
 
 
 
