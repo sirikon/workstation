@@ -1,0 +1,20 @@
+environment:
+  CONFIG_FILE: $HOME/.alacritty.toml
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [bin, config]
+
+  config:
+    quiet: true
+    script: |
+      config_file_path="$(realpath "${EBRO_TASK_WORKING_DIRECTORY}/../config/alacritty.toml")"
+      ln -fs "${config_file_path}" "$CONFIG_FILE"
+
+  bin:
+    requires: [:homebrew]
+    script: brew install --cask alacritty
+    when:
+      check_fails: command -v alacritty

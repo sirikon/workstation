@@ -4,18 +4,6 @@ set -euo pipefail
 export SRK_ROOT="$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")"
 
 function main {
-    command_exists brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    command_exists mise || brew install mise
-    command_exists alacritty || brew install --cask alacritty
-    directory_exists '/Applications/iCanHazShortcut.app' || brew install --cask icanhazshortcut
-    file_exists '/opt/homebrew/bin/bash' || brew install bash
-
-    link "$SRK_ROOT/config/alacritty/alacritty.toml" \
-        "$HOME/.alacritty.toml"
-
-    link "$SRK_ROOT/config/vscode/settings.json" \
-        "$HOME/Library/Application Support/Code/User/settings.json"
-
     link "$SRK_ROOT/config/sublime-merge/preferences.json" \
         "$HOME/Library/Application Support/Sublime Merge/Packages/User/Preferences.sublime-settings"
 

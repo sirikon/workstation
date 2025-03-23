@@ -1,0 +1,8 @@
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [:homebrew]
+    script: brew install bash
+    when:
+      check_fails: test -f /opt/homebrew/bin/bash

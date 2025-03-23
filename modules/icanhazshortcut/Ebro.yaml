@@ -1,0 +1,8 @@
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [:homebrew]
+    script: brew install --cask icanhazshortcut
+    when:
+      check_fails: test -d /Applications/iCanHazShortcut.app

@@ -1,12 +1,17 @@
-imports:
-  config: { from: "../" }
-
 tasks:
   default:
     labels:
       apt.packages: "sublime-merge"
       autorequire: "true"
-    requires: [apt-source]
+    requires: [config, apt-source]
+  
+  config:
+    script: |
+      mkdir -p "$HOME/.config/sublime-merge/Packages/User"
+      preferences_path="$(realpath "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-merge/preferences.json")"
+      ln -fs "${preferences_path}" "$HOME/.config/sublime-merge/Packages/User/Preferences.sublime-settings"
+    when:
+      check_fails: test -f "$HOME/.config/sublime-merge/Packages/User/Preferences.sublime-settings"
 
   apt-source:
     requires: [apt-key]

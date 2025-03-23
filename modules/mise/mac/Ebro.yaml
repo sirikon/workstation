@@ -1,0 +1,8 @@
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [:homebrew]
+    script: brew install mise
+    when:
+      check_fails: command -v mise

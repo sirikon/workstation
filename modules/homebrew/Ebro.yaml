@@ -1,0 +1,8 @@
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    script: |
+      bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    when:
+      check_fails: command -v brew

@@ -1,0 +1,13 @@
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [config]
+
+  config:
+    script: |
+      mkdir -p "$HOME/.config/Code/User"
+      settings_path="$(realpath "$EBRO_TASK_WORKING_DIRECTORY/../config/settings.json")"
+      ln -fs "${settings_path}" "$HOME/Library/Application Support/Code/User/settings.json"
+    when:
+      check_fails: test -f "$HOME/Library/Application Support/Code/User/settings.json"

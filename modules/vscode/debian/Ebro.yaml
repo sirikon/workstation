@@ -1,13 +1,14 @@
 environment:
   VSCODE_CACHE: "${CACHE_DIR}/vscode"
 
-imports:
-  config: { from: "../" }
-
 tasks:
+
   default:
     labels:
       autorequire: "true"
+    requires: [bin, config]
+
+  bin:
     interactive: true
     script: |
       mkdir -p "$VSCODE_CACHE"
@@ -15,3 +16,11 @@ tasks:
       sudo apt-get install -y "$VSCODE_CACHE/vscode.deb"
     when:
       check_fails: command -v code
+
+  config:
+    script: |
+      mkdir -p "$HOME/.config/Code/User"
+      settings_path="$(realpath "$EBRO_TASK_WORKING_DIRECTORY/../config/settings.json")"
+      ln -fs "${settings_path}" "$HOME/.config/Code/User/settings.json"
+    when:
+      check_fails: test -f "$HOME/.config/Code/User/settings.json"
