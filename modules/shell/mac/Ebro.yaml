@@ -1,0 +1,14 @@
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [gsed]
+    script: ./update-bash-profile.sh
+    when:
+      output_changes: cat ./update-bash-profile.sh
+
+  gsed:
+    requires: [":homebrew"]
+    script: brew install gnu-sed
+    when:
+      check_fails: command -v gsed

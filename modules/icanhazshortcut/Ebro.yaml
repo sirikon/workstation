@@ -2,6 +2,17 @@ tasks:
   default:
     labels:
       autorequire: "true"
+    requires: [bin, config]
+
+  config:
+    quiet: true
+    script: |
+      rm -rf "$HOME/.config/iCanHazShortcut"
+      ln -fFs "$EBRO_TASK_WORKING_DIRECTORY/config" "$HOME/.config/iCanHazShortcut"
+
+  bin:
+    labels:
+      autorequire: "true"
     requires: [:homebrew]
     script: brew install --cask icanhazshortcut
     when:

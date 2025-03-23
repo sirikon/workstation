@@ -4,6 +4,7 @@ environment:
 imports:
   homebrew: { from: "../../modules/homebrew" }
   bash: { from: "../../modules/bash/mac" }
+  shell: { from: "../../modules/shell/mac" }
   mise: { from: "../../modules/mise/mac" }
   alacritty: { from: "../../modules/alacritty/mac" }
   icanhazshortcut: { from: "../../modules/icanhazshortcut" }
