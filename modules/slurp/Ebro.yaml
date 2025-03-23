@@ -9,7 +9,7 @@ tasks:
       autorequire: "true"
     requires: [build]
     script: |
-      rm -f "/usr/local/bin/slurp"
+      sudo rm -f "/usr/local/bin/slurp"
       sudo cp "$SLURP_CACHE/repo/build/slurp" "/usr/local/bin/slurp"
     when:
       check_fails: test -f "/usr/local/bin/slurp"

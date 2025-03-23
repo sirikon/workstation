@@ -6,7 +6,7 @@ imports:
   networkmanager: { from: "../../modules/networkmanager" }
   sway: { from: "../../modules/sway" }
   waybar: { from: "../../modules/waybar" }
-  alacritty: { from: "../../modules/alacritty" }
+  alacritty: { from: "../../modules/alacritty/debian" }
   mise: { from: "../../modules/mise/debian" }
   docker: { from: "../../modules/docker" }
   sublime: { from: "../../modules/sublime/debian" }
