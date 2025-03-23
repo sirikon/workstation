@@ -56,7 +56,8 @@ function docker-cleanup {
 }
 
 function pycharm-docker-killall {
-    local pycharm_container_id="$(docker ps -aqf 'name=pycharm_helpers_PY-*')"
+    pycharm_container_id="$(docker ps -aqf 'name=pycharm_helpers_PY-*')"
+    local pycharm_container_id
     if [ "${pycharm_container_id}" != "" ]; then
         docker rm -f "${pycharm_container_id}"
     fi
