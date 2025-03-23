@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-EBRO_VERSION="0.17.0"
+EBRO_VERSION="0.18.0"
 declare -A EBRO_SUMS=(
-  ["Linux__aarch64"]="4637d02696f5f5a4047f27c69a762f26598139dbc5bbf18c6048ecac170509ab"
-  ["Linux__x86_64"]="2717bb4ae906442b0150b3f9218b69925a6caa44908fd794818688ad4da5a3b3"
-  ["Darwin__arm64"]="040302537b820e9dd59a422cd5fc52543a36806a47d9a3acd06c9b817c3551e8"
+  ["Linux__aarch64"]="99d81648282cbb065b590bf5d1880d16b258c712795dbbabade1db8f07dc7e52"
+  ["Linux__x86_64"]="cd7ee92bb944601713989421fe1c8af4ed3e027c7165f25f1b3a5143ba7a7362"
+  ["Darwin__arm64"]="8547bdfb649e4c76007437a449b6845f40c00f1da0f022ebad15e9242ced984e"
 )
 
 EBRO_BIN=".ebro/bin/${EBRO_VERSION}/ebro"
