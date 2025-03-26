@@ -15,3 +15,10 @@ tasks:
   default:
     requires:
       - query: tasks | filter(.labels["autorequire"] == "true") | map(.id)
+
+  install-watch:
+    labels:
+      autorequire: "true"
+    script: brew install watch
+    when:
+      check_fails: command -v watch
