@@ -15,4 +15,4 @@ tasks:
   install:
     script: brew install --cask visual-studio-code
     when:
-      check_fails: test -d /Applications/Visual Studio Code.app
+      check_fails: test -d '/Applications/Visual Studio Code.app'
