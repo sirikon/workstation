@@ -2,7 +2,7 @@ tasks:
   default:
     labels:
       autorequire: "true"
-    requires: [config]
+    requires: [config, install]
 
   config:
     script: |
@@ -11,3 +11,8 @@ tasks:
       ln -fs "${settings_path}" "$HOME/Library/Application Support/Code/User/settings.json"
     when:
       check_fails: test -f "$HOME/Library/Application Support/Code/User/settings.json"
+
+  install:
+    script: brew install --cask visual-studio-code
+    when:
+      check_fails: test -d /Applications/Visual Studio Code.app
