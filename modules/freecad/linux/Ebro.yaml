@@ -1,0 +1,31 @@
+environment:
+  FREECAD_CACHE: "${CACHE_DIR}/freecad"
+  FREECAD_VERSION_TTL_SECONDS: "86400"
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: ["version"]
+    script: |
+      mkdir -p "$FREECAD_CACHE/bin"
+      version="$(cat "$FREECAD_CACHE/VERSION")"
+      rm -f "$FREECAD_CACHE/bin/freecad"
+      wget -O "$FREECAD_CACHE/bin/freecad" "https://github.com/FreeCAD/FreeCAD/releases/download/1.0.0/FreeCAD_1.0.0-conda-Linux-$(uname -m)-py311.AppImage"
+      chmod +x "$FREECAD_CACHE/bin/freecad"
+      rm -f "$HOME/bin/freecad"
+      cp "$FREECAD_CACHE/bin/freecad" "$HOME/bin/freecad"
+    when:
+      check_fails: |
+        command -v freecad
+      output_changes: |
+        cat "$FREECAD_CACHE/VERSION"
+
+  version:
+    script: |
+      mkdir -p "$FREECAD_CACHE"
+      curl --silent "https://api.github.com/repos/FreeCAD/FreeCAD/releases/latest" | jq -r ".tag_name" > "$FREECAD_CACHE/VERSION"
+    when:
+      check_fails: |
+        test -f "$FREECAD_CACHE/VERSION"
+        [ $(("$(date -r "$FREECAD_CACHE/VERSION" "+%s")" + "$FREECAD_VERSION_TTL_SECONDS")) -gt "$(date "+%s")" ]
