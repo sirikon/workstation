@@ -53,5 +53,6 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "chat.commandCenter.enabled": false
+  "chat.commandCenter.enabled": false,
+  "zig.zls.enabled": "on"
 }
