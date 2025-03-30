@@ -19,6 +19,7 @@ imports:
   yt-dlp: { from: "../../modules/yt-dlp/debian" }
   freecad: { from: "../../modules/freecad/linux" }
   shell: { from: "../../modules/shell/linux" }
+  gc: { from: "../../modules/gc/linux" }
 
 tasks:
   default:

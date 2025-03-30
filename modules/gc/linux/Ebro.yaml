@@ -1,0 +1,17 @@
+environment:
+  GC_SRC: "$EBRO_ROOT/../../src/gc"
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [":mise"]
+    script: |
+      cd $GC_SRC
+      eval "$(mise env)"
+      mise i
+      zig build -Doptimize=ReleaseSafe
+      cp zig-out/bin/gc $HOME/bin/ngc
+    when:
+      output_changes: cd $GC_SRC/src && cat *
+      check_fails: test -f $HOME/bin/ngc
