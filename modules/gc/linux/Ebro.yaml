@@ -8,10 +8,14 @@ tasks:
     requires: [":mise"]
     script: |
       cd $GC_SRC
-      eval "$(mise env)"
       mise i
+      eval "$(mise env)"
       zig build -Doptimize=ReleaseSafe
       cp zig-out/bin/gc $HOME/bin/ngc
     when:
-      output_changes: cd $GC_SRC/src && cat *
+      output_changes: |
+        cd $GC_SRC
+        cat build.zig
+        cat build.zig.zon
+        cat src/*
       check_fails: test -f $HOME/bin/ngc
