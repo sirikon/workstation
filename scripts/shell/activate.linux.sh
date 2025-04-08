@@ -27,6 +27,7 @@ function upgrade { (
     sudo apt-get update
     sudo apt-get upgrade
     (cd "$SRK_ROOT" && ./ebrow)
+    sudo fwupdtool update
 ); }
 
 # function upgrade-fnmt-tools { (
