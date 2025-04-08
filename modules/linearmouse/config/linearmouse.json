@@ -1,11 +1,7 @@
 {
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0",
   "schemes" : [
     {
-      "scrolling" : {
-        "acceleration" : 1,
-        "distance" : 2,
-        "speed" : 0
-      },
       "pointer" : {
         "acceleration" : 1,
         "disableAcceleration" : true,
@@ -13,51 +9,44 @@
       },
       "if" : {
         "device" : {
-          "vendorID" : "0x46d",
           "productID" : "0xc548",
           "productName" : "USB Receiver",
-          "category" : "mouse"
+          "category" : "mouse",
+          "vendorID" : "0x46d"
         }
+      },
+      "scrolling" : {
+        "acceleration" : 1,
+        "distance" : {
+          "horizontal" : "36px",
+          "vertical" : "61.7px"
+        },
+        "speed" : 0
       }
     },
     {
-      "scrolling" : {
-        "distance" : 5
-      },
       "if" : {
         "device" : {
-          "productName" : "USB Receiver",
-          "category" : "mouse",
-          "vendorID" : "0x46d",
-          "productID" : "0xc548"
-        },
-        "app" : "org.mozilla.firefox"
-      }
-    },
-    {
+          "category" : "trackpad",
+          "vendorID" : "0x5ac",
+          "productID" : "0x343",
+          "productName" : "Apple Internal Keyboard \/ Trackpad"
+        }
+      },
       "scrolling" : {
         "reverse" : {
           "vertical" : true
-        },
-        "distance" : {
-          "vertical" : "auto"
         },
         "speed" : {
           "vertical" : 0
         },
         "acceleration" : {
           "vertical" : 1
-        }
-      },
-      "if" : {
-        "device" : {
-          "vendorID" : "0x5ac",
-          "category" : "trackpad",
-          "productID" : "0x343",
-          "productName" : "Apple Internal Keyboard \/ Trackpad"
+        },
+        "distance" : {
+          "vertical" : "auto"
         }
       }
     }
-  ],
-  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0"
+  ]
 }
