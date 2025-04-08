@@ -10,6 +10,7 @@ imports:
   icanhazshortcut: { from: "../../modules/icanhazshortcut" }
   vscode: { from: "../../modules/vscode/mac" }
   sublime: { from: "../../modules/sublime/mac" }
+  linearmouse: { from: "../../modules/linearmouse" }
 
 tasks:
   default:

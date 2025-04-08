@@ -1,0 +1,16 @@
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [install, config]
+
+  config:
+    quiet: true
+    script: |
+      ln -fFs "$(pwd)/config" "$HOME/.config/linearmouse"
+  
+  install:
+    requires: [:homebrew]
+    script: brew install --cask linearmouse
+    when:
+      check_fails: test -d /Applications/LinearMouse.app
