@@ -1,68 +1,68 @@
 {
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0",
   "schemes" : [
     {
       "scrolling" : {
-        "acceleration" : 1,
         "distance" : {
-          "vertical" : "61.7px",
-          "horizontal" : "36px"
+          "horizontal" : "36px",
+          "vertical" : "61.7px"
         },
-        "speed" : 0
-      },
-      "pointer" : {
-        "acceleration" : 1,
-        "disableAcceleration" : true,
-        "speed" : 0
+        "speed" : 0,
+        "acceleration" : 1
       },
       "if" : {
         "device" : {
-          "category" : "mouse",
-          "productName" : "USB Receiver",
           "productID" : "0xc548",
-          "vendorID" : "0x46d"
+          "productName" : "USB Receiver",
+          "vendorID" : "0x46d",
+          "category" : "mouse"
+        }
+      },
+      "pointer" : {
+        "speed" : 0,
+        "disableAcceleration" : true,
+        "acceleration" : 1
+      }
+    },
+    {
+      "scrolling" : {
+        "distance" : 5,
+        "speed" : 0,
+        "acceleration" : 1
+      },
+      "if" : {
+        "app" : "org.mozilla.firefox",
+        "device" : {
+          "productName" : "USB Receiver",
+          "vendorID" : "0x46d",
+          "productID" : "0xc548",
+          "category" : "mouse"
         }
       }
     },
     {
       "scrolling" : {
-        "acceleration" : 1,
-        "speed" : 0,
-        "distance" : 3
-      },
-      "if" : {
-        "device" : {
-          "productName" : "USB Receiver",
-          "category" : "mouse",
-          "productID" : "0xc548",
-          "vendorID" : "0x46d"
-        },
-        "app" : "org.mozilla.firefox"
-      }
-    },
-    {
-      "scrolling" : {
-        "acceleration" : {
-          "vertical" : 1
-        },
         "reverse" : {
           "vertical" : true
+        },
+        "distance" : {
+          "vertical" : "auto"
         },
         "speed" : {
           "vertical" : 0
         },
-        "distance" : {
-          "vertical" : "auto"
+        "acceleration" : {
+          "vertical" : 1
         }
       },
       "if" : {
         "device" : {
-          "productName" : "Apple Internal Keyboard \/ Trackpad",
+          "vendorID" : "0x5ac",
           "productID" : "0x343",
-          "category" : "trackpad",
-          "vendorID" : "0x5ac"
+          "productName" : "Apple Internal Keyboard \/ Trackpad",
+          "category" : "trackpad"
         }
       }
     }
-  ],
-  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0"
+  ]
 }
