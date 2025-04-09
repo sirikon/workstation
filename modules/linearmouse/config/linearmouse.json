@@ -1,7 +1,14 @@
 {
-  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0",
   "schemes" : [
     {
+      "scrolling" : {
+        "acceleration" : 1,
+        "distance" : {
+          "vertical" : "61.7px",
+          "horizontal" : "36px"
+        },
+        "speed" : 0
+      },
       "pointer" : {
         "acceleration" : 1,
         "disableAcceleration" : true,
@@ -9,44 +16,53 @@
       },
       "if" : {
         "device" : {
-          "productID" : "0xc548",
-          "productName" : "USB Receiver",
           "category" : "mouse",
+          "productName" : "USB Receiver",
+          "productID" : "0xc548",
           "vendorID" : "0x46d"
         }
-      },
-      "scrolling" : {
-        "acceleration" : 1,
-        "distance" : {
-          "horizontal" : "36px",
-          "vertical" : "61.7px"
-        },
-        "speed" : 0
       }
     },
     {
+      "scrolling" : {
+        "acceleration" : 1,
+        "speed" : 0,
+        "distance" : 3
+      },
       "if" : {
         "device" : {
-          "category" : "trackpad",
-          "vendorID" : "0x5ac",
-          "productID" : "0x343",
-          "productName" : "Apple Internal Keyboard \/ Trackpad"
-        }
-      },
+          "productName" : "USB Receiver",
+          "category" : "mouse",
+          "productID" : "0xc548",
+          "vendorID" : "0x46d"
+        },
+        "app" : "org.mozilla.firefox"
+      }
+    },
+    {
       "scrolling" : {
+        "acceleration" : {
+          "vertical" : 1
+        },
         "reverse" : {
           "vertical" : true
         },
         "speed" : {
           "vertical" : 0
         },
-        "acceleration" : {
-          "vertical" : 1
-        },
         "distance" : {
           "vertical" : "auto"
         }
+      },
+      "if" : {
+        "device" : {
+          "productName" : "Apple Internal Keyboard \/ Trackpad",
+          "productID" : "0x343",
+          "category" : "trackpad",
+          "vendorID" : "0x5ac"
+        }
       }
     }
-  ]
+  ],
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0"
 }
