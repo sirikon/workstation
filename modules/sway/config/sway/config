@@ -159,6 +159,8 @@ input "type:pointer" {
 #
 # Screenshots/recording
 #
+    # Win+Shift+S is the default area screenshot hotkey in Windows, and that's the combination produced
+    # when pressing the "screenshot" (Fn F8) key in the MX Keys Mini in Windows mode. 
     bindsym $mod+Shift+S exec grim -g "$(slurp)" - | wl-copy
     bindsym $mod+Control+Shift+S exec kooha
 
