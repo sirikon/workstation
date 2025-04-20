@@ -4,7 +4,6 @@
   "explorer.confirmDelete": false,
   "redhat.telemetry.enabled": false,
   "editor.inlayHints.enabled": "off",
-  "extensions.ignoreRecommendations": true,
   "diffEditor.hideUnchangedRegions.enabled": true,
   "workbench.startupEditor": "none",
   "git.openRepositoryInParentFolders": "never",
@@ -54,5 +53,7 @@
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "chat.commandCenter.enabled": false,
-  "zig.zls.enabled": "on"
+  "zig.zls.enabled": "on",
+  "extensions.ignoreRecommendations": true,
+  "docker.lsp.experimental.vulnerabilityScanning": false
 }
