@@ -219,3 +219,4 @@ include /etc/sway/config.d/*
 # icon works
 exec dropbox start
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
