@@ -17,6 +17,7 @@ imports:
   kooha: { from: "../../modules/kooha" }
   telegram: { from: "../../modules/telegram/debian" }
   yt-dlp: { from: "../../modules/yt-dlp/debian" }
+  balena-etcher: { from: "../../modules/balena-etcher/debian" }
   freecad: { from: "../../modules/freecad/linux" }
   shell: { from: "../../modules/shell/linux" }
   gc: { from: "../../modules/gc/linux" }

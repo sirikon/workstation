@@ -1,0 +1,38 @@
+environment:
+  BETCHER_CACHE: "${CACHE_DIR}/balena-etcher"
+  BETCHER_VERSION_TTL_SECONDS: "86400"
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+      apt.packages: "curl unzip"
+    requires: [version]
+    script: |
+      version="$(cat "$BETCHER_CACHE/VERSION")"
+      version_num="$(echo "$version" | sed 's/v//')"
+      rm -rf "$BETCHER_CACHE/archive"
+      curl -L --create-dirs --output "$BETCHER_CACHE/archive/balena-etcher.zip" "https://github.com/balena-io/etcher/releases/download/${version}/balenaEtcher-linux-x64-${version_num}.zip"
+      cd "$BETCHER_CACHE/archive"
+      unzip balena-etcher.zip
+      cd balenaEtcher-linux-x64
+      rm balenaEtcher
+      rm -f "$HOME/bin/balena-etcher"
+      mkdir -p "$HOME/bin/"
+      ln -s "$(pwd)/balena-etcher" "$HOME/bin/balena-etcher"
+    when:
+      check_fails: |
+        test -f "$HOME/bin/balena-etcher"
+      output_changes: |
+        cat "$BETCHER_CACHE/VERSION"
+
+  version:
+    labels:
+      apt.packages: "curl"
+    script: |
+      mkdir -p "$BETCHER_CACHE"
+      curl --silent "https://api.github.com/repos/balena-io/etcher/releases/latest" | jq -r ".tag_name" > "$BETCHER_CACHE/VERSION"
+    when:
+      check_fails: |
+        test -f "$BETCHER_CACHE/VERSION"
+        [ $(("$(date -r "$BETCHER_CACHE/VERSION" "+%s")" + "$BETCHER_VERSION_TTL_SECONDS")) -gt "$(date "+%s")" ]
