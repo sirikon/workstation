@@ -55,5 +55,6 @@
   "chat.commandCenter.enabled": false,
   "zig.zls.enabled": "on",
   "extensions.ignoreRecommendations": true,
-  "docker.lsp.experimental.vulnerabilityScanning": false
+  "docker.lsp.experimental.vulnerabilityScanning": false,
+  "docker.extension.enableComposeLanguageServer": false
 }

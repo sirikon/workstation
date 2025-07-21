@@ -15,7 +15,7 @@ def main():
     path = extract_path(address)
 
     if path is None:
-        print("Could not determine a path to clone the repository to")
+        print("Could not determine a path to clone the repository to " + address)
         exit(1)
 
     complete_path = Path.home() / "repos" / path
@@ -36,6 +36,7 @@ def main():
 PATH_EXTRACTORS = [
     compile(r"^https?://[a-zA-Z0-9\.-]+/(.*)\.git"),
     compile(r"^git@[a-zA-Z0-9\.-]+:(.+)\.git"),
+    compile(r"^ssh://git@[a-zA-Z0-9\.-]+/(.+)\.git"),
 ]
 
 
