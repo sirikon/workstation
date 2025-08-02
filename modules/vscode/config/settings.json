@@ -52,6 +52,9 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
   "chat.commandCenter.enabled": false,
   "zig.zls.enabled": "on",
   "extensions.ignoreRecommendations": true,
