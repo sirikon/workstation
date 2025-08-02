@@ -1,0 +1,32 @@
+environment:
+  HELIX_CACHE: "${CACHE_DIR}/helix"
+  HELIX_VERSION_TTL_SECONDS: "86400"
+
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: ["version"]
+    script: |
+      mkdir -p "$HELIX_CACHE/package"
+      version="$(cat "$HELIX_CACHE/VERSION")"
+      rm -rf "$HELIX_CACHE/package/"*
+      wget -O "$HELIX_CACHE/package/helix.tar.xz" "https://github.com/helix-editor/helix/releases/download/${version}/helix-${version}-$(uname -m)-linux.tar.xz"
+      (cd "$HELIX_CACHE/package" && tar -xvf helix.tar.xz)
+      mv "$HELIX_CACHE/package/helix-${version}-$(uname -m)-linux" "$HELIX_CACHE/package/helix"
+      rm -f /usr/local/bin/hx
+      sudo ln -s "$HELIX_CACHE/package/helix/hx" /usr/local/bin/hx
+    when:
+      check_fails: |
+        command -v hx
+      output_changes: |
+        cat "$HELIX_CACHE/VERSION"
+
+  version:
+    script: |
+      mkdir -p "$HELIX_CACHE"
+      curl --silent --fail "https://api.github.com/repos/helix-editor/helix/releases/latest" | jq -r ".tag_name" > "$HELIX_CACHE/VERSION"
+    when:
+      check_fails: |
+        test -f "$HELIX_CACHE/VERSION"
+        [ $(("$(date -r "$HELIX_CACHE/VERSION" "+%s")" + "$HELIX_VERSION_TTL_SECONDS")) -gt "$(date "+%s")" ]

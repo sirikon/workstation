@@ -21,6 +21,7 @@ imports:
   freecad: { from: "../../modules/freecad/linux" }
   shell: { from: "../../modules/shell/linux" }
   gc: { from: "../../modules/gc/linux" }
+  helix: { from: "../../modules/helix/linux" }
 
 tasks:
   default:
