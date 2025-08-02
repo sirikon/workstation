@@ -6,7 +6,7 @@ tasks:
   default:
     labels:
       autorequire: "true"
-    requires: ["version"]
+    requires: ["config", "version"]
     script: |
       mkdir -p "$HELIX_CACHE/package"
       version="$(cat "$HELIX_CACHE/VERSION")"
@@ -21,6 +21,12 @@ tasks:
         command -v hx
       output_changes: |
         cat "$HELIX_CACHE/VERSION"
+
+  config:
+    script: |
+      mkdir -p ~/.config/helix
+      ln -s "$EBRO_TASK_WORKING_DIRECTORY/../config.toml" ~/.config/helix/config.toml
+    quiet: true
 
   version:
     script: |
