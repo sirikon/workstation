@@ -24,7 +24,7 @@ tasks:
   version:
     script: |
       mkdir -p "$KEEPASSXC_CACHE"
-      curl --silent "https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest" | jq -r ".tag_name" > "$KEEPASSXC_CACHE/VERSION"
+      curl --silent --fail "https://api.github.com/repos/keepassxreboot/keepassxc/releases/latest" | jq -r ".tag_name" > "$KEEPASSXC_CACHE/VERSION"
     when:
       check_fails: |
         test -f "$KEEPASSXC_CACHE/VERSION"
