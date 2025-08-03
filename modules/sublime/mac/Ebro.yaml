@@ -2,12 +2,26 @@ tasks:
   default:
     labels:
       autorequire: "true"
-    requires: [config]
-  
+    requires: [subl-config, smerge-config]
+
   config:
+    abstract: true
     script: |
-      mkdir -p "$HOME/.config/sublime-merge/Packages/User"
-      preferences_path="$(realpath "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-merge/preferences.json")"
-      ln -fs "${preferences_path}" "$HOME/Library/Application Support/Sublime Merge/Packages/User/Preferences.sublime-settings"
+      rm -rf "$CONFIG_TARGET"
+      config_path="$(realpath "$CONFIG")"
+      ln -fs "${config_path}" "$CONFIG_TARGET"
     when:
-      check_fails: test -f "$HOME/Library/Application Support/Sublime Merge/Packages/User/Preferences.sublime-settings"
+      check_fails: |
+        [ "$(readlink "$CONFIG_TARGET")" == "$(realpath "$CONFIG")" ]
+
+  subl-config:
+    extends: [config]
+    environment:
+      CONFIG: "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-text"
+      CONFIG_TARGET: "$HOME/Library/Application Support/Sublime Text/Packages/User"
+
+  smerge-config:
+    extends: [config]
+    environment:
+      CONFIG: "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-merge"
+      CONFIG_TARGET: "$HOME/Library/Application Support/Sublime Merge/Packages/User"
