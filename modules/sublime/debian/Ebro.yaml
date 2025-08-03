@@ -3,15 +3,23 @@ tasks:
     labels:
       apt.packages: "sublime-text sublime-merge"
       autorequire: "true"
-    requires: [config, apt-source]
-  
-  config:
+    requires: [subl-config, smerge-config, apt-source]
+
+  subl-config:
     script: |
-      mkdir -p "$HOME/.config/sublime-merge/Packages/User"
-      preferences_path="$(realpath "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-merge/preferences.json")"
-      ln -fs "${preferences_path}" "$HOME/.config/sublime-merge/Packages/User/Preferences.sublime-settings"
+      config_path="$(realpath "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-text")"
+      ln -fs "${config_path}" "$HOME/.config/sublime-text/Packages/User"
     when:
-      check_fails: test -f "$HOME/.config/sublime-merge/Packages/User/Preferences.sublime-settings"
+      check_fails: |
+        [ "$(readlink "$HOME/.config/sublime-text/Packages/User")" == "$(realpath "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-text")" ]
+
+  smerge-config:
+    script: |
+      config_path="$(realpath "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-merge")"
+      ln -fs "${config_path}" "$HOME/.config/sublime-merge/Packages/User"
+    when:
+      check_fails: |
+        [ "$(readlink "$HOME/.config/sublime-merge/Packages/User")" == "$(realpath "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-merge")" ]
 
   apt-source:
     requires: [apt-key]
