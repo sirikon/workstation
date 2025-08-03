@@ -1,3 +1,4 @@
 {
-	"theme": "Default Dark.sublime-theme"
+	"theme": "Default Dark.sublime-theme",
+	"show_panel_on_build": false
 }
