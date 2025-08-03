@@ -17,11 +17,11 @@ tasks:
   subl-config:
     extends: [config]
     environment:
-      CONFIG: "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-text"
-      CONFIG_TARGET: "$HOME/Library/Application Support/Sublime Text/Packages/User"
+      CONFIG: "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-text/Preferences.sublime-settings"
+      CONFIG_TARGET: "$HOME/Library/Application Support/Sublime Text/Packages/User/Preferences.sublime-settings"
 
   smerge-config:
     extends: [config]
     environment:
-      CONFIG: "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-merge"
-      CONFIG_TARGET: "$HOME/Library/Application Support/Sublime Merge/Packages/User"
+      CONFIG: "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-merge/Preferences.sublime-settings"
+      CONFIG_TARGET: "$HOME/Library/Application Support/Sublime Merge/Packages/User/Preferences.sublime-settings"

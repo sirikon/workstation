@@ -8,6 +8,7 @@ tasks:
   config:
     abstract: true
     script: |
+      mkdir -p "$(dirname "$CONFIG_TARGET")"
       rm -rf "$CONFIG_TARGET"
       config_path="$(realpath "$CONFIG")"
       ln -fs "${config_path}" "$CONFIG_TARGET"
@@ -18,14 +19,14 @@ tasks:
   subl-config:
     extends: [config]
     environment:
-      CONFIG: "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-text"
-      CONFIG_TARGET: "$HOME/.config/sublime-text/Packages/User"
+      CONFIG: "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-text/Preferences.sublime-settings"
+      CONFIG_TARGET: "$HOME/.config/sublime-text/Packages/User/Preferences.sublime-settings"
 
   smerge-config:
     extends: [config]
     environment:
-      CONFIG: "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-merge"
-      CONFIG_TARGET: "$HOME/.config/sublime-merge/Packages/User"
+      CONFIG: "$EBRO_TASK_WORKING_DIRECTORY/../config/sublime-merge/Preferences.sublime-settings"
+      CONFIG_TARGET: "$HOME/.config/sublime-merge/Packages/User/Preferences.sublime-settings"
 
   apt-source:
     requires: [apt-key]
