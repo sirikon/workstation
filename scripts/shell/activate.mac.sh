@@ -28,3 +28,4 @@ function upgrade { (
     brew update
     brew upgrade
 ); }
+
