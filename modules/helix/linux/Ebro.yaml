@@ -25,8 +25,10 @@ tasks:
   config:
     script: |
       mkdir -p ~/.config/helix
-      ln -sf "$EBRO_TASK_WORKING_DIRECTORY/../config.toml" ~/.config/helix/config.toml
-    quiet: true
+      ln -sf "$(realpath "$EBRO_TASK_WORKING_DIRECTORY/../config.toml")" "$HOME/.config/helix/config.toml"
+    when:
+      check_fails: |
+        [ "$(readlink "$HOME/.config/helix/config.toml")" == "$(realpath "$EBRO_TASK_WORKING_DIRECTORY/../config.toml")" ]
 
   version:
     script: |
