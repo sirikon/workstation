@@ -6,6 +6,10 @@ function sm {
     /Applications/Sublime\ Merge.app/Contents/SharedSupport/bin/smerge -n .
 }
 
+function lite-xl {
+    /Applications/Lite\ XL.app/Contents/MacOS/lite-xl "$@"
+}
+
 function xcode-cleanup { (
     rm -rf ~/Library/Developer/Xcode/DerivedData
     rm -rf ~/Library/Developer/Xcode/Archives
