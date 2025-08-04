@@ -11,6 +11,7 @@ imports:
   vscode: { from: "../../modules/vscode/mac" }
   sublime: { from: "../../modules/sublime/mac" }
   linearmouse: { from: "../../modules/linearmouse" }
+  helix: { from: "../../modules/helix/mac" }
 
 tasks:
   default:

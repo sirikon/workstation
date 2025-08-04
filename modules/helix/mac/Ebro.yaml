@@ -1,0 +1,19 @@
+tasks:
+  default:
+    labels:
+      autorequire: "true"
+    requires: [install, config]
+
+  install:
+    requires: [:homebrew]
+    script: brew install helix
+    when:
+      check_fails: command -v hx
+
+  config:
+    script: |
+      mkdir -p ~/.config/helix
+      ln -sf "$(realpath "$EBRO_TASK_WORKING_DIRECTORY/../config.toml")" "$HOME/.config/helix/config.toml"
+    when:
+      check_fails: |
+        [ "$(readlink "$HOME/.config/helix/config.toml")" == "$(realpath "$EBRO_TASK_WORKING_DIRECTORY/../config.toml")" ]
