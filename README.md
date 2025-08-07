@@ -1,5 +1,1 @@
-# Workstation Scripts
-
-```bash
-./ebrow
-```
+# Moved to [Codeberg](https://codeberg.org/sirikon/workstation)
